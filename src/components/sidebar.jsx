@@ -54,7 +54,13 @@ function Sidebar() {
           <span className="tooltip">Settings</span>
         </li>
 
-        
+        <li>
+          <Link to="/login">
+            <box-icon name="stocks"></box-icon>
+            <span className="nav-item">login</span>
+          </Link>
+          <span className="tooltip">login</span>
+        </li>
 
       </ul>
     </div>
