@@ -46,7 +46,15 @@ function Sidebar() {
           <span className="tooltip">Wallet</span>
         </li>
 
-       
+        <li>
+          <Link to="/Settings">
+            <box-icon name="cog"></box-icon>
+            <span className="nav-item">Settings</span>
+          </Link>
+          <span className="tooltip">Settings</span>
+        </li>
+
+        
 
       </ul>
     </div>
