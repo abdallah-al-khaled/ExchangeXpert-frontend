@@ -14,6 +14,7 @@ function Sidebar() {
   };
 
   return (
+    <>
     <div className={`sidebar ${isOpen ? "open" : ""}`} onClick={toggleSidebar}>
       <div className="top">
         <div className="logo">
@@ -25,7 +26,7 @@ function Sidebar() {
       <ul>
         <li>
           <Link to="/Markets">
-            <box-icon name="stocks"></box-icon>
+            <box-icon color="white" name="stocks"></box-icon>
             <span className="nav-item">Markets</span>
           </Link>
           <span className="tooltip">Markets</span>
@@ -33,7 +34,7 @@ function Sidebar() {
         
         <li>
           <Link to="/AI-bots">
-            <box-icon name="bot"></box-icon>
+            <box-icon color="white"  name="bot"></box-icon>
             <span className="nav-item">AI Trading Bots</span>
           </Link>
           <span className="tooltip">AI Trading Bots</span>
@@ -41,7 +42,7 @@ function Sidebar() {
 
         <li>
           <Link to="/wallet">
-            <box-icon name="wallet"></box-icon>
+            <box-icon color="white"  name="wallet"></box-icon>
             <span className="nav-item">Wallet</span>
           </Link>
           <span className="tooltip">Wallet</span>
@@ -49,7 +50,7 @@ function Sidebar() {
 
         <li>
           <Link to="/Settings">
-            <box-icon name="cog"></box-icon>
+            <box-icon color="white"  name="cog"></box-icon>
             <span className="nav-item">Settings</span>
           </Link>
           <span className="tooltip">Settings</span>
@@ -57,7 +58,7 @@ function Sidebar() {
 
         <li>
           <Link to="/login">
-            <box-icon name="log-in"></box-icon>
+            <box-icon color="white"  name="log-in"></box-icon>
             <span className="nav-item">login</span>
           </Link>
           <span className="tooltip">login</span>
@@ -65,6 +66,14 @@ function Sidebar() {
 
       </ul>
     </div>
+    <div className="main-content">
+      <div className="container">
+        <h1>
+          wellcome
+        </h1>
+      </div>
+    </div>
+    </>
   );
 }
 export default Sidebar;
