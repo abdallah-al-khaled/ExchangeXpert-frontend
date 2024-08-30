@@ -21,6 +21,18 @@ function Sidebar() {
         </div>
         <box-icon name="menu" id="btn"></box-icon>
         </div>
+
+      <ul>
+      <li>
+          <Link to="/Markets">
+            <box-icon name="stocks"></box-icon>
+            <span className="nav-item">Markets</span>
+          </Link>
+          <span className="tooltip">Markets</span>
+        </li>
+        
+
+      </ul>
     </div>
   );
 }
