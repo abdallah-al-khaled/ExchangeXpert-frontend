@@ -29,7 +29,7 @@ function Sidebar() {
           </Link>
           <span className="tooltip">Markets</span>
         </li>
-
+        
         <li>
           <Link to="/AI-bots">
             <box-icon name="bot"></box-icon>
@@ -38,7 +38,15 @@ function Sidebar() {
           <span className="tooltip">AI Trading Bots</span>
         </li>
 
-        
+        <li>
+          <Link to="/wallet">
+            <box-icon name="wallet"></box-icon>
+            <span className="nav-item">Wallet</span>
+          </Link>
+          <span className="tooltip">Wallet</span>
+        </li>
+
+       
 
       </ul>
     </div>
