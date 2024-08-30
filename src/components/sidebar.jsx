@@ -2,6 +2,7 @@ import "boxicons";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import "../assets/css/sidebar.css";
 
 function Sidebar() {
   let btn = document.querySelector("#btn");
@@ -56,7 +57,7 @@ function Sidebar() {
 
         <li>
           <Link to="/login">
-            <box-icon name="stocks"></box-icon>
+            <box-icon name="log-in"></box-icon>
             <span className="nav-item">login</span>
           </Link>
           <span className="tooltip">login</span>
