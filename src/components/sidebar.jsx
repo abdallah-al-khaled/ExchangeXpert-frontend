@@ -1,21 +1,27 @@
 import "boxicons";
-import logo from "../assets/images/logo.png"; 
+import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Sidebar() {
+
+  let btn = document.querySelector('#btn');
+  let sidebar = document.querySelector('.sidebar');
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen); // Toggle the sidebar open/close
+  };
+
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`} onClick={toggleSidebar}>
       <div className="top">
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
-      </div>
-
-      <ul>
-        <li>
-          
-        </li>
-      </ul>
+        <box-icon name="menu" id="btn"></box-icon>
+        </div>
     </div>
-  )
+  );
 }
 export default Sidebar;
