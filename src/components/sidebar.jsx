@@ -113,6 +113,7 @@ function Sidebar() {
       <div className="main-content">
         <TopNav />
         <TopContainer/>
+        
         {/* <div className="topbar-container">
           <div className="Best-stocks">
             <h2>Best Stocks</h2>
