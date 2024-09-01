@@ -1,0 +1,39 @@
+.topnav {
+    overflow: hidden;
+    justify-content: space-between;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 30px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+  }
+
+.topnav img {
+    width: 40px;
+    height: 40px;
+}
+
+.profile{
+    gap: 10px;
+}
+.username{
+    margin-right:30px ;
+}
+
+.search input{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(216, 216, 216);
+    width: 360px;
+}
+
+.search input::placeholder{
+    font-size: 14px;
+}
+
+.dash{
+    background: #B4BBCB;
+    width: 1px;
+}

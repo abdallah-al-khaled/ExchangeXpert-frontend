@@ -3,7 +3,7 @@
     height: 50px;
 }
 
-
+/* ~: */
 .sidebar {
     position: absolute;
     top: 0;
@@ -16,8 +16,7 @@
 }
 
 .sidebar.open ~ .main-content{
-    left: 250px;
-    color: red;
+    left: 300px;
     width: calc(100% - 300px);
 }
 
@@ -82,7 +81,6 @@
 
 .sidebar ul li .nav-link span{
     color: #ffffff;
-    margin-bottom: 9px;
 }
 
 
@@ -111,26 +109,87 @@
 .sidebar ul li .nav-link {
     display: flex;
     align-items: center;
-    padding-top:7px;
+    
     text-decoration: none;
     color: #ffffff;
     border-radius: 0.8rem;
     height: 50px;
     margin-left: -5px;
+    transition: all 0.3s ease;
 }
 
 .sidebar ul li .icon {
-    min-width: 50px; /* Fixed width for the icon area */
-    text-align: center;
-    height: 50px;
     border-radius: 12px;
-    line-height: 50px;
-  
-
+    padding-top: 5px;
 }
-
-.sidebar ul li .nav-link:hover {
+svg {
+    width: 24px;
+    height: 24px;
+}
+.sidebar.open ul li .nav-link:hover {
+    background-color:#1990FE;
+}
+.sidebar ul li .icon:hover {
     background-color:#1990FE;
 }
 
 
+.main-content {
+    position: relative;
+    min-height: 100vh;
+    transition: all 0.5s ease;
+    left: 80px;
+    width: calc(100% - 80px);
+}
+
+
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.topbar-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px 20px ;
+
+  }
+
+  .tradingview-widget-container__widget{
+    display: flex;
+    gap: 20px;
+    min-width: 20px;
+  }
+
+  .label__link-dzbd7lyV{
+    display: none;
+  }
+
+  .Best-stocks{
+    align-self:start;
+  }
+
+  .stock-list-top-bar{
+    display: flex;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    width: 100%;
+    border: 1px solid rgb(216, 216, 216);
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .stock-list-top-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.viewchart{
+    padding: 10px;
+    margin: 10px 20px ;
+}
