@@ -140,6 +140,7 @@ svg {
     transition: all 0.5s ease;
     left: 80px;
     width: calc(100% - 80px);
+    background-color: #F5F7F9;
 }
 
 

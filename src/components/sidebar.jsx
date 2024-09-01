@@ -6,12 +6,13 @@ import "../assets/css/sidebar.css";
 import Topbar from "./Topbar";
 import TradeViewChart from "./TradeViewChart";
 import TopNav from "./TopNav";
+import TopContainer from "./TopContainer";
 
 function Sidebar() {
   let btn = document.querySelector("#btn");
   let sidebar = document.querySelector(".sidebar");
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggleSidebar = () => {
     setIsOpen(!isOpen); // Toggle the sidebar open/close
   };
@@ -110,24 +111,25 @@ function Sidebar() {
       </div>
 
       <div className="main-content">
-      <TopNav/>
-      <div className="topbar-container">
-        {/* <TradeViewChart/> */}
-        <div className="Best-stocks">
-          <h2>Best Stocks</h2>
+        <TopNav />
+        <TopContainer/>
+        {/* <div className="topbar-container">
+          <div className="Best-stocks">
+            <h2>Best Stocks</h2>
+          </div>
+          <div className="stock-list-top-bar">
+            <Topbar symbol="NVDA" />
+            <Topbar />
+            <Topbar />
+            <Topbar />
+            <Topbar />
+            <Topbar />
+          </div>
         </div>
-        <div className="stock-list-top-bar">
-        <Topbar symbol="NVDA"/>
-        <Topbar />
-        <Topbar />
-        <Topbar />
-        <Topbar />
-        <Topbar />
-        </div>
-      </div>
-      <div className="viewchart">
-       <TradeViewChart/>
-      </div>
+        <div className="viewchart">
+          <TradeViewChart />
+        </div> */}
+
       </div>
     </>
   );
