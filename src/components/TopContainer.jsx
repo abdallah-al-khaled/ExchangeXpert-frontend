@@ -50,8 +50,8 @@ function TopContainer({ title, filter = "active" }) {
               sort: "asc",
             },
             headers: {
-              "APCA-API-KEY-ID": process.env.APCA_API_KEY_ID,
-              "APCA-API-SECRET-KEY": process.env.APCA_API_SECRET_KEY,
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
               'accept': 'application/json',
             },
             paramsSerializer: params => {
@@ -60,8 +60,11 @@ function TopContainer({ title, filter = "active" }) {
           }
         );
         console.log(response.data.bars);
+        
+        
       } catch (error) {
         console.error("Error fetching stocks data:", error);
+        console.log(process.env.APCA_API_KEY_ID, "REGJKHBNFUIJERTGBHJRTUEDFGB");
       }
     };
     fetchData();
