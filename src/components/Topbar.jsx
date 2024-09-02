@@ -30,7 +30,6 @@ function Topbar({ symbol="AAPL" }) {
     <>
 <div className="tradingview-widget-container">
       <div className="tradingview-widget-container__widget"></div>
-
       </div>
       </>
   )

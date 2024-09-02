@@ -3,6 +3,7 @@ import "../assets/css/topcontainer.css";
 import axios from "axios";
 import qs from "qs";
 import TopContainerListItem from "./TopContainerListItem";
+import StocksList from "./StocksList";
 function TopContainer({ title, filter = "active" }) {
   const [stocks, setStocks] = useState([]);
 
@@ -40,33 +41,45 @@ function TopContainer({ title, filter = "active" }) {
     fetchData();
   }, [filter]);
   return (
-    <div className="top-containers">
-      <div className="top-active stocks-container">
-        <p className="title">Top 5 Active</p>
+    <div className="page">
+      <div className="top-containers">
+        <div className="top-active stocks-container">
+          <p className="title">Top 5 Active</p>
 
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-      </div>
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+        </div>
 
-      <div className="top-gainers stocks-container">
-        <p className="title">Top 5 Gainers</p>
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-      </div>
+        <div className="top-gainers stocks-container">
+          <p className="title">Top 5 Gainers</p>
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+        </div>
 
-      <div className="top-losers stocks-container">
-        <p className="title">Top 5 Losers</p>
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
-        <TopContainerListItem />
+        <div className="top-losers stocks-container">
+          <p className="title">Top 5 Losers</p>
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+          <TopContainerListItem />
+        </div>
+        <div className="flex column">
+          <div className="stockList flex column">
+            <div className="list-container">
+              <h1 className="stockslist">StocksList</h1>
+            </div>
+            <div className="test"></div>
+            <div className="test"></div>
+          </div>
+        </div>
+            <StocksList />
       </div>
     </div>
   );

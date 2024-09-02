@@ -7,6 +7,7 @@ import Topbar from "./Topbar";
 import TradeViewChart from "./TradeViewChart";
 import TopNav from "./TopNav";
 import TopContainer from "./TopContainer";
+import StocksList from "./StocksList";
 
 function Sidebar() {
   let btn = document.querySelector("#btn");

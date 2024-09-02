@@ -10,8 +10,8 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00" }) {
           style={{ margin: -5 }}
         />
         <div className="flex column stock-name">
-          <span>{symbol}</span>
-          <span>MSFT</span>
+          <span className="companyName">Microsoft Corp</span>
+          <span className="symbol">{symbol}</span>
         </div>
       </div>
       <div className="price flex column">
