@@ -122,10 +122,7 @@
     border-radius: 12px;
     padding-top: 5px;
 }
-svg {
-    width: 24px;
-    height: 24px;
-}
+
 .sidebar.open ul li .nav-link:hover {
     background-color:#1990FE;
 }

@@ -12,6 +12,7 @@ function App() {
             <MiniChart symbol="AAPL" /> 
         </div> */}
         <Sidebar/>
+        
     </Router>
   );
 }

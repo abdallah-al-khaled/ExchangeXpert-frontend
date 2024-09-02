@@ -79,8 +79,9 @@ function TopContainer({ title, filter = "active" }) {
             <div className="test"></div>
           </div>
         </div>
-            <StocksList />
       </div>
+      <StocksList />
+
     </div>
   );
 }

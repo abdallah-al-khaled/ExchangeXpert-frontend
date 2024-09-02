@@ -6,4 +6,46 @@
     background: #ffffff;
     box-shadow: 0px 2px 10px  rgba(0,0,0,0.16);
     border-radius: 10px;
+    align-items: center;
+    gap: 0px;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+.apexcharts-yaxis-label{
+    display: none;
+}
+.chart{
+    width: 200px;
+    height: 70px;
+    stroke-width: 3px;
+    stroke: #77B900;
+    fill: "none";
+    align-items: center;
+}
+
+.logo-list{
+    align-items: center;
+}
+
+.highcharts-credits{
+    display: none;
+}
+
+.sentiment-analysis{
+    font-size: 13px;
+}
+
+.sentiment-text{
+    padding-left: 20px;
+    color: #6D6D6D;
+}
+
+.buy-or-sell{
+    align-self: center;
+    color: rgb(255, 7, 77);
+}
+
+.date{
+    padding-left: 20px;
+    color: #6D6D6D;
 }
