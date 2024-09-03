@@ -15,12 +15,12 @@ const GaugeChart = ({ value = 10 }) => {
     const gaugeOptions = {
       chart: {
         type: 'solidgauge',
-        height: '300px',
+        height: '250px',
       },
       title: null,
       pane: {
         center: ['50%', '85%'],
-        size: '100%',
+        size: '150%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -84,7 +84,7 @@ const GaugeChart = ({ value = 10 }) => {
     };
   
     return (
-      <div id="container-gauge" style={{ height: '300px', width: '300px' }}>
+      <div id="container-gauge">
         <HighchartsReact highcharts={Highcharts} options={gaugeOptions} />
       </div>
     );

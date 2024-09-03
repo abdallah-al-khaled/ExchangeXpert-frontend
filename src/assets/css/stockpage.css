@@ -1,0 +1,39 @@
+.upper{
+    margin-top: 20px;
+    gap: 20px;
+}
+
+ #container-gauge{
+    /* width: 200px;
+    height: 600px; */
+}
+
+.tradingviewchart{
+    background: #ffffff;
+    padding: 15px 15px 0 15px;
+    border-radius: 20px;
+}
+
+.gauge-chart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 615px;
+    background:white;
+    border-radius: 20px;
+    
+}
+
+.last-updated{
+    align-self: flex-end;
+    padding-right: 20px;
+    color: #999999;
+    font-size: 16px;
+}
+
+.sell{
+    font-size: 20px;
+    color: #FE3F3F;
+    margin-top: -20px;
+}

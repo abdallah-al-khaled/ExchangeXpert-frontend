@@ -40,10 +40,6 @@ function Wallet() {
         </div>
        </div>
       </div>
-
-      <div className="open-positions">
-        <GaugeChart/>
-      </div>
       
       </div>
     </div>

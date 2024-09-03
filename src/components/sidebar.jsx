@@ -38,7 +38,7 @@ function Sidebar() {
 
         <ul>
           <li>
-            <Link to="/Markets" className={`nav-link ${isActive("/Markets") ? "bg-blue" : isActive("/Stock") ? "bg-blue" :"" } `}>
+            <Link to="/Markets" className={`nav-link ${isActive("/Markets") ? "bg-blue" : isActive("/Stock/") ? "bg-blue" :"" } `}>
               <div className="icon">
                 <svg
                   width="20"
