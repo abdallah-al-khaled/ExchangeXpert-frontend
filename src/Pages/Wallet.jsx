@@ -1,3 +1,4 @@
+import AccountHistoryChart from "../components/AccountHistoryChart";
 import Topbar from "../components/Topbar";
 import TopContainer from "../components/TopContainer";
 import TopNav from "../components/TopNav";
@@ -21,7 +22,7 @@ function Wallet() {
         </div>
         </div>
       <div className="viewchart">
-       <TradeViewChart/>
+       <AccountHistoryChart/>
       </div>
     </div>
   )

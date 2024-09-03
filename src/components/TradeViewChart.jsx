@@ -12,14 +12,14 @@ function TradingViewWidget() {
       script.async = true;
       script.innerHTML = `
         {
-        "width": "800",
-          "height": "500",
+        "width": "1000",
+          "height": "600",
           "autosize": false,
           "symbol": "NASDAQ:AAPL",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "light",
-          "style": "1",
+          "style": "2",
           "locale": "en",
           "allow_symbol_change": true,
           "calendar": false,
@@ -29,6 +29,7 @@ function TradingViewWidget() {
     },
     []
   );
+  //           "style": "1",
 
   return (
     <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
