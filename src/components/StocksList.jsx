@@ -4,7 +4,8 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 import ReactApexChart from "react-apexcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from 'highcharts';
-function StocksList({ symbol = "MSFT" }) {
+function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60,data=[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54, 33, 22, 77, 55, 33, 99,
+  55, 33, 65, 36,]}) {
   // var options = {
   //   series: [
   //     {
@@ -56,12 +57,7 @@ function StocksList({ symbol = "MSFT" }) {
   tooltip: {
     format: '<span style="color:{point.color}">\u25CF</span> <b>{series.name}: {point.y}</b>',
   },
-  accessibility: {
-    typeDescription: 'Stacked bar "force" chart. Positive forces are shown on the right side and negative on the left.',
-    series: {
-      descriptionFormat: 'Series {add series.index 1} of {chart.series.length}, Name: {series.name}, {#if (gt series.points.0.y 0)}accelerating{else}decelerating{/if} value of {series.points.0.y}.',
-    },
-  },
+ 
   yAxis: {
     reversedStacks: false,
     opposite: true,
@@ -89,11 +85,11 @@ function StocksList({ symbol = "MSFT" }) {
   series: [
     {
       name: 'Positive Forces',
-      data: [60], // 60% for positive force
+      data: [sentiment], // 60% for positive force
     },
     {
       name: 'Negative Forces',
-      data: [-40], // -40% for negative force
+      data: [sentiment-100], // -40% for negative force
     },
   ],
 };
@@ -115,21 +111,18 @@ function StocksList({ symbol = "MSFT" }) {
 
         <div className="price">
           <p>Price</p>
-          <p>$123.45</p>
+          <p>{price}</p>
         </div>
 
         <div className="volume">
           <p>Volume</p>
-          <p>123,456</p>
+          <p>{volume}</p>
         </div>
         <div className="chart flex">
           {/* <ReactApexChart options={options} series={options.series} type="area" height={60}/> */}
           
           <Sparklines
-            data={[
-              25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54, 33, 22, 77, 55, 33, 99,
-              55, 33, 65, 36,
-            ]}
+            data={data}
           >
             <SparklinesLine color="#77B900" style={{ strokeWidth: 3 }} />
           </Sparklines>
