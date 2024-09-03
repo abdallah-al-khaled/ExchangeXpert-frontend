@@ -5,7 +5,7 @@ import ReactApexChart from "react-apexcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from 'highcharts';
 function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60,data=[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54, 33, 22, 77, 55, 33, 99,
-  55, 33, 65, 36,]}) {
+  55, 33, 65, 36,48,25, 66, 41, 79, 63, 35, 44, 12, 36,]}) {
   // var options = {
   //   series: [
   //     {
@@ -124,7 +124,7 @@ function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60
           <Sparklines
             data={data}
           >
-            <SparklinesLine color="#77B900" style={{ strokeWidth: 3 }} />
+            <SparklinesLine color="#52B4FF" style={{ strokeWidth: 3 }} />
           </Sparklines>
         </div>
         <div className="flex column sentiment-analysis">
