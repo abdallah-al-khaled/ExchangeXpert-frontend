@@ -8,7 +8,7 @@ import TopContainer from './components/TopContainer';
 import Markets from './Pages/Markets';
 import Wallet from './Pages/Wallet';
 import Stock from './Pages/Stock';
-import { Login } from '@mui/icons-material';
+import Login from './Pages/Login';
  
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path="/Markets" element={<Markets />} />
           <Route path="/Wallet" element={<Wallet />} />
           <Route path="/Stock/:symbol" element={<Stock />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
     </Router>
   );
