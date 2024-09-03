@@ -9,6 +9,8 @@ function Wallet() {
   return (
     <div className="main-content">
       <TopNav />
+      <div className="page">
+
       <div className="topbar-container">
       <div className="Best-stocks">
           <h2>Best Stocks</h2>
@@ -33,10 +35,16 @@ function Wallet() {
           <TopContainerListItem />
           <TopContainerListItem />
           <TopContainerListItem />
+          
         </div>
        </div>
       </div>
+
+      <div className="open-positions">
+
+      </div>
       
+      </div>
     </div>
   )
 //           <Topbar/>

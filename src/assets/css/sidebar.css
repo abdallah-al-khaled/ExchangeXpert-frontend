@@ -203,3 +203,7 @@
 .highcharts-container{
     border-radius: 20px;
 }
+.trending{
+    align-self: flex-start;
+    padding: 10px;
+}
