@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import TopContainer from './components/TopContainer';
 import Markets from './Pages/Markets';
+import Wallet from './Pages/Wallet';
  
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
     <Router>
         <Sidebar/>
         <Routes>
-          <Route path="/" element={<Markets />} />
+          <Route path="/Markets" element={<Markets />} />
+          <Route path="/Wallet" element={<Wallet />} />
         </Routes>
     </Router>
   );

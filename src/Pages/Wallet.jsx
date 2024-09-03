@@ -1,12 +1,14 @@
+import Topbar from "../components/Topbar";
 import TopContainer from "../components/TopContainer";
 import TopNav from "../components/TopNav";
 
-function Markets() {
+function Wallet() {
   return (
     <div className="main-content">
       <TopNav />
-      <TopContainer />
+      <Topbar />
     </div>
-  );
+  )
+//           <Topbar/>
 }
-export default Markets;
+export default Wallet

@@ -123,6 +123,10 @@
     padding-top: 5px;
 }
 
+.bg-blue{
+    background-color:#1990FE;
+}
+
 .sidebar.open ul li .nav-link:hover {
     background-color:#1990FE;
 }
