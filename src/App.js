@@ -3,16 +3,18 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import MiniChart from './components/MiniChart';
 import Topbar from './components/Topbar';
 import Sidebar from './components/Sidebar';
+import TopNav from './components/TopNav';
+import TopContainer from './components/TopContainer';
+import Markets from './Pages/Markets';
  
 
 function App() {
   return (
     <Router>
-      {/* <div style={{ display: 'flex', justifyContent: 'center', padding: '50px' }}>
-            <MiniChart symbol="AAPL" /> 
-        </div> */}
         <Sidebar/>
-        
+        <Routes>
+          <Route path="/" element={<Markets />} />
+        </Routes>
     </Router>
   );
 }

@@ -26,13 +26,14 @@
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
-    border-color: rgb(216, 216, 216);
+    border: 0px;
     width: 360px;
     background-image: url("../images/images.png");
     background-repeat: no-repeat;
     background-position: 10px 10px;
     background-size: 20px;
     padding: 12px 20px 12px 40px;
+    background-color: #FAFBFC;
 }
 
 

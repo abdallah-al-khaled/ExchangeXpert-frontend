@@ -27,8 +27,6 @@ function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60
   //   },
   // };
 
-
-
  const options = {
   chart: {
     type: 'bar',
