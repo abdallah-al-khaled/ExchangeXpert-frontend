@@ -1,12 +1,13 @@
 import React from 'react';
 import '../assets/css/login.css';
+import img from "../assets/images/image(2).png";
 
 const Login = () => {
   return (
     <div className="login-container">
       <div className="login-image">
         {/* Replace with your image URL */}
-        <img src="https://via.placeholder.com/600x800" alt="Login" />
+        <img src={img} alt="Login" />
       </div>
       <div className="login-form">
         <h2>Login</h2>

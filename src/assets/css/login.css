@@ -2,6 +2,7 @@
 .login-container {
     display: flex;
     height: 100vh;
+    font-family: 'Arial', sans-serif;
   }
   
   /* Left side with the image */
@@ -23,48 +24,87 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 40px;
     background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .login-form h2 {
-    margin-bottom: 20px;
-    font-size: 2rem;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #333;
   }
   
   .form-group {
     width: 100%;
     max-width: 400px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   
   .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-weight: bold;
+    color: #555;
+    font-size: 1.1rem;
   }
   
   .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px 15px;
     font-size: 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
   }
   
   button[type="submit"] {
     width: 100%;
     max-width: 400px;
-    padding: 10px;
+    padding: 12px;
     font-size: 1.2rem;
     color: #fff;
     background-color: #007bff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 10px; /* Add margin to separate the button from inputs */
   }
   
   button[type="submit"]:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.4);
+  }
+  
+  button[type="submit"]:active {
+    background-color: #004494;
+    box-shadow: 0 2px 8px rgba(0, 68, 148, 0.4);
+  }
+  
+  button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Ensure the form, inputs, and button are all aligned */
+  form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group,
+  button[type="submit"] {
+    width: 100%;
   }
   
