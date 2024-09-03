@@ -1,7 +1,13 @@
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function TopContainerListItem({ symbol="MSFT",price="100",change="1.00" }) {
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/Stock/${symbol}`);
+  }
   return (
-    <div className="list-item flex row">
+    <div className="list-item flex row" onClick={handleClick}>
       <div className="flex">
         <img
           src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}

@@ -1,7 +1,7 @@
 // TradingViewWidget.jsx
 import React, { useEffect, useRef, memo } from 'react';
 
-function TradingViewWidget() {
+function TradingViewWidget({symbol="AAPL"}) {
   const container = useRef();
 
   useEffect(
@@ -12,10 +12,10 @@ function TradingViewWidget() {
       script.async = true;
       script.innerHTML = `
         {
-        "width": "1000",
+        "width": "800",
           "height": "600",
           "autosize": false,
-          "symbol": "NASDAQ:AAPL",
+          "symbol": "${symbol}",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "light",
@@ -34,7 +34,7 @@ function TradingViewWidget() {
   return (
     <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
       <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "1000px"}}></div>
-      <div className="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span className="blue-text">Track all markets on TradingView</span></a></div>
+      <div className="tradingview-widget-copyright"></div>
     </div>
   );
 }

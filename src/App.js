@@ -7,6 +7,7 @@ import TopNav from './components/TopNav';
 import TopContainer from './components/TopContainer';
 import Markets from './Pages/Markets';
 import Wallet from './Pages/Wallet';
+import Stock from './Pages/Stock';
  
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/Markets" element={<Markets />} />
           <Route path="/Wallet" element={<Wallet />} />
+          <Route path="/Stock/:symbol" element={<Stock />} />
         </Routes>
     </Router>
   );
