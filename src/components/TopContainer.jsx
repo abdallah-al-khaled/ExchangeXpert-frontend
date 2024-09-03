@@ -80,8 +80,13 @@ function TopContainer({ title, filter = "active" }) {
           </div>
         </div>
       </div>
+      <div className="flex column gap">
       <StocksList />
-
+      <StocksList />
+      <StocksList />
+      <StocksList />
+      <StocksList />
+      </div>
     </div>
   );
 }
