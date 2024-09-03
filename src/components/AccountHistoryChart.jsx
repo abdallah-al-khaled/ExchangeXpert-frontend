@@ -225,6 +225,8 @@ function AccountHistoryChart() {
       zooming: {
         type: "x",
       },
+      height: 500,
+      width: 1000,
     },
     title: {
       text: "Account Portfolio History",
@@ -277,7 +279,7 @@ function AccountHistoryChart() {
     series: [
       {
         type: "area",
-        name: "USD to EUR",
+        name: "Equity",
         data: chartData,
       },
     ],

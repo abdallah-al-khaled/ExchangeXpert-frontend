@@ -24,6 +24,7 @@ function Wallet() {
       <div className="viewchart">
        <AccountHistoryChart/>
       </div>
+      
     </div>
   )
 //           <Topbar/>
