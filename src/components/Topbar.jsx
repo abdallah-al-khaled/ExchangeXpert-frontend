@@ -14,7 +14,7 @@ function Topbar({ symbol="AAPL" }) {
           width: "350",
           height: "200",
           locale: "en",
-          dateRange: "3M",
+          dateRange: "1D",
           colorTheme: "light",
           isTransparent: true,
           autosize: false,

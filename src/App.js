@@ -9,6 +9,7 @@ import Markets from './Pages/Markets';
 import Wallet from './Pages/Wallet';
 import Stock from './Pages/Stock';
 import Login from './Pages/Login';
+import TradingBots from './Pages/TradingBots';
  
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/Wallet" element={<Wallet />} />
           <Route path="/Stock/:symbol" element={<Stock />} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/AI-bots" element={<TradingBots/>} />
         </Routes>
     </Router>
   );

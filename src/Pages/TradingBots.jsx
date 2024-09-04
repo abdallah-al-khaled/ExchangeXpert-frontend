@@ -1,7 +1,8 @@
 function TradingBots() {
   return (
-    <div>
-        
+    <div className="main-content">
+        <div className="page">
+            <h1>Trading Bots</h1></div>        
     </div>
   )
 }

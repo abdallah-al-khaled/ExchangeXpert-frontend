@@ -183,10 +183,11 @@
     display: flex;
     overflow-x: scroll;
     scrollbar-width: none;
-    border: 1px solid rgb(216, 216, 216);
+    border: 1px solid rgb(255, 255, 255);
     padding: 20px;
     border-radius: 20px;
     align-self:start;
+    background: #ffffff;
   }
 
   .stock-list-top-bar::-webkit-scrollbar {

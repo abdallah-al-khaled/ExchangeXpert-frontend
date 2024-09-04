@@ -8,6 +8,9 @@ const Login = () => {
       <div className="login-image">
         {/* Replace with your image URL */}
         <img src={img} alt="Login" />
+        <div className="login-image-text">
+          Navigate the Markets<br />with Confidence
+        </div>
       </div>
       <div className="login-form">
         <h2>Login</h2>
