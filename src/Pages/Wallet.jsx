@@ -1,10 +1,7 @@
 import AccountHistoryChart from "../components/AccountHistoryChart";
-import GaugeChart from "../components/GaugeChart";
 import Topbar from "../components/Topbar";
-import TopContainer from "../components/TopContainer";
 import TopContainerListItem from "../components/TopContainerListItem";
 import TopNav from "../components/TopNav";
-import TradeViewChart from "../components/TradeViewChart";
 
 function Wallet() {
   return (
