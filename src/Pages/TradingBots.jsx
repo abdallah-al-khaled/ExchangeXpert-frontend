@@ -1,11 +1,11 @@
+import TopNav from "../components/TopNav";
 import TradingBot from "../components/TradingBot";
 
 function TradingBots() {
   return (
     <div className="main-content">
-      <div className="page">
+      <TopNav />
         <TradingBot/>
-      </div>
     </div>
   );
 }
