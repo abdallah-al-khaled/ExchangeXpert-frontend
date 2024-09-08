@@ -1,6 +1,8 @@
 function TradingBot() {
   return (
-    <div>TradingBot</div>
+    <div className="tradingbot-container">
+        
+    </div>
   )
 }
 export default TradingBot
