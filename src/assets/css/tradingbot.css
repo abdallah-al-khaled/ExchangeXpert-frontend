@@ -18,13 +18,14 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
-    width: 100%;
+    width: 1350px;
+    height: 242px;
+    max-width: 1350px;
 }
 
 .bot-chart {
-    flex: 1; /* Chart takes 50% of the space */
-    max-width: 50%;
-    height: 250px;
+    width: 400px;
+    height: 100%;
 }
 
 .bot-info {
@@ -58,3 +59,6 @@
     color: #00b74a;
 }
 
+.bot-container{
+    margin-top: 20px;
+}

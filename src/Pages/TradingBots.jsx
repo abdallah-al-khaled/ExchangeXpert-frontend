@@ -7,6 +7,8 @@ function TradingBots() {
       <TopNav />
       <div className="page">
         <TradingBot/>
+        <TradingBot/>
+        <TradingBot/>
       </div>
     </div>
   );
