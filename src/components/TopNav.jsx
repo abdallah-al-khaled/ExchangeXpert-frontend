@@ -14,7 +14,7 @@ function TopNav() {
           <p className="email">johndoe@gmail.com</p>
         </div>
 
-<div className="dash"></div>
+        <div className="dash"></div>
         <div className="profileBalance flex column">
           <p>Profile Balance</p>
           <p>$623,000.00</p>

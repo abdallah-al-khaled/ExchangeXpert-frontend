@@ -7,3 +7,54 @@
     background: white;
     box-shadow: 0px 24px 48px 0 rgba(0,0,0,0.10);
 }
+/* botCard.css */
+
+.bot-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.bot-chart {
+    flex: 1; /* Chart takes 50% of the space */
+    max-width: 50%;
+    height: 250px;
+}
+
+.bot-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px; /* Add some space between chart and info */
+}
+
+.bot-info h6 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.bot-info p {
+    margin: 5px 0;
+}
+
+.bot-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0.2;
+    min-width: 100px;
+}
+
+.switch-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #00b74a;
+}
+
