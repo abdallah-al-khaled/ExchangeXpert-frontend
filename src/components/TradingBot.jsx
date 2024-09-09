@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Grid, Box, Typography, Switch } from "@mui/material";
+import {Switch } from "@mui/material";
 import "../assets/css/tradingbot.css"; // Link to your CSS file for custom styling
 
 // Sample data for the performance chart
