@@ -1,5 +1,5 @@
-import React from 'react';
-import '../assets/css/login.css';
+import React from "react";
+import "../assets/css/login.css";
 import img from "../assets/images/image(2).png";
 
 const Login = () => {
@@ -9,10 +9,14 @@ const Login = () => {
         <img src={img} alt="Login" />
         <div className="login-image-text flex column">
           <h4>
-          Navigate the Markets<br />with Confidence
+            Navigate the Markets
+            <br />
+            with Confidence
           </h4>
-          <p>Advanced Technical Analysis/Charting Tools</p>
-          <p>AI Tools</p>
+          <div className="flex">
+            <p>Advanced Technical Analysis/Charting Tools</p>
+            <p>AI Tools</p>
+          </div>
           <p>Advanced AI Trading Bots</p>
           <p>Advanced AI Analyses</p>
         </div>
@@ -22,11 +26,21 @@ const Login = () => {
         <form>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required />
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
           </div>
           <button type="submit">Login</button>
           <p></p>

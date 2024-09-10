@@ -32,6 +32,10 @@
     padding: 20px;
     border-radius: 10px; /* Optional: rounds the corners of the text background */
   }
+  .login-image-text p{
+    font-size: medium;
+    font-weight: 100;
+  }
   
   /* Right side with the login form */
   .login-form {
