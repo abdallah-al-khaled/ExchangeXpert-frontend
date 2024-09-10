@@ -27,8 +27,8 @@ function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60
         y: 20,
         verticalAlign: 'bottom',
       },
-      color: 'rgb(255, 7, 77)',
-      negativeColor: 'rgb(1, 127, 250)',
+      negativeColor: 'rgb(255, 7, 77)',
+      color: 'rgb(1, 127, 250)',
       accessibility: {
         exposeAsGroupOnly: true,
       },
@@ -110,7 +110,7 @@ function StocksList({ symbol = "MSFT",price="123.45",volume="12345",sentiment=60
         </div>
         <div className="flex column sentiment-analysis">
           <p className="sentiment-text">Sentiment</p>
-          <p className="buy-or-sell">Sell</p>
+          <p className={`buy-or-sell ${sentiment>=70?"Buy":"Sell"}`}>{sentiment>=70?"Buy":"Sell"}</p>
           <HighchartsReact highcharts={Highcharts} options={options} />
           <p className="date">Based on data from 11-8-2024</p>
         </div>

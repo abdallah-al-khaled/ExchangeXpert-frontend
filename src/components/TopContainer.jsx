@@ -88,10 +88,10 @@ function TopContainer({ title, filter = "active" }) {
         </div>
       </div>
       <div className="flex column gap">
-      <StocksList symbol="TSLA"/>
-      <StocksList symbol="NVDA"/>
-      <StocksList symbol="AAPL"/>
-      <StocksList symbol="AMZN"/>
+      <StocksList symbol="TSLA" sentiment={20}/>
+      <StocksList symbol="NVDA" sentiment={50}/>
+      <StocksList symbol="AAPL" sentiment={90}/>
+      <StocksList symbol="AMZN" sentiment={70}/>
       <StocksList />
       </div>
     </div>

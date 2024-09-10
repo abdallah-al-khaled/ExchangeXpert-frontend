@@ -46,7 +46,13 @@
 
 .buy-or-sell{
     align-self: center;
+}
+
+.Sell{
     color: rgb(255, 7, 77);
+}
+.Buy{
+    color: rgb(1, 127, 250);
 }
 
 .date{
