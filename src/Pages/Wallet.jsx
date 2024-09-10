@@ -69,13 +69,11 @@ function Wallet() {
        <div className="trending-up">
        <div className="top-active stocks-container">
           <p className="trending">Trending Up</p>
-
-          <TopContainerListItem />
-          <TopContainerListItem />
-          <TopContainerListItem />
-          <TopContainerListItem />
-          <TopContainerListItem />
-          
+          <TopContainerListItem symbol={symbols[0]} data={stocks[symbols[0]]}/>
+          <TopContainerListItem symbol={symbols[1]} data={stocks[symbols[1]]}/>
+          <TopContainerListItem symbol={symbols[2]} data={stocks[symbols[2]]}/>
+          <TopContainerListItem symbol={symbols[3]} data={stocks[symbols[3]]}/>
+          <TopContainerListItem symbol={symbols[4]} data={stocks[symbols[4]]}/>
         </div>
        </div>
       </div>

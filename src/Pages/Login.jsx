@@ -6,10 +6,13 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-image">
-        {/* Replace with your image URL */}
         <img src={img} alt="Login" />
-        <div className="login-image-text">
+        <div className="login-image-text flex column">
+          <h4>
           Navigate the Markets<br />with Confidence
+          </h4>
+          <p>Advanced Technical Analysis/Charting Tools</p>
+          <p></p>
         </div>
       </div>
       <div className="login-form">
@@ -24,6 +27,7 @@ const Login = () => {
             <input type="password" id="password" placeholder="Enter your password" required />
           </div>
           <button type="submit">Login</button>
+          <p></p>
         </form>
       </div>
     </div>
