@@ -21,6 +21,7 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
           src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
           alt={symbol}
           width={50}
+          height={50}
           style={{ margin: -0 }}
         />
         <div className="flex column stock-name">
