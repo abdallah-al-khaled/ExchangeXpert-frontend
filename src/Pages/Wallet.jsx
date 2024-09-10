@@ -15,11 +15,11 @@ function Wallet() {
         </div>
       <div className="stock-list-top-bar ">
         <Topbar symbol="NVDA"/>
-        <Topbar />
-        <Topbar />
-        <Topbar />
-        <Topbar />
-        <Topbar />
+        <Topbar symbol="TSLA"/>
+        <Topbar symbol="AMD"/>
+        <Topbar symbol="META"/>
+        <Topbar symbol="AAPL"/>
+        <Topbar symbol="MSFT"/>
         </div>
         </div>
       <div className="viewchart flex row">
