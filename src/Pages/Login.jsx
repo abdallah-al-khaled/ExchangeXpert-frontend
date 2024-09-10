@@ -13,7 +13,7 @@ const Login = () => {
           </h4>
           <p>Advanced Technical Analysis/Charting Tools</p>
           <p>AI Tools</p>
-          <p></p>
+          <p>Advanced AI Trading Bots</p>
         </div>
       </div>
       <div className="login-form">
