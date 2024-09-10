@@ -6,6 +6,9 @@
 /* ~: */
 .sidebar {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     top: 0;
     left: 0;
     height: 100vh;
@@ -210,5 +213,11 @@
 }
 
 .login-logout{
-    align-self: end;
+}
+
+.logout{
+}
+
+.sidebar.open ul.logout li .nav-link {
+    background-color:#1990FE;
 }

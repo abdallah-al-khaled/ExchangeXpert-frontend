@@ -1,6 +1,6 @@
 import "boxicons";
 import logo from "../assets/images/logo.png";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "../assets/css/sidebar.css";
 import Topbar from "./Topbar";
@@ -11,7 +11,7 @@ import StocksList from "./StocksList";
 
 function Sidebar() {
   const location = useLocation();
-  
+
   // Helper function to determine if the link is active
   const isActive = (path) => location.pathname === path;
 
@@ -22,7 +22,9 @@ function Sidebar() {
 
   return (
     <>
+    
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
+      <div className="">
         <div className="top">
           <div className="logo">
             <img src={logo} alt="logo" />
@@ -38,7 +40,16 @@ function Sidebar() {
 
         <ul>
           <li>
-            <Link to="/Markets" className={`nav-link ${isActive("/Markets") ? "bg-blue" : isActive("/Stock/") ? "bg-blue" :"" } `}>
+            <Link
+              to="/Markets"
+              className={`nav-link ${
+                isActive("/Markets")
+                  ? "bg-blue"
+                  : isActive("/Stock/")
+                  ? "bg-blue"
+                  : ""
+              } `}
+            >
               <div className="icon">
                 <svg
                   width="20"
@@ -74,7 +85,10 @@ function Sidebar() {
           </li>
 
           <li>
-            <Link to="/AI-bots" className={`nav-link ${isActive("/AI-bots") ? "bg-blue" : ""}`}>
+            <Link
+              to="/AI-bots"
+              className={`nav-link ${isActive("/AI-bots") ? "bg-blue" : ""}`}
+            >
               <div className="icon">
                 <box-icon color="white" name="bot"></box-icon>
               </div>
@@ -83,7 +97,10 @@ function Sidebar() {
           </li>
 
           <li>
-            <Link to="/Wallet" className={`nav-link ${isActive("/Wallet") ? "bg-blue" : ""}`}>
+            <Link
+              to="/Wallet"
+              className={`nav-link ${isActive("/Wallet") ? "bg-blue" : ""}`}
+            >
               <div className="icon">
                 <box-icon color="white" name="wallet"></box-icon>
               </div>
@@ -92,7 +109,10 @@ function Sidebar() {
           </li>
 
           <li>
-            <Link to="/Settings" className={`nav-link ${isActive("/Settings") ? "bg-blue" : ""}`}>
+            <Link
+              to="/Settings"
+              className={`nav-link ${isActive("/Settings") ? "bg-blue" : ""}`}
+            >
               <div className="icon">
                 <box-icon color="white" name="cog"></box-icon>
               </div>
@@ -100,9 +120,14 @@ function Sidebar() {
               <span className="nav-item">Settings</span>
             </Link>
           </li>
-
+        </ul>
+        </div>
+        <ul className="logout">
           <li className="login-logout">
-            <Link to="/login" className={`nav-link ${isActive("/login") ? "bg-blue" : ""}`}>
+            <Link
+              to="/login"
+              className={`nav-link ${isActive("/login") ? "bg-blue" : ""}`}
+            >
               <div className="icon">
                 <box-icon color="white" name="log-in"></box-icon>
               </div>
