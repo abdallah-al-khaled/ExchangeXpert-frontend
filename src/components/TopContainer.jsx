@@ -46,7 +46,7 @@ function TopContainer({ title, filter = "active" }) {
       }
     };
     fetchData();
-  },[filter]);
+  },[]);
   return (
     <div className="page">
       <div className="top-containers">
