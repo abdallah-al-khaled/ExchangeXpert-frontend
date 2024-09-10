@@ -83,3 +83,7 @@
 .gap{
     gap: 15px;
 }
+
+.item img{
+    border-radius: 50px;
+}

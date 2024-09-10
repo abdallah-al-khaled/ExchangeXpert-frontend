@@ -7,7 +7,7 @@ function TopNav() {
       <div className="search">
         <input type="text" placeholder="Search for stocks and more" />
       </div>
-      <div className="flex profile">
+      {/* <div className="flex profile">
         <img src={profilePic} alt="profile" />
         <div className="flex column username">
           <p className="name">John Doe</p>
@@ -19,7 +19,7 @@ function TopNav() {
           <p>Profile Balance</p>
           <p>$623,000.00</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

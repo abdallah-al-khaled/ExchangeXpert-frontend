@@ -7,7 +7,7 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
   price = data[length-1].c
   let price_change_percent = (price_change/data[length-2].c)*100
   price_change_percent = Number((price_change_percent).toFixed(2))
-  
+
   price_change = Number((price_change).toFixed(2))
   const navigate = useNavigate();
 
@@ -16,12 +16,12 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
   }
   return (
     <div className="list-item flex row" onClick={handleClick}>
-      <div className="flex">
+      <div className="flex item">
         <img
           src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
           alt={symbol}
           width={50}
-          style={{ margin: -5 }}
+          style={{ margin: -0 }}
         />
         <div className="flex column stock-name">
           <span className="companyName">Microsoft Corp</span>
