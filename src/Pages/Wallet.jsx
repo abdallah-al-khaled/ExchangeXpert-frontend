@@ -9,7 +9,37 @@ function Wallet() {
   const [stocks, setStocks] = useState({});
   const symbols = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META"];
   const [loading,setLoading] = useState(false)
-  
+  useEffect(() => {
+    var d = new Date();
+    d.setDate(d.getDate() - 5);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://data.alpaca.markets/v2/stocks/bars",
+          {
+            params: {
+              symbols: symbols.join(","),
+              timeframe: "1D",
+              start: d,
+              adjustment: "raw",
+              feed: "sip",
+              sort: "asc",
+              limit: 10000,
+            },
+            headers: {
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+              accept: "application/json",
+            },
+          }
+        );        
+        
+      } catch (error) {
+        console.error("Error fetching stocks data:", error);
+      }
+    };
+    fetchData();
+  },[]);
 
   return (
     <div className="main-content">
