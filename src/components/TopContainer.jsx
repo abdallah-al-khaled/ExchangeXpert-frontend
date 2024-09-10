@@ -30,9 +30,6 @@ function TopContainer({ title, filter = "active" }) {
               "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
               accept: "application/json",
             },
-            paramsSerializer: (params) => {
-              return qs.stringify(params);
-            },
           }
         );        
         // const stockSymbol = "AAPL";

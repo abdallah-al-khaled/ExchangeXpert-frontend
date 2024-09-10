@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
 import AccountHistoryChart from "../components/AccountHistoryChart";
 import Topbar from "../components/Topbar";
 import TopContainerListItem from "../components/TopContainerListItem";
 import TopNav from "../components/TopNav";
+import axios from "axios";
 
 function Wallet() {
+  const [stocks, setStocks] = useState({});
+  const symbols = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META"];
+  const [loading,setLoading] = useState(false)
+  
+
   return (
     <div className="main-content">
       <TopNav />
