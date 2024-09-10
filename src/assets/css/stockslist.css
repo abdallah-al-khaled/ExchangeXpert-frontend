@@ -26,6 +26,10 @@
 .logo-list{
     align-items: center;
 }
+.logo-list img{
+    border-radius: 50px;
+    margin: 5px;
+}
 
 .highcharts-credits{
     display: none;
