@@ -12,6 +12,7 @@ const Login = () => {
           Navigate the Markets<br />with Confidence
           </h4>
           <p>Advanced Technical Analysis/Charting Tools</p>
+          <p>AI Tools</p>
           <p></p>
         </div>
       </div>
