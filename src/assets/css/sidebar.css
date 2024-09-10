@@ -208,3 +208,7 @@
     align-self: flex-start;
     padding: 10px;
 }
+
+.login-logout{
+    align-self: end;
+}

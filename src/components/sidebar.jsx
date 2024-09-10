@@ -101,7 +101,7 @@ function Sidebar() {
             </Link>
           </li>
 
-          <li>
+          <li className="login-logout">
             <Link to="/login" className={`nav-link ${isActive("/login") ? "bg-blue" : ""}`}>
               <div className="icon">
                 <box-icon color="white" name="log-in"></box-icon>
