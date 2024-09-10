@@ -33,7 +33,12 @@ function Wallet() {
             },
           }
         );        
-        
+        // const stockSymbol = "AAPL";
+        console.log(response.data.bars);
+        setStocks(response.data.bars);
+        console.log(stocks);
+        setLoading(true)
+        return response.data.bars;
       } catch (error) {
         console.error("Error fetching stocks data:", error);
       }
