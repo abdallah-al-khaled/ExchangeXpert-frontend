@@ -35,6 +35,10 @@
   .login-image-text p{
     font-size: medium;
     font-weight: 100;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 50px;
+    box-shadow: 5px 20px 20px 5px rgb(203, 203, 203,0.5) inset;
   }
   
   /* Right side with the login form */
