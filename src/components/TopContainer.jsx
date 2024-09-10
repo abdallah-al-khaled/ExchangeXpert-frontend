@@ -6,7 +6,7 @@ import TopContainerListItem from "./TopContainerListItem";
 import StocksList from "./StocksList";
 function TopContainer({ title, filter = "active" }) {
   const [stocks, setStocks] = useState({});
-  const symbols = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META", "NVDA", "JPM", "JNJ", "UNH", "HD", "PG", "V", "MA"];
+  const symbols = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META", "NVDA", "JPM", "JNJ", "UNH", "HD", "PG", "V", "MA", "NIO"];
   const [loading,setLoading] = useState(false)
   useEffect(() => {
     var d = new Date();

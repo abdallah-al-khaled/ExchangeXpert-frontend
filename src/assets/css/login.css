@@ -133,3 +133,12 @@
     width: 100%;
   }
   
+  .terms-and-services{
+    margin-top: 10px;
+    color: #999999;
+  }
+
+  .link{
+    color: #00BDDD;
+    text-decoration: underline;
+  }

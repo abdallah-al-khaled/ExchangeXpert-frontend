@@ -7,7 +7,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-image">
         <img src={img} alt="Login" />
-        <div className="login-image-text">
+        <div className="login-image-text flex column">
           <h4>
             Navigate the Markets
             <br />
@@ -40,7 +40,7 @@ const Login = () => {
           required
         />
         <button type="submit">Login</button>
-        <p className="terms-and-services">By logging in, you agree to follow our terms of service</p>
+        <p className="terms-and-services">By logging in, you agree to follow our<span className="link"> terms of service</span></p>
       </div>
     </div>
   );
