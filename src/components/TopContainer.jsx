@@ -104,6 +104,8 @@ function TopContainer({ title, filter = "active" }) {
             <div className="list-container">
               <h1 className="stockslist">StocksList</h1>
             </div>
+            <div className="test"></div>
+            <div className="test"></div>
           </div>
         </div>
       </div>
