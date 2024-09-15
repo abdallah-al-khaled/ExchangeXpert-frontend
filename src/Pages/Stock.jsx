@@ -6,12 +6,15 @@ import GaugeChart from "../components/GaugeChart";
 import "../assets/css/stockpage.css";
 import { useEffect } from "react";
 import axios from "axios";
+import React, { useState } from 'react';
 function Stock() {
   const { symbol } = useParams();
-  
+  const [sentiment, setSentiment]  = useState({})
   useEffect(()=>{
     const request = async()=>{
-      const {data} = axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
+      const {data} = await axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
+      console.log((parseFloat(data.sentiment_score) + 1)*50);
+      setSentiment((parseFloat(data.sentiment_score) + 1)*50)
       return data
     }
     request()
@@ -30,8 +33,8 @@ function Stock() {
             <div className=""></div>
             <div className=""></div>
             <h3>Technical analysis for {symbol}</h3>
-            <GaugeChart />
-            <p className="sell">Sell</p>
+            <GaugeChart value={sentiment}/>
+            <p className="sell">{sentiment > 50 ? "Sell" : "Buy"}</p>
             <div className=""></div>
             <p className="last-updated">last updated 22-8-2024</p>
           </div>
