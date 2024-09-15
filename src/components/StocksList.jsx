@@ -119,7 +119,8 @@ function StocksList({
       <div className="single-stock flex row">
         <div className="flex row logo-list">
           <img
-            src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
+            // src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
+            src={`https://assets.parqet.com/logos/symbol/${symbol}?format=jpg`}
             alt={symbol}
             width={50}
           />
