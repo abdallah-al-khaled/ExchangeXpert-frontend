@@ -9,6 +9,7 @@ function StocksList({
   price = "123.45",
   volume = "12345",
   sentiment = 60,
+  Security = ""
 }) {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -115,17 +116,17 @@ function StocksList({
       },
     ],
   };
-  const [Security, setSecurity] = useState("");
-  useEffect(() => {
-    const fetchCompanyData = async () => {
-      const response = await fetch('/sp500_companies.json');
-      const companies = await response.json();
-      console.log(companies[symbol]);
-      setSecurity(companies[symbol]);
-    };
+  // const [Security, setSecurity] = useState("");
+  // useEffect(() => {
+  //   const fetchCompanyData = async () => {
+  //     const response = await fetch('/sp500_companies.json');
+  //     const companies = await response.json();
+  //     console.log(companies[symbol]);
+  //     setSecurity(companies[symbol]);
+  //   };
   
-    fetchCompanyData();
-  }, []);
+  //   fetchCompanyData();
+  // }, []);
 
   return (
     <>

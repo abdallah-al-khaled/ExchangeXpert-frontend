@@ -12,10 +12,14 @@ function TopContainer({ title, filter = "active" }) {
     "AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META", "NVDA", 
     "JPM", "JNJ", "UNH", "HD", "PG", "V", "MA", "NIO"
   ];
+  const [companies, setCompanies] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const data = await fetch('/sp500_companies.json');
+        const request = await data.json();
+        setCompanies(request);
         var d = new Date();
         d.setDate(d.getDate() - 5);
 
@@ -48,6 +52,7 @@ function TopContainer({ title, filter = "active" }) {
     fetchData();  // Fetch data once when the component mounts
 
   }, []);  // Pass an empty array as the dependency to run useEffect only once
+  console.log(companies, "dfijughdfurythtdtijbnyur");
 
   // Display loading or the stock list based on loading state
   return (
@@ -111,11 +116,31 @@ function TopContainer({ title, filter = "active" }) {
       </div>
 
       <div className="flex column gap">
-        <StocksList symbol="TSLA" sentiment={20}/>
-        <StocksList symbol="NVDA" sentiment={50}/>
-        <StocksList symbol="AAPL" sentiment={90}/>
-        <StocksList symbol="AMZN" sentiment={70}/>
-        <StocksList />
+        {companies && (
+          <>
+            <StocksList
+              symbol="TSLA"
+              sentiment={20}
+              Security={companies.TSLA}
+            />
+            <StocksList
+              symbol="NVDA"
+              sentiment={50}
+              Security={companies.NVDA}
+            />
+            <StocksList
+              symbol="AAPL"
+              sentiment={90}
+              Security={companies.AAPL}
+            />
+            <StocksList
+              symbol="AMZN"
+              sentiment={70}
+              Security={companies.AMZN}
+            />
+          </>
+        )}
+        
       </div>
     </div>
   );
