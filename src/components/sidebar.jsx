@@ -92,7 +92,7 @@ function Sidebar() {
               <div className="icon">
                 <box-icon color="white" name="bot"></box-icon>
               </div>
-              <span className="nav-item">AI Trading Bots</span>
+              <span className="nav-item">Trading Bots</span>
             </Link>
           </li>
 

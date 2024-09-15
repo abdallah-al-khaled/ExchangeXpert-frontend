@@ -97,7 +97,6 @@
 }
 
 .sidebar .nav-item {
-    display: inline-block; /* Ensure it takes space even when hidden */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -106,7 +105,7 @@
 .sidebar.open .nav-item {
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.s; /* Delay the text appearance */
+    transition-delay: 0.2s; /* Delay the text appearance */
 }
 
 .sidebar ul li .nav-link {
