@@ -49,10 +49,10 @@ function TopContainer({ title, filter = "active" }) {
         if (bestStocks.length > 0 || worstStocks.length > 0) {
           // Merge best and worst stock symbols into a single array
           const stockSymbols = [
-            ...new Set([
+            // ...new Set([
               ...bestStocks.map((stock) => stock.stock_symbol),
               ...worstStocks.map((stock) => stock.stock_symbol),
-            ]),
+            // ]),
           ];
 
           // Make a single API request for all the stocks
@@ -73,8 +73,7 @@ function TopContainer({ title, filter = "active" }) {
               },
               headers: {
                 "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-                "APCA-API-SECRET-KEY":
-                  process.env.REACT_APP_APCA_API_SECRET_KEY,
+                "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
                 accept: "application/json",
               },
             }
@@ -105,6 +104,7 @@ function TopContainer({ title, filter = "active" }) {
                 key={index}
                 symbol={stock.stock_symbol}
                 data={stocks[stock.stock_symbol]}
+                Security={companies[stock.stock_symbol]}
               />
             ))
           ) : (
@@ -145,7 +145,7 @@ function TopContainer({ title, filter = "active" }) {
         <div className="flex column">
           <div className="stockList flex column">
             <div className="list-container">
-              <h1 className="stockslist">StocksList</h1>
+              <h1 className="stockslist">Stocks List</h1>
             </div>
             <div className="test"></div>
             <div className="test"></div>

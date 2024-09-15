@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1,2]}) {
+function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1,2],Security=""}) {
   const length = data.length
   // const price_change = ((price-data[length-1])/data[length-1])*100
   let price_change = data[length-1].c-data[length-2].c
@@ -25,7 +25,7 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
           style={{ margin: -0 }}
         />
         <div className="flex column stock-name">
-          <span className="companyName">Microsoft Corp</span>
+          <span className="companyName">{Security}</span>
           <span className="symbol">{symbol}</span>
         </div>
       </div>
