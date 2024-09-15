@@ -115,6 +115,17 @@ function StocksList({
       },
     ],
   };
+  const [Security, setSecurity] = useState("");
+  useEffect(() => {
+    const fetchCompanyData = async () => {
+      const response = await fetch('/sp500_companies.json');
+      const companies = await response.json();
+      console.log(companies[symbol]);
+      setSecurity(companies[symbol]);
+    };
+  
+    fetchCompanyData();
+  }, []);
 
   return (
     <>
@@ -126,7 +137,7 @@ function StocksList({
             width={50}
           />
           <div className="flex column">
-            <p>Microsoft Corp</p>
+            <p>{Security}</p>
             <p className="symbol">{symbol}</p>
           </div>
         </div>
