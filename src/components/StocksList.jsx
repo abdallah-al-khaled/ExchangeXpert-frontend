@@ -39,8 +39,6 @@ function StocksList({
         // Extract closing prices from the data and update state
         const closingPrices = bars.map((bar) => bar.c);
         setData(closingPrices);
-        console.log(symbol);
-        console.log(response.data.bars)
         return response.data.bars;
       } catch (error) {
         console.error("Error fetching stock data from Alpaca:", error);
@@ -48,7 +46,6 @@ function StocksList({
       }
     };
     getData() 
-    console.log(data.c);
   }, []);
 
   const options = {
