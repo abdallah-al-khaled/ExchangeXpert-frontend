@@ -15,7 +15,7 @@ function StocksList({
     const getData = async () => {
       try {
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);  // Subtract 1 day
+        yesterday.setDate(yesterday.getDate() - 2);  // Subtract 1 day
         const startDate = yesterday.toISOString().split('T')[0];
 
         const response = await axios.get(
@@ -28,8 +28,8 @@ function StocksList({
               feed: "iex"
             },
             headers: {
-              "APCA-API-KEY-ID": "PK1WQS1KTLJOOKR0AF8N",
-              "APCA-API-SECRET-KEY": "EEzJ6tHctib6oKYQnLufNSnMfjgEv8cjYGU6UsPO",
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
               accept: "application/json",
             },
           }

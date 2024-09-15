@@ -15,11 +15,13 @@
     justify-content: space-around;
     align-items: center;
     height: 615px;
+    width: 400px;
     background:white;
     border-radius: 20px;
-    
 }
-
+#highcharts-qsr5rt8-0{
+    width:400px
+}
 .last-updated{
     align-self: flex-end;
     padding-right: 20px;

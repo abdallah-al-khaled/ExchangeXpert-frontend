@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import SolidGauge from 'highcharts/modules/solid-gauge';
 import * as ChartModuleMore from 'highcharts/highcharts-more.js';
 import HCSoldGauge from 'highcharts/modules/solid-gauge';
 
@@ -16,11 +15,13 @@ const GaugeChart = ({ value = 10 }) => {
       chart: {
         type: 'solidgauge',
         height: '250px',
+        // width: '600px',
+        
       },
       title: null,
       pane: {
         center: ['50%', '85%'],
-        size: '150%',
+        size: '140%',
         startAngle: -90,
         endAngle: 90,
         background: {
@@ -85,7 +86,7 @@ const GaugeChart = ({ value = 10 }) => {
   
     return (
       <div id="container-gauge">
-        <HighchartsReact highcharts={Highcharts} options={gaugeOptions} />
+        <HighchartsReact highcharts={Highcharts} options={gaugeOptions} containerProps={{ style: { width: "400px" } }}/>
       </div>
     );
   };
