@@ -120,6 +120,7 @@ function TopContainer({ title, filter = "active" }) {
                 key={index}
                 symbol={stock.stock_symbol}
                 data={stocks[stock.stock_symbol]}
+                Security={companies[stock.stock_symbol]}
               />
             ))
           ) : (
