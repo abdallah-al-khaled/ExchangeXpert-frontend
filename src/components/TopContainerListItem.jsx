@@ -19,6 +19,7 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
       <div className="flex item">
         <img
           // src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
+          // https://eodhd.com/img/logos/US/${symbol}.png
           src={`https://logo.synthfinance.com/ticker/${symbol}`}
           alt={symbol}
           width={50}
