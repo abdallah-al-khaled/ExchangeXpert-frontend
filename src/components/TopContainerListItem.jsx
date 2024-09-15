@@ -18,7 +18,8 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
     <div className="list-item flex row" onClick={handleClick}>
       <div className="flex item">
         <img
-          src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
+          // src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
+          src={`https://financialmodelingprep.com/image-stock/${symbol}.png?apikey=${process.env.fmp_key}`}
           alt={symbol}
           width={50}
           height={50}
