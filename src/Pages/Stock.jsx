@@ -1,4 +1,3 @@
-import TopContainer from "../components/TopContainer";
 import TopNav from "../components/TopNav";
 import { useParams } from "react-router-dom";
 import TradeViewChart from "../components/TradeViewChart";

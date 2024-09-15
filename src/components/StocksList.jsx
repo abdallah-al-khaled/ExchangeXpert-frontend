@@ -149,8 +149,8 @@ function StocksList({
         </div>
         <div className="flex column sentiment-analysis">
           <p className="sentiment-text">Sentiment</p>
-          <p className={`buy-or-sell ${sentiment >= 70 ? "Buy" : "Sell"}`}>
-            {sentiment >= 70 ? "Buy" : "Sell"}
+          <p className={`buy-or-sell ${sentiment > 70 ? "blue" : sentiment < 30 ? "red" : "green"}`}>
+          {sentiment > 70 ? "Positive" : sentiment < 30 ? "Negative" : "Neutral"}
           </p>
           <HighchartsReact highcharts={Highcharts} options={options} />
           <p className="date">Based on data from 11-8-2024</p>
