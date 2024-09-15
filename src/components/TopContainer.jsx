@@ -13,6 +13,15 @@ function TopContainer({ title, filter = "active" }) {
     "JPM", "JNJ", "UNH", "HD", "PG", "V", "MA", "NIO"
   ];
   const [companies, setCompanies] = useState({});
+  const [stockList, setStockList] = useState();
+  const fetchTopSentimentStocks = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/top-sentiment-stocks');
+      setStockList(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +59,10 @@ function TopContainer({ title, filter = "active" }) {
     };
     
     fetchData();  // Fetch data once when the component mounts
-
+    fetchTopSentimentStocks();
   }, []);  // Pass an empty array as the dependency to run useEffect only once
   console.log(companies, "dfijughdfurythtdtijbnyur");
+  console.log(stockList, "dfijughdfurythtdtijbnyur");
 
   // Display loading or the stock list based on loading state
   return (

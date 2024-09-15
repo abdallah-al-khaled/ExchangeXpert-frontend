@@ -116,17 +116,6 @@ function StocksList({
       },
     ],
   };
-  // const [Security, setSecurity] = useState("");
-  // useEffect(() => {
-  //   const fetchCompanyData = async () => {
-  //     const response = await fetch('/sp500_companies.json');
-  //     const companies = await response.json();
-  //     console.log(companies[symbol]);
-  //     setSecurity(companies[symbol]);
-  //   };
-  
-  //   fetchCompanyData();
-  // }, []);
 
   return (
     <>
