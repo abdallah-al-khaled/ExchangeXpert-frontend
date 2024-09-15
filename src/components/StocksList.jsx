@@ -1,17 +1,55 @@
+import { useEffect, useState } from "react";
 import "../assets/css/stockslist.css";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import axios from "axios";
 function StocksList({
   symbol = "MSFT",
   price = "123.45",
   volume = "12345",
   sentiment = 60,
-  data = [
-    25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54, 33, 22, 77, 55, 33, 99, 55, 33,
-    65, 36, 48, 25, 66, 41, 79, 63, 35, 44, 12, 36,
-  ],
 }) {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);  // Subtract 1 day
+        const startDate = yesterday.toISOString().split('T')[0];
+
+        const response = await axios.get(
+          `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
+          {
+            params: {
+              timeframe: "5Min", // You can change the interval as needed
+              start: `${startDate}`, // Start time for regular market hours (9:30 AM)
+              limit: 1000, // Number of data points
+              feed: "iex"
+            },
+            headers: {
+              "APCA-API-KEY-ID": "PK1WQS1KTLJOOKR0AF8N",
+              "APCA-API-SECRET-KEY": "EEzJ6tHctib6oKYQnLufNSnMfjgEv8cjYGU6UsPO",
+              accept: "application/json",
+            },
+          }
+        );
+        const bars = response.data.bars;
+        // Extract closing prices from the data and update state
+        const closingPrices = bars.map((bar) => bar.c);
+        setData(closingPrices);
+        console.log(symbol);
+        console.log(response.data.bars)
+        return response.data.bars;
+      } catch (error) {
+        console.error("Error fetching stock data from Alpaca:", error);
+        return [];
+      }
+    };
+    getData() 
+    console.log(data.c);
+  }, []);
+
   const options = {
     chart: {
       type: "bar",

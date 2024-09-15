@@ -4,8 +4,18 @@ import { useParams } from "react-router-dom";
 import TradeViewChart from "../components/TradeViewChart";
 import GaugeChart from "../components/GaugeChart";
 import "../assets/css/stockpage.css";
+import { useEffect } from "react";
+import axios from "axios";
 function Stock() {
   const { symbol } = useParams();
+  
+  useEffect(()=>{
+    const request = async()=>{
+      const {data} = axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
+      return data
+    }
+    request()
+  },[])
   console.log(symbol);
   return (
     <div className="main-content">
