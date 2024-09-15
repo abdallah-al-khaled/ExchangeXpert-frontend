@@ -40,7 +40,7 @@ function Stock() {
             <div className=""></div>
             <h3>Technical analysis for {symbol}</h3>
             <GaugeChart value={sentiment} />
-            <p className={sentiment > 70 ? "green" : sentiment < 30 ? "red" : "yellow"} id={"sentiment"}>{sentiment > 70 ? "Positve" : sentiment < 30 ? "Negative" : "Neutral"}</p>
+            <p className={sentiment > 70 ? "green" : sentiment < 30 ? "red" : "yellow"} id={"sentiment"}>{sentiment > 70 ? "Positive" : sentiment < 30 ? "Negative" : "Neutral"}</p>
             <div className=""></div>
             <p className="last-updated">last updated 22-8-2024</p>
           </div>
