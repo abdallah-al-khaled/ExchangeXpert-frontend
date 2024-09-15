@@ -14,9 +14,13 @@ function TopContainer({ title, filter = "active" }) {
   // Function to fetch both best and worst sentiment stocks
   const fetchTopAndWorstSentimentStocks = async () => {
     try {
-      const bestResponse = await axios.get('http://127.0.0.1:8000/api/top-sentiment-stocks');
-      const worstResponse = await axios.get('http://127.0.0.1:8000/api/worst-sentiment-stocks');
-      
+      const bestResponse = await axios.get(
+        "http://127.0.0.1:8000/api/top-sentiment-stocks"
+      );
+      const worstResponse = await axios.get(
+        "http://127.0.0.1:8000/api/worst-sentiment-stocks"
+      );
+
       setBestStocks(bestResponse.data);
       setWorstStocks(worstResponse.data);
     } catch (err) {
@@ -27,18 +31,17 @@ function TopContainer({ title, filter = "active" }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch('/sp500_companies.json');
+        const data = await fetch("/sp500_companies.json");
         const request = await data.json();
         setCompanies(request);
-
         await fetchTopAndWorstSentimentStocks();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    
-    fetchData(); 
-  }, []); 
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -46,7 +49,10 @@ function TopContainer({ title, filter = "active" }) {
         if (bestStocks.length > 0 || worstStocks.length > 0) {
           // Merge best and worst stock symbols into a single array
           const stockSymbols = [
-            ...new Set([...bestStocks.map(stock => stock.stock_symbol), ...worstStocks.map(stock => stock.stock_symbol)])
+            ...new Set([
+              ...bestStocks.map((stock) => stock.stock_symbol),
+              ...worstStocks.map((stock) => stock.stock_symbol),
+            ]),
           ];
 
           // Make a single API request for all the stocks
@@ -67,7 +73,8 @@ function TopContainer({ title, filter = "active" }) {
               },
               headers: {
                 "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-                "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+                "APCA-API-SECRET-KEY":
+                  process.env.REACT_APP_APCA_API_SECRET_KEY,
                 accept: "application/json",
               },
             }
@@ -84,7 +91,7 @@ function TopContainer({ title, filter = "active" }) {
     if (bestStocks.length > 0 || worstStocks.length > 0) {
       fetchStockData();
     }
-  }, [bestStocks, worstStocks]);  // Trigger fetch when best/worst stocks are fetched
+  }, [bestStocks, worstStocks]); // Trigger fetch when best/worst stocks are fetched
 
   // Display loading or the stock list based on loading state
   return (
@@ -94,7 +101,11 @@ function TopContainer({ title, filter = "active" }) {
           <p className="title">Top 5 Best Sentiment Stocks</p>
           {loading && bestStocks ? (
             bestStocks.map((stock, index) => (
-              <TopContainerListItem key={index} symbol={stock.stock_symbol} data={stocks[stock.stock_symbol]} />
+              <TopContainerListItem
+                key={index}
+                symbol={stock.stock_symbol}
+                data={stocks[stock.stock_symbol]}
+              />
             ))
           ) : (
             <p>Loading data...</p>
@@ -105,7 +116,11 @@ function TopContainer({ title, filter = "active" }) {
           <p className="title">Top 5 Worst Sentiment Stocks</p>
           {loading && worstStocks ? (
             worstStocks.map((stock, index) => (
-              <TopContainerListItem key={index} symbol={stock.stock_symbol} data={stocks[stock.stock_symbol]} />
+              <TopContainerListItem
+                key={index}
+                symbol={stock.stock_symbol}
+                data={stocks[stock.stock_symbol]}
+              />
             ))
           ) : (
             <p>Loading data...</p>
@@ -116,7 +131,11 @@ function TopContainer({ title, filter = "active" }) {
           <p className="title">Top 5 Worst Sentiment Stocks</p>
           {loading && worstStocks ? (
             worstStocks.map((stock, index) => (
-              <TopContainerListItem key={index} symbol={stock.stock_symbol} data={stocks[stock.stock_symbol]} />
+              <TopContainerListItem
+                key={index}
+                symbol={stock.stock_symbol}
+                data={stocks[stock.stock_symbol]}
+              />
             ))
           ) : (
             <p>Loading data...</p>
@@ -132,17 +151,32 @@ function TopContainer({ title, filter = "active" }) {
             <div className="test"></div>
           </div>
         </div>
-
-        <div className="flex column gap">
-          {companies && (
-            <>
-              <StocksList symbol="TSLA" sentiment={20} Security={companies.TSLA} />
-              <StocksList symbol="NVDA" sentiment={50} Security={companies.NVDA} />
-              <StocksList symbol="AAPL" sentiment={90} Security={companies.AAPL} />
-              <StocksList symbol="AMZN" sentiment={70} Security={companies.AMZN} />
-            </>
-          )}
-        </div>
+      </div>
+      <div className="flex column gap">
+        {companies && (
+          <>
+            <StocksList
+              symbol="TSLA"
+              sentiment={20}
+              Security={companies.TSLA}
+            />
+            <StocksList
+              symbol="NVDA"
+              sentiment={50}
+              Security={companies.NVDA}
+            />
+            <StocksList
+              symbol="AAPL"
+              sentiment={90}
+              Security={companies.AAPL}
+            />
+            <StocksList
+              symbol="AMZN"
+              sentiment={70}
+              Security={companies.AMZN}
+            />
+          </>
+        )}
       </div>
     </div>
   );
