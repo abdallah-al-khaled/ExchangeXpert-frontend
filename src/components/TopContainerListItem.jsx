@@ -32,8 +32,8 @@ function TopContainerListItem({ symbol="MSFT",price="100",change="1.00", data=[1
         </div>
       </div>
       <div className="price flex column">
-        <span>${price}</span>
-        <span className={`${price_change>0?"green":"red"}`}>{price_change>0?"+":""}({price_change}) {price_change_percent<0?price_change_percent*-1:price_change_percent}%</span>
+        <span>${price && price}</span>
+        <span className={`${price_change>0?"green":"red"}`}>{price && `(${price_change>0?"+":""}${price_change}) `}{ price_change_percent<0?price_change_percent*-1:price_change_percent}%</span>
       </div>
     </div>
   );

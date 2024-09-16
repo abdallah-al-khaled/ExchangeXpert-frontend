@@ -87,3 +87,10 @@
 .item img{
     border-radius: 50px;
 }
+
+.companyName{
+    width: 240px;
+    white-space: nowrap; 
+    overflow: hidden;
+  text-overflow: ellipsis; 
+}
