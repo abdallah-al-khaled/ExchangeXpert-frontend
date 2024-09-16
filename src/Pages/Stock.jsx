@@ -19,7 +19,7 @@ function Stock() {
         setSentiment(Math.floor((parseFloat(data.sentiment_score) + 1) * 50));
         return data;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
     request();
@@ -39,13 +39,27 @@ function Stock() {
             <div className=""></div>
             <h3>Technical analysis for {symbol}</h3>
             <GaugeChart value={sentiment} />
-            <p className={sentiment > 70 ? "green" : sentiment < 30 ? "red" : "yellow"} id={"sentiment"}>{sentiment > 70 ? "Positive" : sentiment < 30 ? "Negative" : "Neutral"}</p>
+            <p
+              className={
+                sentiment > 70 ? "green" : sentiment < 30 ? "red" : "yellow"
+              }
+              id={"sentiment"}
+            >
+              {sentiment > 70
+                ? "Positive"
+                : sentiment < 30
+                ? "Negative"
+                : "Neutral"}
+            </p>
             <div className=""></div>
             <p className="last-updated">last updated 22-8-2024</p>
           </div>
         </div>
         <div className="ml-prediction">
-        <img src="http://127.0.0.1:8000/storage/images/mQOHY15IRMCV0b1j0FZ4OAFeEBdaVJXD7RNPirLh.png" alt="" />
+          <img
+            src="http://127.0.0.1:8000/storage/images/mQOHY15IRMCV0b1j0FZ4OAFeEBdaVJXD7RNPirLh.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
