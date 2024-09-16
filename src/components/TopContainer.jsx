@@ -1,104 +1,92 @@
-import { useEffect, useState } from "react";
-import "../assets/css/topcontainer.css";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import TopContainerListItem from "./TopContainerListItem";
 import StocksList from "./StocksList";
+import "../assets/css/topcontainer.css";
+import TopContainerListItem from "./TopContainerListItem";
+import {
+  fetchBestStocks,
+  fetchWorstStocks,
+  setStocksLoaded,
+} from "../features/sentimentSlice";
 
 function TopContainer({ title, filter = "active" }) {
-  const [stocks, setStocks] = useState({});
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { bestStocks, worstStocks, stocksLoaded, loading } = useSelector(
+    (state) => state.sentiment
+  );
   const [companies, setCompanies] = useState({});
-  const [bestStocks, setBestStocks] = useState([]);
-  const [worstStocks, setWorstStocks] = useState([]);
-
-  // Function to fetch both best and worst sentiment stocks
-  const fetchTopAndWorstSentimentStocks = async () => {
-    try {
-      const bestResponse = await axios.get(
-        "http://127.0.0.1:8000/api/top-sentiment-stocks"
-      );
-      const worstResponse = await axios.get(
-        "http://127.0.0.1:8000/api/worst-sentiment-stocks"
-      );
-
-      setBestStocks(bestResponse.data);
-      setWorstStocks(worstResponse.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [stocks, setStocks] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await fetch("/sp500_companies.json");
-        const request = await data.json();
-        setCompanies(request);
-        await fetchTopAndWorstSentimentStocks();
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      if (!stocksLoaded) {
+        dispatch(fetchBestStocks());
+        dispatch(fetchWorstStocks());
+        dispatch(setStocksLoaded(true)); // Mark stocks as loaded to avoid redundant API calls
       }
+
+      const companiesData = await fetch("/sp500_companies.json");
+      const companiesJson = await companiesData.json();
+      setCompanies(companiesJson);
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, stocksLoaded]);
 
   useEffect(() => {
     const fetchStockData = async () => {
-      try {
-        if (bestStocks.length > 0 || worstStocks.length > 0) {
-          // Merge best and worst stock symbols into a single array
-          const stockSymbols = [
-            // ...new Set([
-              ...bestStocks.map((stock) => stock.stock_symbol),
-              ...worstStocks.map((stock) => stock.stock_symbol),
-            // ]),
-          ];
+      if (bestStocks.length > 0 || worstStocks.length > 0) {
+        // Combine best and worst stock symbols into a single array
+        const stockSymbols = [
+          ...new Set([
+            ...bestStocks.map((stock) => stock.stock_symbol),
+            ...worstStocks.map((stock) => stock.stock_symbol),
+          ]),
+        ];
 
-          // Make a single API request for all the stocks
-          const d = new Date();
-          d.setDate(d.getDate() - 5);
+        // Make a single API request for all the stock symbols
+        const d = new Date();
+        d.setDate(d.getDate() - 5);
 
-          const response = await axios.get(
-            "https://data.alpaca.markets/v2/stocks/bars",
-            {
-              params: {
-                symbols: stockSymbols.join(","),
-                timeframe: "1D",
-                start: d.toISOString(),
-                adjustment: "raw",
-                feed: "sip",
-                sort: "asc",
-                limit: 10000,
-              },
-              headers: {
-                "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-                "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-                accept: "application/json",
-              },
-            }
-          );
+        const response = await axios.get(
+          "https://data.alpaca.markets/v2/stocks/bars",
+          {
+            params: {
+              symbols: stockSymbols.join(","),
+              timeframe: "1D",
+              start: d.toISOString(),
+              adjustment: "raw",
+              feed: "sip",
+              sort: "asc",
+              limit: 10000,
+            },
+            headers: {
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+              accept: "application/json",
+            },
+          }
+        );
 
-          setStocks(response.data.bars);
-          setLoading(true);
-        }
-      } catch (error) {
-        console.error("Error fetching stock data from Alpaca:", error);
+        setStocks(response.data.bars);
       }
     };
 
     if (bestStocks.length > 0 || worstStocks.length > 0) {
       fetchStockData();
     }
-  }, [bestStocks, worstStocks]); // Trigger fetch when best/worst stocks are fetched
+  }, [bestStocks, worstStocks]);
 
-  // Display loading or the stock list based on loading state
+  // Display loading or stock data
   return (
     <div className="page">
       <div className="top-containers">
         <div className="top-active stocks-container">
           <p className="title">Top 5 Best Sentiment Stocks</p>
-          {loading && bestStocks ? (
+          {loading ? (
+            <p>Loading data...</p>
+          ) : (
             bestStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
@@ -107,14 +95,14 @@ function TopContainer({ title, filter = "active" }) {
                 Security={companies[stock.stock_symbol]}
               />
             ))
-          ) : (
-            <p>Loading data...</p>
           )}
         </div>
 
         <div className="top-losers stocks-container">
           <p className="title">Top 5 Worst Sentiment Stocks</p>
-          {loading && worstStocks ? (
+          {loading ? (
+            <p>Loading data...</p>
+          ) : (
             worstStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
@@ -123,23 +111,22 @@ function TopContainer({ title, filter = "active" }) {
                 Security={companies[stock.stock_symbol]}
               />
             ))
-          ) : (
-            <p>Loading data...</p>
           )}
         </div>
 
         <div className="top-losers stocks-container">
           <p className="title">Top 5 Worst Sentiment Stocks</p>
-          {loading && worstStocks ? (
+          {loading ? (
+            <p>Loading data...</p>
+          ) : (
             worstStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
                 symbol={stock.stock_symbol}
                 data={stocks[stock.stock_symbol]}
+                Security={companies[stock.stock_symbol]}
               />
             ))
-          ) : (
-            <p>Loading data...</p>
           )}
         </div>
 
