@@ -64,9 +64,7 @@ function Stock() {
             />
           </div>
           <div className="news">
-            <div className="">
               <TradingViewTopStories/>
-            </div>
           </div>
         </div>
       </div>

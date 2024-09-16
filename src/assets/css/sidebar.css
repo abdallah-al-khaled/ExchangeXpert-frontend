@@ -93,19 +93,19 @@
     text-align: center;
     height: 50px;
     line-height: 50px;
-    transition: all 0.3s ease;
+    transition: all 0s ease;
 }
 
 .sidebar .nav-item {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .sidebar.open .nav-item {
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.2s; /* Delay the text appearance */
+    transition-delay: 0.2s; 
 }
 
 .sidebar ul li .nav-link {
