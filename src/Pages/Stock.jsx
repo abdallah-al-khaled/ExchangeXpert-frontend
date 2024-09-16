@@ -55,18 +55,17 @@ function Stock() {
             <p className="last-updated">last updated 22-8-2024</p>
           </div>
         </div>
-        <div className="flex">
-        <div className="ml-prediction">
-          <img
-            src="http://127.0.0.1:8000/storage/images/mQOHY15IRMCV0b1j0FZ4OAFeEBdaVJXD7RNPirLh.png"
-            alt=""
-          />
+        <div className="flex lower">
+          <div className="ml-prediction">
+            <img
+              src="http://127.0.0.1:8000/storage/images/mQOHY15IRMCV0b1j0FZ4OAFeEBdaVJXD7RNPirLh.png"
+              alt=""
+            />
+          </div>
+          <div className="news">
+            <div className=""></div>
+          </div>
         </div>
-        <div className="news">
-          <div className=""></div>
-        </div>
-        </div>
-        
       </div>
     </div>
   );
