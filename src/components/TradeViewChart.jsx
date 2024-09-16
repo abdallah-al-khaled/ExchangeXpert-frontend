@@ -12,7 +12,7 @@ function TradingViewWidget({symbol="AAPL"}) {
       script.async = true;
       script.innerHTML = `
         {
-        "width": "800",
+        "width": "1000",
           "height": "600",
           "autosize": false,
           "symbol": "${symbol}",
