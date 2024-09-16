@@ -47,7 +47,36 @@ function SettingsPage() {
         </div>
       </div>
 
-     
+      {/* Alpaca API Key Section */}
+      <div className="api-section">
+        <h3>Alpaca API Settings</h3>
+        <form onSubmit={handleUpdateKey} className="api-form">
+          <label htmlFor="api-key">API Key</label>
+          <input
+            type="text"
+            id="api-key"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+            placeholder="Enter your Alpaca API Key"
+          />
+
+          <label htmlFor="api-secret">API Secret</label>
+          <input
+            type="password"
+            id="api-secret"
+            value={apiSecret}
+            onChange={(e) => setApiSecret(e.target.value)}
+            placeholder="Enter your Alpaca API Secret"
+          />
+
+          <button type="submit" className="update-btn">
+            Update API Keys
+          </button>
+        </form>
+
+        {/* Display status message */}
+        {statusMessage && <p className="status-message">{statusMessage}</p>}
+      </div>
     </div>
   );
 }
