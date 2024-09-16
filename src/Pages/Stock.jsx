@@ -6,6 +6,7 @@ import "../assets/css/stockpage.css";
 import { useEffect } from "react";
 import axios from "axios";
 import React, { useState } from "react";
+import TradingViewTopStories from "../components/TradingViewTopStories";
 function Stock() {
   const { symbol } = useParams();
   const [sentiment, setSentiment] = useState({});
@@ -63,7 +64,9 @@ function Stock() {
             />
           </div>
           <div className="news">
-            <div className=""></div>
+            <div className="">
+              <TradingViewTopStories/>
+            </div>
           </div>
         </div>
       </div>
