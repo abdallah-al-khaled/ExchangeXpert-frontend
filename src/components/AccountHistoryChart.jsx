@@ -4,29 +4,34 @@ import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
 
 function AccountHistoryChart() {
-  const [chartData, setChartData] = useState([
-    [1262304000000, 0.7537],
-    [1262563200000, 0.6951],
-    [1262649600000, 0.6925],
-    [1262736000000, 0.697],
-    [1262822400000, 0.6992],
-    [1262908800000, 0.7007],
-    [1263168000000, 0.6884],
-    [1263254400000, 0.6907],
-    [1263340800000, 0.6868],
-    [1263427200000, 0.6904],
-    [1263513600000, 0.6958],
-    [1263772800000, 0.696],
-    [1263859200000, 0.7004],
-    [1263945600000, 0.7077],
-    [1264032000000, 0.7111],
-    [1264118400000, 0.7076],
-    [1264377600000, 0.7068],
-    [1264464000000, 0.7101],
-    [1264550400000, 0.7107],
-    [1264636800000, 0.7144],
-    [1264723200000, 0.7161],
-  ]);
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    // Function to fetch account history data from your API
+    const fetchAccountHistory = async () => {
+      try {
+        // Replace the URL with your backend endpoint that fetches the Alpaca data
+        const response = await axios.get("http://127.0.0.1:8000/api/get-portfolio-history", {
+          headers : {
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzI2NDI4MjE0LCJleHAiOjE3MjY0MzE4MTQsIm5iZiI6MTcyNjQyODIxNCwianRpIjoia2I1Y2hJSzJ2ODJ5Rm5RMSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.vFHic6Xi-cLCfKpBMZK6XhhbXPeHbW1CafcyZ5By1Tk',
+          }
+        });
+
+        // Assuming the response data is an array of objects with timestamp and equity values
+        const { equity, timestamp } = response.data;
+
+        // Format the data to fit Highcharts (timestamp in ms and equity value)
+        const formattedData = timestamp.map((time, index) => [new Date(time).getTime(), equity[index]]);
+        console.log(response);
+        
+        setChartData(formattedData);
+      } catch (error) {
+        console.error("Error fetching account history:", error);
+      }
+    };
+
+    fetchAccountHistory(); // Call the API on component mount
+  }, []);
 
   const options = {
     chart: {
@@ -88,7 +93,7 @@ function AccountHistoryChart() {
       {
         type: "area",
         name: "Equity",
-        data: chartData,
+        data: chartData, // Dynamically populated data
       },
     ],
   };
