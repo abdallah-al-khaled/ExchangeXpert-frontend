@@ -31,7 +31,24 @@ function SettingsPage() {
   };
 
   return (
-<div className=""></div>
+    <div className="settings-page">
+      <h2 className="settings-title">Settings</h2>
+
+      {/* User Information Section */}
+      <div className="user-info-section">
+        <h3>User Information</h3>
+        <div className="user-details">
+          <p>
+            <strong>Name:</strong> {userInfo.name}
+          </p>
+          <p>
+            <strong>Email:</strong> {userInfo.email}
+          </p>
+        </div>
+      </div>
+
+     
+    </div>
   );
 }
 
