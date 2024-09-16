@@ -16,7 +16,7 @@ function StocksList({
     const getData = async () => {
       try {
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 2);  // Subtract 1 day
+        yesterday.setDate(yesterday.getDate() - 3);  // Subtract 1 day
         const startDate = yesterday.toISOString().split('T')[0];
 
         const response = await axios.get(
