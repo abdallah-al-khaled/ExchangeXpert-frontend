@@ -11,8 +11,9 @@ const TradingViewTopStories = ({ symbol = "AAPL" }) => {
       isTransparent: true,
       displayMode: "regular",
       width: "100%",
+      largeChartUrl: "",
       height: 600,
-      colorTheme: "dark",
+      colorTheme: "light",
       locale: "en",
       symbol: symbol,
     });

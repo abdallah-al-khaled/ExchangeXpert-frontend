@@ -4,20 +4,22 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function StocksList({
   symbol = "MSFT",
   price = "123.45",
   volume = "12345",
   sentiment = 60,
-  Security = ""
-}) {
+  Security = "",
+}) 
+{
   const [data, setData] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 3);  // Subtract 1 day
-        const startDate = yesterday.toISOString().split('T')[0];
+        yesterday.setDate(yesterday.getDate() - 3); // Subtract 1 day
+        const startDate = yesterday.toISOString().split("T")[0];
 
         const response = await axios.get(
           `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
@@ -26,7 +28,7 @@ function StocksList({
               timeframe: "5Min", // You can change the interval as needed
               start: `${startDate}`, // Start time for regular market hours (9:30 AM)
               limit: 1000, // Number of data points
-              feed: "iex"
+              feed: "iex",
             },
             headers: {
               "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
@@ -45,8 +47,14 @@ function StocksList({
         return [];
       }
     };
-    getData() 
+    getData();
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/Stock/${symbol}`);
+  }
 
   const options = {
     chart: {
@@ -116,7 +124,7 @@ function StocksList({
 
   return (
     <>
-      <div className="single-stock flex row">
+      <div className="single-stock flex row" onClick={handleClick}>
         <div className="flex row logo-list">
           <img
             // src={`https://assets.parqet.com/logos/symbol/${symbol}?format=png`}
@@ -148,8 +156,16 @@ function StocksList({
         </div>
         <div className="flex column sentiment-analysis">
           <p className="sentiment-text">Sentiment</p>
-          <p className={`buy-or-sell ${sentiment > 70 ? "blue" : sentiment < 30 ? "red" : "green"}`}>
-          {sentiment > 70 ? "Positive" : sentiment < 30 ? "Negative" : "Neutral"}
+          <p
+            className={`buy-or-sell ${
+              sentiment > 70 ? "blue" : sentiment < 30 ? "red" : "green"
+            }`}
+          >
+            {sentiment > 70
+              ? "Positive"
+              : sentiment < 30
+              ? "Negative"
+              : "Neutral"}
           </p>
           <HighchartsReact highcharts={Highcharts} options={options} />
           <p className="date">Based on data from 11-8-2024</p>
