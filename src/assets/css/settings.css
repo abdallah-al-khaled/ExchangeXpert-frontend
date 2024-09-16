@@ -1,76 +1,133 @@
 /* SettingsPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .settings-page {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.user-info-section, .api-section {
+  margin-top: 30px;
+  animation: slideIn 1s ease;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+h3 {
+  color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.user-details p {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.api-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.api-form label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.animated-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.animated-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+.update-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.update-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.status-message {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .settings-page {
+    width: 90%;
+    padding: 15px;
+  }
+
   .settings-title {
-    text-align: center;
-    color: #333;
+    font-size: 1.6rem;
   }
-  
-  .user-info-section, .api-section {
-    margin-top: 30px;
-  }
-  
-  h3 {
-    color: #555;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-  }
-  
-  .user-details p {
-    font-size: 1rem;
-    color: #333;
-    margin: 5px 0;
-  }
-  
-  strong {
-    color: #555;
-  }
-  
-  .api-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .api-form label {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .api-form input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-size: 1rem;
-  }
-  
-  .update-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .update-btn:hover {
-    background-color: #45a049;
-  }
-  
-  .status-message {
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #555;
-  }
-  
+}

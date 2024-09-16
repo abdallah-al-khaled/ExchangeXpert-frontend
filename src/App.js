@@ -11,6 +11,7 @@ import Stock from './Pages/Stock';
 import Login from './Pages/Login';
 import TradingBots from './Pages/TradingBots';
 import { Settings } from '@mui/icons-material';
+import SettingsPage from './Pages/Settings';
  
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path="/Stock/:symbol" element={<Stock />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/AI-bots" element={<TradingBots/>} />
-          <Route path="/Settings" element={<Settings/>} />
+          <Route path="/Settings" element={<SettingsPage />} />
         </Routes>
     </Router>
   );

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import "./SettingsPage.css"; // Import CSS
+import "../assets/css/settings.css";
 
 function SettingsPage() {
   // Set states for user info and API key
@@ -15,15 +15,11 @@ function SettingsPage() {
   // Function to handle API key update
   const handleUpdateKey = async (e) => {
     e.preventDefault();
-
     try {
-      // Make a POST request to update the Alpaca API keys
       const response = await axios.post("/api/update-alpaca-keys", {
         api_key: apiKey,
         api_secret: apiSecret,
       });
-
-      // Update the status message
       setStatusMessage("API keys updated successfully!");
     } catch (error) {
       setStatusMessage("Error updating API keys.");
@@ -31,7 +27,7 @@ function SettingsPage() {
   };
 
   return (
-    <div className="settings-page">
+    <div className="settings-page fade-in">
       <h2 className="settings-title">Settings</h2>
 
       {/* User Information Section */}
@@ -58,6 +54,7 @@ function SettingsPage() {
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Enter your Alpaca API Key"
+            className="animated-input"
           />
 
           <label htmlFor="api-secret">API Secret</label>
@@ -67,9 +64,10 @@ function SettingsPage() {
             value={apiSecret}
             onChange={(e) => setApiSecret(e.target.value)}
             placeholder="Enter your Alpaca API Secret"
+            className="animated-input"
           />
 
-          <button type="submit" className="update-btn">
+          <button type="submit" className="update-btn animated-btn">
             Update API Keys
           </button>
         </form>
