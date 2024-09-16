@@ -10,6 +10,7 @@ import Wallet from './Pages/Wallet';
 import Stock from './Pages/Stock';
 import Login from './Pages/Login';
 import TradingBots from './Pages/TradingBots';
+import { Settings } from '@mui/icons-material';
  
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Stock/:symbol" element={<Stock />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/AI-bots" element={<TradingBots/>} />
+          <Route path="/Settings" element={<Settings/>} />
         </Routes>
     </Router>
   );
