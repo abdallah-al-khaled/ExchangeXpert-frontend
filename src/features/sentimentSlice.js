@@ -38,6 +38,22 @@ export const fetchTopStocksByVolume = createAsyncThunk(
   }
 );
 
+export const fetchTopStocksByTrades = createAsyncThunk(
+  "sentiment/fetchTopStocksByTrades",
+  async () => {
+    const response = await axios.get(
+      "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+          "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+          accept: "application/json",
+        },
+      }
+    );
+    return response.data.most_actives; 
+  }
+);
 
 const sentimentSlice = createSlice({
   name: "sentiment",
