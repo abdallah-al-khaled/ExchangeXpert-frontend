@@ -60,7 +60,8 @@ const sentimentSlice = createSlice({
   initialState: {
     bestStocks: [],
     worstStocks: [],
-
+    topStocksByVolume: [],
+    topStocksByTrades: [],
     loading: false,
     stocksLoaded: false,
     error: null,
