@@ -21,11 +21,30 @@ export const fetchWorstStocks = createAsyncThunk(
   }
 );
 
+export const fetchTopStocksByVolume = createAsyncThunk(
+  "sentiment/fetchTopStocksByVolume",
+  async () => {
+    const response = await axios.get(
+      "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
+      {
+        headers: {
+          "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+          "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+          accept: "application/json",
+        },
+      }
+    );
+    return response.data.most_actives; 
+  }
+);
+
+
 const sentimentSlice = createSlice({
   name: "sentiment",
   initialState: {
     bestStocks: [],
     worstStocks: [],
+
     loading: false,
     stocksLoaded: false,
     error: null,
@@ -64,5 +83,6 @@ const sentimentSlice = createSlice({
   },
 });
 
+// Export actions and reducer
 export const { setStocksLoaded } = sentimentSlice.actions;
 export default sentimentSlice.reducer;

@@ -18,6 +18,8 @@ function TopContainer({ title, filter = "active" }) {
   );
   const [companies, setCompanies] = useState({});
   const [stocks, setStocks] = useState({});
+  const [topStocks, setTopStocks] = useState([]);
+  const [topStocksTradeCount, setTopStocksTradeCount] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +46,8 @@ function TopContainer({ title, filter = "active" }) {
           ...new Set([
             ...bestStocks.map((stock) => stock.stock_symbol),
             ...worstStocks.map((stock) => stock.stock_symbol),
+            ...topStocks.map((stock) => stock.symbol),
+            ...topStocksTradeCount.map((stock) => stock.symbol),
           ]),
         ];
 
@@ -75,9 +79,44 @@ function TopContainer({ title, filter = "active" }) {
       }
     };
 
-    if (bestStocks.length > 0 || worstStocks.length > 0) {
+    if (bestStocks.length > 0 || worstStocks.length > 0 || topStocks.length > 0) {
       fetchStockData();
     }
+
+
+    const fetchTopStocksByTradeCount = async () => {
+      try{
+        const response = await axios.get(
+          "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
+          {
+            headers: {
+              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
+              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
+              accept: "application/json",
+            },
+          }
+        );
+        const top100Stocks = response.data.most_actives;
+        console.log("Top 100 Stocks: ", response.data.most_actives);
+
+        const sp500Symbols = Object.keys(companies);
+
+        const sp500TopStocks = top100Stocks.filter((stock) =>
+          sp500Symbols.includes(stock.symbol)
+        );
+
+        const top10Stocks = sp500TopStocks
+          .sort((a, b) => b.trade_count - a.trade_count)
+          .slice(0, 10);
+        console.log("Top 10 S&P 500 Stocks by trade_count: ", top10Stocks);
+        setTopStocksTradeCount(top10Stocks);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    fetchTopStocksByTradeCount();
+
     const fetchTopStocks = async () => {
       try{
         const response = await axios.get(
@@ -103,6 +142,7 @@ function TopContainer({ title, filter = "active" }) {
           .sort((a, b) => b.volume - a.volume)
           .slice(0, 5);
         console.log("Top 5 S&P 500 Stocks by Volume: ", top5Stocks);
+        setTopStocks(top5Stocks);
       }
       catch(error){
         console.log(error);
@@ -111,37 +151,6 @@ function TopContainer({ title, filter = "active" }) {
 
     fetchTopStocks();
 
-    const fetchTopStocksByTradeCount = async () => {
-      try{
-        const response = await axios.get(
-          "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
-          {
-            headers: {
-              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
-              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
-              accept: "application/json",
-            },
-          }
-        );
-        const top100Stocks = response.data.most_actives;
-        console.log("Top 100 Stocks: ", response.data.most_actives);
-
-        const sp500Symbols = Object.keys(companies);
-
-        const sp500TopStocks = top100Stocks.filter((stock) =>
-          sp500Symbols.includes(stock.symbol)
-        );
-
-        const top5Stocks = sp500TopStocks
-          .sort((a, b) => b.trade_count - a.trade_count)
-          .slice(0, 10);
-        console.log("Top 10 S&P 500 Stocks by trade_count: ", top5Stocks);
-      }
-      catch(error){
-        console.log(error);
-      }
-    }
-    fetchTopStocksByTradeCount();
   }, [bestStocks, worstStocks]);
 
   // Display loading or stock data
@@ -185,12 +194,12 @@ function TopContainer({ title, filter = "active" }) {
           {loading ? (
             <p>Loading data...</p>
           ) : (
-            worstStocks.map((stock, index) => (
+            topStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
-                symbol={stock.stock_symbol}
-                data={stocks[stock.stock_symbol]}
-                Security={companies[stock.stock_symbol]}
+                symbol={stock.symbol}
+                data={stocks[stock.symbol]}
+                Security={companies[stock.symbol]}
               />
             ))
           )}
