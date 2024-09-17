@@ -55,6 +55,12 @@ function Stock() {
     if (bestStock) {
       return bestStock.sentiment_score;
     }
+  
+    // Find the symbol in the worstStocks array if it's not in bestStocks
+    const worstStock = worstStocks.find((stock) => stock.stock_symbol === symbol);
+    if (worstStock) {
+      return worstStock.sentiment_score; 
+    }
     return null; // Return null if the symbol is not found
   };
 
