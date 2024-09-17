@@ -4,6 +4,7 @@ import axios from "axios";
 import StocksList from "./StocksList";
 import "../assets/css/topcontainer.css";
 import TopContainerListItem from "./TopContainerListItem";
+
 import {
   fetchBestStocks,
   fetchWorstStocks,
@@ -33,7 +34,7 @@ function TopContainer({ title, filter = "active" }) {
 
     fetchData();
   }, [dispatch, stocksLoaded]);
-console.log(bestStocks);
+  console.log(bestStocks);
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -77,6 +78,38 @@ console.log(bestStocks);
     if (bestStocks.length > 0 || worstStocks.length > 0) {
       fetchStockData();
     }
+    const fetchTopStocks = async () => {
+      try{
+        const response = await axios.get(
+          "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
+          {
+            headers: {
+              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
+              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
+              accept: "application/json",
+            },
+          }
+        );
+        const top100Stocks = response.data.most_actives;
+        console.log("Top 100 Stocks: ", response.data.most_actives);
+
+        const sp500Symbols = Object.keys(companies);
+
+        const sp500TopStocks = top100Stocks.filter((stock) =>
+          sp500Symbols.includes(stock.symbol)
+        );
+
+        const top5Stocks = sp500TopStocks
+          .sort((a, b) => b.volume - a.volume)
+          .slice(0, 5);
+        console.log("Top 5 S&P 500 Stocks by Volume: ", top5Stocks);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+
+    fetchTopStocks();
   }, [bestStocks, worstStocks]);
 
   // Display loading or stock data

@@ -7,23 +7,42 @@ import { useEffect } from "react";
 import axios from "axios";
 import React, { useState } from "react";
 import TradingViewTopStories from "../components/TradingViewTopStories";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchBestStocks,
   fetchWorstStocks,
   setStocksLoaded,
 } from "../features/sentimentSlice";
-
+import { useDispatch, useSelector } from "react-redux";
 function Stock() {
+  const dispatch = useDispatch();
+  const { bestStocks, worstStocks, stocksLoaded } = useSelector(
+    (state) => state.sentiment
+  );
   const { symbol } = useParams();
   const [sentiment, setSentiment] = useState({});
+  const [img, setImg] = useState({});
+
+  const getSentimentScore = (symbol) => {
+    const bestStock = bestStocks.find((stock) => stock.stock_symbol === symbol);
+    if (bestStock) {
+      return bestStock.sentiment_score;
+    }
+    const worstStock = worstStocks.find(
+      (stock) => stock.stock_symbol === symbol
+    );
+    if (worstStock) {
+      return worstStock.sentiment_score;
+    }
+    return null; // Return null if the symbol is not found
+  };
+
   useEffect(() => {
     const request = async () => {
       try {
         const { data } = await axios.get(
           `http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`
         );
-        console.log((parseFloat(data.sentiment_score) + 1) * 50);
+        console.log(parseFloat(data.sentiment_score));
         setSentiment(Math.floor((parseFloat(data.sentiment_score) + 1) * 50));
         return data;
       } catch (error) {
@@ -31,48 +50,23 @@ function Stock() {
       }
     };
     request();
-  }, []);
 
-  const dispatch = useDispatch();
-  const { bestStocks, worstStocks, stocksLoaded, loading } = useSelector(
-    (state) => state.sentiment
-  );
-  useEffect(() => {
     const fetchData = async () => {
-      if (!stocksLoaded) {
-        dispatch(fetchBestStocks());
-        dispatch(fetchWorstStocks());
-        dispatch(setStocksLoaded(true)); // Mark stocks as loaded to avoid redundant API calls
+      try {
+        const { data } = await axios.get(
+          `http://127.0.0.1:8000/api/ml-predictions?stock_symbol=${symbol}`
+        );
+        setImg(data[0].image_path.replace("public", "storage"));
+        console.log(data[0].image_path.replace("public", "storage"));
+        return data;
+      } catch (error) {
+        console.log(error);
       }
     };
     fetchData();
-  }, [dispatch, stocksLoaded]);
-  console.log(bestStocks);
+  }, []);
 
-  const getSentimentScore = (symbol) => {
-    // Find the symbol in the bestStocks array
-    const bestStock = bestStocks.find((stock) => stock.stock_symbol === symbol);
-    if (bestStock) {
-      return bestStock.sentiment_score;
-    }
-  
-    // Find the symbol in the worstStocks array if it's not in bestStocks
-    const worstStock = worstStocks.find((stock) => stock.stock_symbol === symbol);
-    if (worstStock) {
-      return worstStock.sentiment_score; 
-    }
-    return null; // Return null if the symbol is not found
-  };
-
-
-  const stockSymbols = [
-    ...new Set([
-      ...bestStocks.map((stock) => stock.sentiment_score),
-      ...worstStocks.map((stock) => stock.stock_symbol),
-    ]),
-  ];
-  console.log(stockSymbols);
-
+  console.log(sentiment);
   return (
     <div className="main-content">
       <TopNav />
@@ -106,8 +100,9 @@ function Stock() {
         <div className="flex lower">
           <div className="ml-prediction">
             <img
-              src="http://127.0.0.1:8000/storage/images/mQOHY15IRMCV0b1j0FZ4OAFeEBdaVJXD7RNPirLh.png"
+              src={'http://127.0.0.1:8000/' + img}
               alt=""
+              width={1000}
             />
           </div>
           <div className="news">
