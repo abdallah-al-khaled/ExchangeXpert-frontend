@@ -1,24 +1,25 @@
-.stocks-container{
+.stocks-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     min-height: 472px;
-    width : 450px;
+    width: 450px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    box-shadow: 0px 24px 48px 0 rgba(0,0,0,0.16);
+    box-shadow: 0px 24px 48px 0 rgba(0, 0, 0, 0.16);
 }
 
-.page{
+.page {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
-    width : 100%;
-    
+    width: 100%;
+
 }
-.top-containers{
+
+.top-containers {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -29,68 +30,69 @@
     width: 95%;
 }
 
-.list-container{
-    width: 450px;    
+.list-container {
+    width: 450px;
 }
 
-.test{
-    width:450px ;
+.test {
+    width: 450px;
 }
 
 
-.list-item{
+.list-item {
     padding: 20px;
-    width : 100%;
+    width: 100%;
     justify-content: space-between;
     border-bottom: 1px solid rgb(216, 216, 216);
     border-spacing: 4px;
     padding-right: 30px;
+    cursor: pointer;
 }
 
-.green{
+.green {
     color: #77B900;
 }
 
-.red{
+.red {
     color: #E8464C;
 }
 
-.price{
+.price {
     align-items: end;
 }
 
-.title{
+.title {
     font-size: 24px;
     margin-top: 5px;
     margin-bottom: 20px;
 }
 
-.stock-name{
+.stock-name {
     margin-left: 5px;
 }
 
-.symbol{
+.symbol {
     color: #838383;
 }
 
-.stockList{
+.stockList {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-left: -100px;
 }
 
-.gap{
+.gap {
     gap: 15px;
 }
 
-.item img{
+.item img {
     border-radius: 50px;
 }
 
-.companyName{
+.companyName {
     width: 235px;
-    white-space: nowrap; 
+    white-space: nowrap;
     overflow: hidden;
-  text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 }
