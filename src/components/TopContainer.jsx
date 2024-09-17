@@ -9,6 +9,8 @@ import {
   fetchBestStocks,
   fetchWorstStocks,
   setStocksLoaded,
+  fetchTopStocksByVolume,
+  fetchTopStocksByTrades,
 } from "../features/sentimentSlice";
 
 function TopContainer({ title, filter = "active" }) {
@@ -26,6 +28,8 @@ function TopContainer({ title, filter = "active" }) {
       if (!stocksLoaded) {
         dispatch(fetchBestStocks());
         dispatch(fetchWorstStocks());
+        dispatch(fetchTopStocksByVolume());
+        dispatch(fetchTopStocksByTrades());
         dispatch(setStocksLoaded(true)); // Mark stocks as loaded to avoid redundant API calls
       }
 
@@ -79,13 +83,16 @@ function TopContainer({ title, filter = "active" }) {
       }
     };
 
-    if (bestStocks.length > 0 || worstStocks.length > 0 || topStocks.length > 0) {
+    if (
+      bestStocks.length > 0 ||
+      worstStocks.length > 0 ||
+      topStocks.length > 0
+    ) {
       fetchStockData();
     }
 
-
     const fetchTopStocksByTradeCount = async () => {
-      try{
+      try {
         const response = await axios.get(
           "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
           {
@@ -110,15 +117,14 @@ function TopContainer({ title, filter = "active" }) {
           .slice(0, 10);
         console.log("Top 10 S&P 500 Stocks by trade_count: ", top10Stocks);
         setTopStocksTradeCount(top10Stocks);
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
-    }
+    };
     fetchTopStocksByTradeCount();
 
     const fetchTopStocks = async () => {
-      try{
+      try {
         const response = await axios.get(
           "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
           {
@@ -143,14 +149,12 @@ function TopContainer({ title, filter = "active" }) {
           .slice(0, 5);
         console.log("Top 5 S&P 500 Stocks by Volume: ", top5Stocks);
         setTopStocks(top5Stocks);
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     fetchTopStocks();
-
   }, [bestStocks, worstStocks]);
 
   // Display loading or stock data
