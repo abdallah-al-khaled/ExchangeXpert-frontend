@@ -111,6 +111,18 @@ const sentimentSlice = createSlice({
       state.error = action.error.message;
     });
 
+    // For top stocks by trades
+    builder.addCase(fetchTopStocksByTrades.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchTopStocksByTrades.fulfilled, (state, action) => {
+      state.loading = false;
+      state.topStocksByTrades = action.payload;
+    });
+    builder.addCase(fetchTopStocksByTrades.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
   },
 });
 
