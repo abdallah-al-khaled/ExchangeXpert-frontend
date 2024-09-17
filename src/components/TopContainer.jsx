@@ -15,9 +15,11 @@ import {
 
 function TopContainer({ title, filter = "active" }) {
   const dispatch = useDispatch();
-  const { bestStocks, worstStocks, stocksLoaded, loading } = useSelector(
+  const { bestStocks, worstStocks, stocksLoaded, loading,topStocksByVolume,topStocksByTrades } = useSelector(
     (state) => state.sentiment
   );
+  console.log(topStocksByTrades,"dfjgnidkfn");
+  
   const [companies, setCompanies] = useState({});
   const [stocks, setStocks] = useState({});
   const [topStocks, setTopStocks] = useState([]);
@@ -97,8 +99,8 @@ function TopContainer({ title, filter = "active" }) {
           "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
           {
             headers: {
-              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
-              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
               accept: "application/json",
             },
           }
@@ -129,8 +131,8 @@ function TopContainer({ title, filter = "active" }) {
           "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
           {
             headers: {
-              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
-              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
+              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
               accept: "application/json",
             },
           }
@@ -198,7 +200,7 @@ function TopContainer({ title, filter = "active" }) {
           {loading ? (
             <p>Loading data...</p>
           ) : (
-            topStocks.map((stock, index) => (
+            topStocksByTrades.map((stock, index) => (
               <TopContainerListItem
                 key={index}
                 symbol={stock.symbol}
