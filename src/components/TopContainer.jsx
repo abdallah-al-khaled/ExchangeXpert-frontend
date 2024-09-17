@@ -110,6 +110,38 @@ function TopContainer({ title, filter = "active" }) {
     }
 
     fetchTopStocks();
+
+    const fetchTopStocksByTradeCount = async () => {
+      try{
+        const response = await axios.get(
+          "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
+          {
+            headers: {
+              "APCA-API-KEY-ID": "PK0FMUIIT7R0SBT8EP9R",
+              "APCA-API-SECRET-KEY": "MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv",
+              accept: "application/json",
+            },
+          }
+        );
+        const top100Stocks = response.data.most_actives;
+        console.log("Top 100 Stocks: ", response.data.most_actives);
+
+        const sp500Symbols = Object.keys(companies);
+
+        const sp500TopStocks = top100Stocks.filter((stock) =>
+          sp500Symbols.includes(stock.symbol)
+        );
+
+        const top5Stocks = sp500TopStocks
+          .sort((a, b) => b.trade_count - a.trade_count)
+          .slice(0, 10);
+        console.log("Top 10 S&P 500 Stocks by trade_count: ", top5Stocks);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    fetchTopStocksByTradeCount();
   }, [bestStocks, worstStocks]);
 
   // Display loading or stock data
@@ -149,7 +181,7 @@ function TopContainer({ title, filter = "active" }) {
         </div>
 
         <div className="top-losers stocks-container">
-          <p className="title">Top 5 Worst Sentiment Stocks</p>
+          <p className="title">Top 5 Most Active Stocks</p>
           {loading ? (
             <p>Loading data...</p>
           ) : (
