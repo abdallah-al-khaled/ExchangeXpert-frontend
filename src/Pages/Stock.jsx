@@ -49,6 +49,16 @@ function Stock() {
   }, [dispatch, stocksLoaded]);
   console.log(bestStocks);
 
+  const getSentimentScore = (symbol) => {
+    // Find the symbol in the bestStocks array
+    const bestStock = bestStocks.find((stock) => stock.stock_symbol === symbol);
+    if (bestStock) {
+      return bestStock.sentiment_score;
+    }
+    return null; // Return null if the symbol is not found
+  };
+
+
   const stockSymbols = [
     ...new Set([
       ...bestStocks.map((stock) => stock.sentiment_score),
