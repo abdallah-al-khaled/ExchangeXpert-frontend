@@ -33,6 +33,7 @@ function TopContainer({ title, filter = "active" }) {
 
     fetchData();
   }, [dispatch, stocksLoaded]);
+console.log(bestStocks);
 
   useEffect(() => {
     const fetchStockData = async () => {

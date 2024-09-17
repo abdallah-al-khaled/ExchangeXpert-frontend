@@ -7,6 +7,13 @@ import { useEffect } from "react";
 import axios from "axios";
 import React, { useState } from "react";
 import TradingViewTopStories from "../components/TradingViewTopStories";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchBestStocks,
+  fetchWorstStocks,
+  setStocksLoaded,
+} from "../features/sentimentSlice";
+
 function Stock() {
   const { symbol } = useParams();
   const [sentiment, setSentiment] = useState({});
@@ -25,7 +32,31 @@ function Stock() {
     };
     request();
   }, []);
-  console.log(symbol);
+
+  const dispatch = useDispatch();
+  const { bestStocks, worstStocks, stocksLoaded, loading } = useSelector(
+    (state) => state.sentiment
+  );
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!stocksLoaded) {
+        dispatch(fetchBestStocks());
+        dispatch(fetchWorstStocks());
+        dispatch(setStocksLoaded(true)); // Mark stocks as loaded to avoid redundant API calls
+      }
+    };
+    fetchData();
+  }, [dispatch, stocksLoaded]);
+  console.log(bestStocks);
+
+  const stockSymbols = [
+    ...new Set([
+      ...bestStocks.map((stock) => stock.sentiment_score),
+      ...worstStocks.map((stock) => stock.stock_symbol),
+    ]),
+  ];
+  console.log(stockSymbols);
+
   return (
     <div className="main-content">
       <TopNav />
@@ -64,7 +95,7 @@ function Stock() {
             />
           </div>
           <div className="news">
-              <TradingViewTopStories symbol={symbol}/>
+            <TradingViewTopStories symbol={symbol} />
           </div>
         </div>
       </div>
