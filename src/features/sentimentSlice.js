@@ -97,6 +97,20 @@ const sentimentSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
+
+    // For top stocks by volume
+    builder.addCase(fetchTopStocksByVolume.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchTopStocksByVolume.fulfilled, (state, action) => {
+      state.loading = false;
+      state.topStocksByVolume = action.payload;
+    });
+    builder.addCase(fetchTopStocksByVolume.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
   },
 });
 
