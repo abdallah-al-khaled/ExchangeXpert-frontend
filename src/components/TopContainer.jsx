@@ -174,7 +174,7 @@ function TopContainer({ title, filter = "active" }) {
         </div> */}
 
         <div className="top-losers stocks-container">
-          <p className="title">Top 5 Most Active Stocks</p>
+          <p className="title">Top 5 Active Market Players</p>
           {loading ? (
             <p>Loading data...</p>
           ) : (
