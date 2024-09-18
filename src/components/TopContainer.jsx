@@ -126,7 +126,7 @@ function TopContainer({ title, filter = "active" }) {
     <div className="page">
       <div className="top-containers">
         <div className="top-active stocks-container">
-          <p className="title">Top 5 Best Sentiment Stocks</p>
+          <p className="title">Top 5 Market Leaders</p>
           {loading ? (
             <p>Loading data...</p>
           ) : (
@@ -142,7 +142,7 @@ function TopContainer({ title, filter = "active" }) {
         </div>
 
         <div className="top-losers stocks-container">
-          <p className="title">Top 5 Worst Sentiment Stocks</p>
+          <p className="title">Top 5 Market Laggards</p>
           {loading ? (
             <p>Loading data...</p>
           ) : (
@@ -174,7 +174,7 @@ function TopContainer({ title, filter = "active" }) {
         </div> */}
 
         <div className="top-losers stocks-container">
-          <p className="title">Top 5 Most Active Stocks</p>
+          <p className="title">Top 5 Active Market Players</p>
           {loading ? (
             <p>Loading data...</p>
           ) : (

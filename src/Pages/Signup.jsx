@@ -54,7 +54,7 @@ const Signup = () => {
           </div>
           <div className="flex">
             <p>Advanced AI Trading Bots</p>
-            <p>Advanced AI Analyses</p>
+            <p>Advanced AI Analysis</p>
           </div>
         </div>
       </div>
@@ -99,8 +99,8 @@ const Signup = () => {
           </Link>
         </p>
         <p className="terms-and-services">
-          By signing up, you agree to follow our
-          <span className="link"> terms of service</span>
+          By signing up, you agree to follow our <span className="link"> terms of service</span>
+
         </p>
       </div>
     </div>
