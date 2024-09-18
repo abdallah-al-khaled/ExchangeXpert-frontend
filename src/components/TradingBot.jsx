@@ -33,6 +33,7 @@ const TradingBot = ({ botName }) => {
     <div className="bot-card">
       <div className="bot-chart">
         <Line data={chartData} />
+        
       </div>
 
       <div className="bot-info">
