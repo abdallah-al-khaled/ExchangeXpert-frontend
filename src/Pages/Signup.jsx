@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../assets/css/login.css";
 import img from "../assets/images/image(2).png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
-  const [name, setName] = useState(""); 
+  const [name, setName] = useState(""); // Added name state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,15 +15,18 @@ const Signup = () => {
     e.preventDefault();
 
     try {
+      // Call the sign-up API (registration endpoint)
       const response = await axios.post("http://127.0.0.1:8000/api/register", {
         name,
         email,
         password,
       });
 
+      // Extract the token from the response
       const { token } = response.data;
       localStorage.setItem("authToken", token);
 
+      // Redirect to the Markets page
       navigate("/Markets");
 
     } catch (error) {
@@ -87,6 +90,14 @@ const Signup = () => {
             Sign Up
           </button>
         </div>
+
+        {/* Add "Already have an account" section */}
+        <p className="terms-and-services">
+          Already have an account?{" "}
+          <Link to="/login" className="link">
+            Go to Login
+          </Link>
+        </p>
         <p className="terms-and-services">
           By signing up, you agree to follow our
           <span className="link"> terms of service</span>
