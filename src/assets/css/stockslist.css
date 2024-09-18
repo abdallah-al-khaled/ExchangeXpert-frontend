@@ -64,3 +64,9 @@
 .blue{
     color: rgb(1, 127, 250);
 }
+
+.security{
+    white-space: nowrap; 
+    width: 170px;
+    text-overflow: ellipsis; 
+}

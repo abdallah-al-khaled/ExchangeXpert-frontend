@@ -141,7 +141,7 @@ function StocksList({
             alt={symbol}
             width={50}
           />
-          <div className="flex column">
+          <div className="flex column security">
             <p>{Security}</p>
             <p className="symbol">{symbol}</p>
           </div>
