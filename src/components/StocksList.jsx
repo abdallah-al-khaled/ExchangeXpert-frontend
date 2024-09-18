@@ -48,6 +48,11 @@ function StocksList({
       }
     };
     getData();
+
+    const getSentimentScore = async (symbol) => {
+      const {data} = await axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
+      
+    };
   }, []);
 
   const navigate = useNavigate();
