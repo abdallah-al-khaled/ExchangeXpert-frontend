@@ -13,6 +13,9 @@ body {
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fade-in {
@@ -41,6 +44,9 @@ body {
 .user-info-section, .api-section {
   margin-top: 30px;
   animation: slideIn 1s ease;
+}
+.user-info-section{
+  width: 500px;
 }
 
 @keyframes slideIn {

@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "../assets/css/login.css";
 import img from "../assets/images/image(2).png";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/login", {
+        email,
+        password,
+      });
+
+      const { token } = response.data;
+      localStorage.setItem("authToken", response.data.authorisation.token);
+      console.log(response.data.authorisation.token);
+      
+      navigate("/Markets");
+
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Login failed. Please try again.");
+      }
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-image">
@@ -25,22 +56,30 @@ const Login = () => {
       </div>
       <div className="login-form">
         <h2>Login</h2>
-        {/* <label htmlFor="email">Email</label> */}
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          required
-        />
-        {/* <label htmlFor="password">Password</label> */}
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter your password"
-          required
-        />
-        <button type="submit">Login</button>
-        <p className="terms-and-services">By logging in, you agree to follow our<span className="link"> terms of service</span></p>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <div className="form">
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" onClick={handleSubmit}>Login</button>
+        </div>
+        <p className="terms-and-services">
+          By logging in, you agree to follow our
+          <span className="link"> terms of service</span>
+        </p>
       </div>
     </div>
   );

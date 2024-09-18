@@ -120,7 +120,7 @@
   }
   
   /* Ensure the form, inputs, and button are all aligned */
-  form {
+  .form {
     width: 100%;
     max-width: 500px;
     display: flex;
