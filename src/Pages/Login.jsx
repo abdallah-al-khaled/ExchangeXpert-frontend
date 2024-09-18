@@ -50,7 +50,7 @@ const Login = () => {
           </div>
           <div className="flex">
             <p>Advanced AI Trading Bots</p>
-            <p>Advanced AI Analyses</p>
+            <p>Advanced AI Analysis</p>
           </div>
         </div>
       </div>
