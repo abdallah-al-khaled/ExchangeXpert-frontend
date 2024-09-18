@@ -51,6 +51,8 @@ export const fetchTopStocksByTrades = createAsyncThunk(
         },
       }
     );
+    console.log("from slice", response.data.most_actives);
+    
     return response.data.most_actives; 
   }
 );
