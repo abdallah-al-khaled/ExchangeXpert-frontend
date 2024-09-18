@@ -13,7 +13,7 @@ function AccountHistoryChart() {
         // Replace the URL with your backend endpoint that fetches the Alpaca data
         const response = await axios.get("http://127.0.0.1:8000/api/get-portfolio-history", {
           headers : {
-            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzI2NDI4MjE0LCJleHAiOjE3MjY0MzE4MTQsIm5iZiI6MTcyNjQyODIxNCwianRpIjoia2I1Y2hJSzJ2ODJ5Rm5RMSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.vFHic6Xi-cLCfKpBMZK6XhhbXPeHbW1CafcyZ5By1Tk',
+            Authorization: 'Bearer ' + localStorage.getItem('authToken'),
           }
         });
 

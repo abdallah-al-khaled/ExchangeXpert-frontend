@@ -16,11 +16,18 @@ function SettingsPage() {
   // Function to handle API key update
   const handleUpdateKey = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("authToken");
     try {
-      const response = await axios.post("/api/store-alpaca-key", {
+      const response = await axios.post("http://127.0.0.1:8000/api/store-alpaca-key", {
         api_key: apiKey,
         api_secret: apiSecret,
-      });
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      }
+    );
       setStatusMessage("API keys updated successfully!");
     } catch (error) {
       setStatusMessage("Error updating API keys.");
