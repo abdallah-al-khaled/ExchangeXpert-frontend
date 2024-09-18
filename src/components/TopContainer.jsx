@@ -51,7 +51,12 @@ function TopContainer({ title, filter = "active" }) {
   // Fetch stock data by symbols
   useEffect(() => {
     const fetchStockData = async () => {
-      if (bestStocks.length > 0 || worstStocks.length > 0 || topStocksByVolume.length > 0 || topStocksByTrades.length > 0) {
+      if (
+        bestStocks.length > 0 &&
+        worstStocks.length > 0 &&
+        topStocksByVolume.length > 0 &&
+        topStocksByTrades.length > 0
+      ) {
         const stockSymbols = [
           ...new Set([
             ...bestStocks.map((stock) => stock.stock_symbol),
@@ -84,13 +89,13 @@ function TopContainer({ title, filter = "active" }) {
           }
         );
         console.log("from slice", stockSymbols);
-        
+
         setStocks(response.data.bars);
       }
     };
 
     fetchStockData();
-  }, [bestStocks, worstStocks, topStocksByVolume, topStocksByTrades]);
+  }, [bestStocks, worstStocks, topStocksByVolume, topStocksByTrades, topStocks, topStocksTradeCount]);
 
   // Filter and set top S&P 500 stocks by volume
   useEffect(() => {
@@ -99,7 +104,7 @@ function TopContainer({ title, filter = "active" }) {
       const sp500TopStocks = topStocksByVolume.filter((stock) =>
         sp500Symbols.includes(stock.symbol)
       );
-      const top5Stocks = sp500TopStocks.slice(0, 5);
+      const top5Stocks = sp500TopStocks.slice(0, 10);
       setTopStocks(top5Stocks);
     }
   }, [companies, topStocksByVolume]);
@@ -218,6 +223,19 @@ function TopContainer({ title, filter = "active" }) {
               Security={companies.AMZN}
             />
           </>
+        )}
+
+        {loading ? (
+          <p>Loading data...</p>
+        ) : (
+          topStocks.map((stock, index) => (
+            <StocksList
+              key={index}
+              symbol={stock.symbol}
+              sentiment={50}
+              Security={companies[stock.symbol]}
+            />
+          ))
         )}
       </div>
     </div>
