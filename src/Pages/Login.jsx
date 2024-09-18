@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../assets/css/login.css";
 import img from "../assets/images/image(2).png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -76,6 +76,12 @@ const Login = () => {
           />
           <button type="submit" onClick={handleSubmit}>Login</button>
         </div>
+        <p className="terms-and-services">
+          Do not have an account?{" "}
+          <Link to="/signup" className="link">
+            Go to Sign Up
+          </Link>
+        </p>
         <p className="terms-and-services">
           By logging in, you agree to follow our
           <span className="link"> terms of service</span>
