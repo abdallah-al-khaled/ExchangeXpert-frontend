@@ -83,8 +83,7 @@ const Login = () => {
           </Link>
         </p>
         <p className="terms-and-services">
-          By logging in, you agree to follow our
-          <span className="link"> terms of service</span>
+          By logging in, you agree to follow our <span className="link">terms of service</span>
         </p>
       </div>
     </div>
