@@ -200,31 +200,6 @@ function TopContainer({ title, filter = "active" }) {
         </div>
       </div>
       <div className="flex column gap">
-        {companies && (
-          <>
-            <StocksList
-              symbol="TSLA"
-              sentiment={20}
-              Security={companies.TSLA}
-            />
-            <StocksList
-              symbol="NVDA"
-              sentiment={50}
-              Security={companies.NVDA}
-            />
-            <StocksList
-              symbol="AAPL"
-              sentiment={90}
-              Security={companies.AAPL}
-            />
-            <StocksList
-              symbol="AMZN"
-              sentiment={70}
-              Security={companies.AMZN}
-            />
-          </>
-        )}
-
         {loading ? (
           <p>Loading data...</p>
         ) : (

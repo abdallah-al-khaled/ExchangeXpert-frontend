@@ -13,21 +13,22 @@ function StocksList({
   Security = "",
 }) 
 {
+  const [sentimentScore, setSentimentScore] = useState(0);
   const [data, setData] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 3); // Subtract 1 day
+        yesterday.setDate(yesterday.getDate() - 3); 
         const startDate = yesterday.toISOString().split("T")[0];
 
         const response = await axios.get(
           `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
           {
             params: {
-              timeframe: "5Min", // You can change the interval as needed
-              start: `${startDate}`, // Start time for regular market hours (9:30 AM)
-              limit: 1000, // Number of data points
+              timeframe: "5Min", 
+              start: `${startDate}`,
+              limit: 1000, 
               feed: "iex",
             },
             headers: {
@@ -49,10 +50,13 @@ function StocksList({
     };
     getData();
 
-    const getSentimentScore = async (symbol) => {
+    const getSentimentScore = async () => {
       const {data} = await axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
-      
+      setSentimentScore(Math.floor((parseFloat(data.sentiment_score) + 1) * 50))
+      console.log((data))
+      return data.sentiment_score
     };
+    getSentimentScore()
   }, []);
 
   const navigate = useNavigate();
@@ -118,11 +122,11 @@ function StocksList({
     series: [
       {
         name: "Positive Forces",
-        data: [sentiment], // 60% for positive force
+        data: [sentimentScore], // 60% for positive force
       },
       {
         name: "Negative Forces",
-        data: [sentiment - 100], // -40% for negative force
+        data: [sentimentScore - 100], // -40% for negative force
       },
     ],
   };
@@ -154,21 +158,23 @@ function StocksList({
         </div>
         <div className="chart flex">
           {/* <ReactApexChart options={options} series={options.series} type="area" height={60}/> */}
-
-          <Sparklines data={data}>
-            <SparklinesLine color="#52B4FF" style={{ strokeWidth: 3 }} />
-          </Sparklines>
+          {sentimentScore && sentimentScore > 0 ? (
+            <Sparklines data={data}>
+              <SparklinesLine color="#52B4FF" style={{ strokeWidth: 3 }} />
+            </Sparklines>
+          ): null}
+          
         </div>
         <div className="flex column sentiment-analysis">
           <p className="sentiment-text">Sentiment</p>
           <p
             className={`buy-or-sell ${
-              sentiment > 70 ? "blue" : sentiment < 30 ? "red" : "green"
+              sentimentScore > 70 ? "blue" : sentimentScore < 30 ? "red" : "green"
             }`}
           >
-            {sentiment > 70
+            {sentimentScore > 70
               ? "Positive"
-              : sentiment < 30
+              : sentimentScore < 30
               ? "Negative"
               : "Neutral"}
           </p>
