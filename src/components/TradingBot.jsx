@@ -29,7 +29,7 @@ const TradingBot = ({ botName }) => {
 
   return (
     <div className="bot-container">
-        <h3>Bot1 </h3>
+        <h3>{botName}</h3>
     <div className="bot-card">
       <div className="bot-chart">
         <Line data={chartData} />

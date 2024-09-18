@@ -122,7 +122,7 @@ function Sidebar() {
           </li>
         </ul>
         </div>
-        <ul className="logout">
+        {!localStorage.getItem("authToken") && <ul className="logout">
           <li className="login-logout">
             <Link
               to="/login"
@@ -135,7 +135,7 @@ function Sidebar() {
               <span className="nav-item">login</span>
             </Link>
           </li>
-        </ul>
+        </ul>}
       </div>
     </>
   );

@@ -6,9 +6,9 @@ function TradingBots() {
     <div className="main-content">
       <TopNav />
       <div className="page">
-        <TradingBot/>
-        <TradingBot/>
-        <TradingBot/>
+        <TradingBot botName={'Bot1'}/>
+        <TradingBot botName={'Bot2'}/>
+        <TradingBot botName={'Bot3'}/>
       </div>
     </div>
   );
