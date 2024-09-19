@@ -39,14 +39,36 @@ function TopContainer({ title, filter = "active" }) {
         dispatch(fetchTopStocksByTrades());
         dispatch(setStocksLoaded(true));
       }
-
       const companiesData = await fetch("/sp500_companies.json");
       const companiesJson = await companiesData.json();
       setCompanies(companiesJson);
     };
-
     fetchData();
   }, [dispatch, stocksLoaded]);
+
+  // Filter and set top S&P 500 stocks by volume
+  useEffect(() => {
+    if (companies && topStocksByVolume.length > 0) {
+      const sp500Symbols = Object.keys(companies);
+      const sp500TopStocks = topStocksByVolume.filter((stock) =>
+        sp500Symbols.includes(stock.symbol)
+      );
+      const top5Stocks = sp500TopStocks.slice(0, 10);
+      setTopStocks(top5Stocks);
+    }
+  }, [companies, topStocksByVolume]);
+
+  // Filter and set top S&P 500 stocks by trade count
+  useEffect(() => {
+    if (companies && topStocksByTrades.length > 0) {
+      const sp500Symbols = Object.keys(companies);
+      const sp500TopStocks = topStocksByTrades.filter((stock) =>
+        sp500Symbols.includes(stock.symbol)
+      );
+      const top5Stocks = sp500TopStocks.slice(0, 5);
+      setTopStocksTradeCount(top5Stocks);
+    }
+  }, [companies, topStocksByTrades]);
 
   // Fetch stock data by symbols
   useEffect(() => {
@@ -54,7 +76,7 @@ function TopContainer({ title, filter = "active" }) {
       if (
         bestStocks.length > 0 &&
         worstStocks.length > 0 &&
-        topStocksByVolume.length > 0 &&
+        topStocks.length > 0 &&
         topStocksByTrades.length > 0
       ) {
         const stockSymbols = [
@@ -89,37 +111,15 @@ function TopContainer({ title, filter = "active" }) {
           }
         );
         console.log("from slice", stockSymbols);
-
+        console.log(" response", response);
         setStocks(response.data.bars);
+        console.log("NIIIIGA");
+
+        console.log(bestStocks, loading, topStocks, topStocksTradeCount, worstStocks);
       }
     };
-
     fetchStockData();
-  }, [bestStocks, worstStocks, topStocksByVolume, topStocksByTrades, topStocks, topStocksTradeCount]);
-
-  // Filter and set top S&P 500 stocks by volume
-  useEffect(() => {
-    if (companies && topStocksByVolume.length > 0) {
-      const sp500Symbols = Object.keys(companies);
-      const sp500TopStocks = topStocksByVolume.filter((stock) =>
-        sp500Symbols.includes(stock.symbol)
-      );
-      const top5Stocks = sp500TopStocks.slice(0, 10);
-      setTopStocks(top5Stocks);
-    }
-  }, [companies, topStocksByVolume]);
-
-  // Filter and set top S&P 500 stocks by trade count
-  useEffect(() => {
-    if (companies && topStocksByTrades.length > 0) {
-      const sp500Symbols = Object.keys(companies);
-      const sp500TopStocks = topStocksByTrades.filter((stock) =>
-        sp500Symbols.includes(stock.symbol)
-      );
-      const top5Stocks = sp500TopStocks.slice(0, 5);
-      setTopStocksTradeCount(top5Stocks);
-    }
-  }, [companies, topStocksByTrades]);
+  }, [bestStocks, loading, topStocks, topStocksTradeCount, worstStocks]);
 
   // Display loading or stock data
   return (

@@ -5,7 +5,7 @@ export const fetchBestStocks = createAsyncThunk(
   "sentiment/fetchBestStocks",
   async () => {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/top-sentiment-stocks"
+      "http://127.0.0.1:8000/api/sentiment-analysis/top"
     );
     return response.data;
   }
@@ -15,7 +15,7 @@ export const fetchWorstStocks = createAsyncThunk(
   "sentiment/fetchWorstStocks",
   async () => {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/worst-sentiment-stocks"
+      "http://127.0.0.1:8000/api/sentiment-analysis/worst"
     );
     return response.data;
   }
