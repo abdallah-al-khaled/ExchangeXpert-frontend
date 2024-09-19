@@ -91,7 +91,7 @@
 }
 
 .companyName {
-    width: 235px;
+    width: 230px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
