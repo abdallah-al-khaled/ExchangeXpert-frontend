@@ -113,7 +113,6 @@ function TopContainer({ title, filter = "active" }) {
         console.log("from slice", stockSymbols);
         console.log(" response", response);
         setStocks(response.data.bars);
-        console.log("NIIIIGA");
 
         console.log(bestStocks, loading, topStocks, topStocksTradeCount, worstStocks);
       }
