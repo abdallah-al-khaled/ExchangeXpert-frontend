@@ -137,3 +137,110 @@ h3 {
     font-size: 1.6rem;
   }
 }
+
+/* Container Styles */
+.api-section {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.api-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form Styles */
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.config-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.config-form select,
+.config-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+/* Input Focus Animation */
+.config-form select:focus,
+.config-form input:focus {
+  border-color: #8a2be2;
+  outline: none;
+}
+
+/* Button Styles */
+.update-btn {
+  background-color: #8a2be2;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-btn:hover {
+  background-color: #6a1cb8;
+  box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
+}
+
+.update-btn:active {
+  background-color: #4e1d80;
+}
+
+/* Animation for Form Fields */
+.config-form select,
+.config-form input {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Fade-in Effect */
+.config-form select.show,
+.config-form input.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .api-section {
+    padding: 15px;
+  }
+
+  .config-form {
+    gap: 10px;
+  }
+
+  .config-form label {
+    font-size: 0.9rem;
+  }
+
+  .config-form select,
+  .config-form input {
+    font-size: 0.9rem;
+  }
+
+  .update-btn {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
