@@ -122,7 +122,7 @@ function Sidebar() {
           </li>
         </ul>
         </div>
-        {!localStorage.getItem("authToken") && <ul className="logout">
+        {!sessionStorage.getItem("authToken") && <ul className="logout">
           <li className="login-logout">
             <Link
               to="/login"

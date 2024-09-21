@@ -19,16 +19,16 @@ const Login = () => {
         password,
       });
 
-      const { token } = response.data;
       localStorage.setItem("authToken", response.data.authorisation.token);
+      sessionStorage.setItem("authToken", response.data.authorisation.token);
       console.log(response.data.authorisation.token);
       
       navigate("/Markets");
 
     } catch (error) {
       if (error.response && error.response.data.message) {
-        setErrorMessage(error.response.data.message);
-      } else {
+        setErrorMessage("Login failed. Please try again.");
+      }else {
         setErrorMessage("Login failed. Please try again.");
       }
     }
@@ -56,7 +56,6 @@ const Login = () => {
       </div>
       <div className="login-form">
         <h2>Login</h2>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="form">
           <input
             type="email"
@@ -75,6 +74,8 @@ const Login = () => {
             required
           />
           <button type="submit" onClick={handleSubmit}>Login</button>
+
+          {errorMessage && <p className="error-message" style={{ color: "red", padding: "10px 0 5px 0" }}>{errorMessage}</p>}
         </div>
         <p className="terms-and-services">
           Do not have an account?{" "}
