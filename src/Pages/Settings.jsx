@@ -16,7 +16,7 @@ function SettingsPage() {
   // Function to handle API key update
   const handleUpdateKey = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     try {
       const response = await axios.post("http://127.0.0.1:8000/api/store-alpaca-key", {
         api_key: apiKey,
@@ -29,8 +29,15 @@ function SettingsPage() {
       }
     );
       setStatusMessage("API keys updated successfully!");
+      if (response.status === 401) {
+        setStatusMessage("Unauthorized: Please login again.");
+      }
+      console.log(response.status);
+      
     } catch (error) {
-      setStatusMessage("Error updating API keys.");
+      console.log(error);
+      setStatusMessage("Unauthorized: Please login again.");
+
     }
   };
 
