@@ -91,28 +91,35 @@ function TopContainer({ title, filter = "active" }) {
         const d = new Date();
         d.setDate(d.getDate() - 5);
 
-        const response = await axios.get(
-          "https://data.alpaca.markets/v2/stocks/bars",
-          {
-            params: {
-              symbols: stockSymbols.join(","),
-              timeframe: "1D",
-              start: d.toISOString(),
-              adjustment: "raw",
-              feed: "sip",
-              sort: "asc",
-              limit: 10000,
-            },
-            headers: {
-              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-              accept: "application/json",
-            },
-          }
-        );
+        try {
+
+          const response = await axios.get(
+            "https://data.alpaca.markets/v2/stocks/bars",
+            {
+              params: {
+                symbols: stockSymbols.join(","),
+                timeframe: "1D",
+                start: d.toISOString(),
+                adjustment: "raw",
+                feed: "sip",
+                sort: "asc",
+                limit: 10000,
+              },
+              headers: {
+                "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+                "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+                accept: "application/json",
+              },
+            }
+          );
+                  
         console.log("from slice", stockSymbols);
         console.log(" response", response);
         setStocks(response.data.bars);
+        } catch (error) {
+          console.log(error);
+          
+        }
 
         console.log(bestStocks, loading, topStocks, topStocksTradeCount, worstStocks);
       }

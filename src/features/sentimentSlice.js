@@ -4,37 +4,49 @@ import axios from "axios";
 export const fetchBestStocks = createAsyncThunk(
   "sentiment/fetchBestStocks",
   async () => {
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/sentiment-analysis/top"
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/sentiment-analysis/top"
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const fetchWorstStocks = createAsyncThunk(
   "sentiment/fetchWorstStocks",
   async () => {
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/sentiment-analysis/worst"
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/sentiment-analysis/worst"
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const fetchTopStocksByVolume = createAsyncThunk(
   "sentiment/fetchTopStocksByVolume",
   async () => {
-    const response = await axios.get(
-      "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
-      {
-        headers: {
-          "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-          "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-          accept: "application/json",
-        },
-      }
-    );
-    return response.data.most_actives; 
+    try {
+      const response = await axios.get(
+        "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=volume&top=100",
+        {
+          headers: {
+            "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+            "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+            accept: "application/json",
+          },
+        }
+      );
+      return response.data.most_actives;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -52,8 +64,8 @@ export const fetchTopStocksByTrades = createAsyncThunk(
       }
     );
     console.log("from slice", response.data.most_actives);
-    
-    return response.data.most_actives; 
+
+    return response.data.most_actives;
   }
 );
 
