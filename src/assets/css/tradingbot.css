@@ -23,10 +23,6 @@
     max-width: 1350px;
 }
 
-.bot-chart {
-    width: 400px;
-    height: 100%;
-}
 
 .bot-info {
     flex: 1;
@@ -128,4 +124,24 @@
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .overlap-image {
+    position: relative;
+    z-index: 1; /* Ensures images stack on top of each other */
+    margin-left: -15px; /* Adjust the overlap by tweaking this value */
+    position: relative;
+    border-radius: 50%;
+  }
+  
+  .overlap-image:nth-child(1) {
+    z-index: 3;
+  }
+  
+  .overlap-image:nth-child(2) {
+    z-index: 2;
+  }
+  
+  .overlap-image:nth-child(3) {
+    z-index: 1;
   }

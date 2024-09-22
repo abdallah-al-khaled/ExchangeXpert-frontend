@@ -150,8 +150,8 @@ function Sidebar() {
                 <div className="icon">
                   <box-icon color="white" name="log-in"></box-icon>
                 </div>
+                <span className="nav-item">logout</span>
               </div>
-              <span className="nav-item">logout</span>
             </li>
           </ul>
         )}
