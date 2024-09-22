@@ -39,63 +39,12 @@ function TopContainer({ title, filter = "active" }) {
         dispatch(fetchTopStocksByTrades());
         dispatch(setStocksLoaded(true));
       }
-
       const companiesData = await fetch("/sp500_companies.json");
       const companiesJson = await companiesData.json();
       setCompanies(companiesJson);
     };
-
     fetchData();
   }, [dispatch, stocksLoaded]);
-
-  // Fetch stock data by symbols
-  useEffect(() => {
-    const fetchStockData = async () => {
-      if (
-        bestStocks.length > 0 &&
-        worstStocks.length > 0 &&
-        topStocksByVolume.length > 0 &&
-        topStocksByTrades.length > 0
-      ) {
-        const stockSymbols = [
-          ...new Set([
-            ...bestStocks.map((stock) => stock.stock_symbol),
-            ...worstStocks.map((stock) => stock.stock_symbol),
-            ...topStocks.map((stock) => stock.symbol),
-            ...topStocksTradeCount.map((stock) => stock.symbol),
-          ]),
-        ];
-
-        const d = new Date();
-        d.setDate(d.getDate() - 5);
-
-        const response = await axios.get(
-          "https://data.alpaca.markets/v2/stocks/bars",
-          {
-            params: {
-              symbols: stockSymbols.join(","),
-              timeframe: "1D",
-              start: d.toISOString(),
-              adjustment: "raw",
-              feed: "sip",
-              sort: "asc",
-              limit: 10000,
-            },
-            headers: {
-              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-              accept: "application/json",
-            },
-          }
-        );
-        console.log("from slice", stockSymbols);
-
-        setStocks(response.data.bars);
-      }
-    };
-
-    fetchStockData();
-  }, [bestStocks, worstStocks, topStocksByVolume, topStocksByTrades, topStocks, topStocksTradeCount]);
 
   // Filter and set top S&P 500 stocks by volume
   useEffect(() => {
@@ -120,6 +69,63 @@ function TopContainer({ title, filter = "active" }) {
       setTopStocksTradeCount(top5Stocks);
     }
   }, [companies, topStocksByTrades]);
+
+  // Fetch stock data by symbols
+  useEffect(() => {
+    const fetchStockData = async () => {
+      if (
+        bestStocks.length > 0 &&
+        worstStocks.length > 0 &&
+        topStocks.length > 0 &&
+        topStocksByTrades.length > 0
+      ) {
+        const stockSymbols = [
+          ...new Set([
+            ...bestStocks.map((stock) => stock.stock_symbol),
+            ...worstStocks.map((stock) => stock.stock_symbol),
+            ...topStocks.map((stock) => stock.symbol),
+            ...topStocksTradeCount.map((stock) => stock.symbol),
+          ]),
+        ];
+
+        const d = new Date();
+        d.setDate(d.getDate() - 5);
+
+        try {
+
+          const response = await axios.get(
+            "https://data.alpaca.markets/v2/stocks/bars",
+            {
+              params: {
+                symbols: stockSymbols.join(","),
+                timeframe: "1D",
+                start: d.toISOString(),
+                adjustment: "raw",
+                feed: "sip",
+                sort: "asc",
+                limit: 10000,
+              },
+              headers: {
+                "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+                "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+                accept: "application/json",
+              },
+            }
+          );
+                  
+        console.log("from slice", stockSymbols);
+        console.log(" response", response);
+        setStocks(response.data.bars);
+        } catch (error) {
+          console.log(error);
+          
+        }
+
+        console.log(bestStocks, loading, topStocks, topStocksTradeCount, worstStocks);
+      }
+    };
+    fetchStockData();
+  }, [bestStocks, loading, topStocks, topStocksTradeCount, worstStocks]);
 
   // Display loading or stock data
   return (

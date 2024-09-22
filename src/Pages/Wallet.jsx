@@ -1,86 +1,130 @@
 import { useEffect, useState } from "react";
 import AccountHistoryChart from "../components/AccountHistoryChart";
 import Topbar from "../components/Topbar";
-import TopContainerListItem from "../components/TopContainerListItem";
 import TopNav from "../components/TopNav";
 import axios from "axios";
+import TopContainerListItem from "../components/TopContainerListItem";
 
 function Wallet() {
+  const [positions, setPositions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [stocks, setStocks] = useState({});
-  const symbols = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "META"];
-  const [loading,setLoading] = useState(false)
+  const [companies, setCompanies] = useState({});
+
+  // Fetch open positions
   useEffect(() => {
-    var d = new Date();
-    d.setDate(d.getDate() - 5);
-    const fetchData = async () => {
+    const fetchOpenPositions = async () => {
+      const token = sessionStorage.getItem("authToken");
       try {
         const response = await axios.get(
-          "https://data.alpaca.markets/v2/stocks/bars",
+          "http://127.0.0.1:8000/api/open-positions",
           {
-            params: {
-              symbols: symbols.join(","),
-              timeframe: "1D",
-              start: d,
-              adjustment: "raw",
-              feed: "sip",
-              sort: "asc",
-              limit: 10000,
-            },
             headers: {
-              "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-              "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-              accept: "application/json",
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json",
             },
           }
-        );        
-        // const stockSymbol = "AAPL";
-        console.log(response.data.bars);
-        setStocks(response.data.bars);
-        console.log(stocks);
-        setLoading(true)
-        return response.data.bars;
+        );
+        setPositions(response.data);
+        setLoading(true);
+        console.log(response.data);
       } catch (error) {
-        console.error("Error fetching stocks data:", error);
+        console.error("Error fetching open positions:", error);
       }
+
+      const companiesData = await fetch("/sp500_companies.json");
+      const companiesJson = await companiesData.json();
+      setCompanies(companiesJson);
+
     };
-    fetchData();
-  },[]);
+
+    fetchOpenPositions();
+  }, []);
+
+  useEffect(() => {
+    const fetchStockData = async () => {
+      if (positions.length === 0) {
+        return;
+      }
+      const stockSymbols = [
+        ...new Set([
+          ...positions.map((position) => position.symbol),
+        ]),
+      ];
+
+      const d = new Date();
+      d.setDate(d.getDate() - 5);
+
+      const response = await axios.get(
+        "https://data.alpaca.markets/v2/stocks/bars",
+        {
+          params: {
+            symbols: stockSymbols.join(","),
+            timeframe: "1D",
+            start: d.toISOString(),
+            adjustment: "raw",
+            feed: "sip",
+            sort: "asc",
+            limit: 10000,
+          },
+          headers: {
+            "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+            "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+            accept: "application/json",
+          },
+        }
+      );
+      console.log("from slice hhhhhhhhhhhhhhhhh");
+      console.log(response.data.bars);
+      setStocks(response.data.bars,);
+  };
+  fetchStockData();
+  },[positions])
+
 
   return (
     <div className="main-content">
       <TopNav />
       <div className="page">
-
-      <div className="topbar-container">
-      <div className="Best-stocks">
-          <h2>Best Stocks</h2>
+        <div className="topbar-container">
+          <div className="Best-stocks">
+            <h2>Best Stocks</h2>
+          </div>
+          <div className="stock-list-top-bar ">
+            <Topbar symbol="NVDA" />
+            <Topbar symbol="TSLA" />
+            <Topbar symbol="AMD" />
+            <Topbar symbol="META" />
+            <Topbar symbol="AAPL" />
+            <Topbar symbol="MSFT" />
+          </div>
         </div>
-      <div className="stock-list-top-bar ">
-        <Topbar symbol="NVDA"/>
-        <Topbar symbol="TSLA"/>
-        <Topbar symbol="AMD"/>
-        <Topbar symbol="META"/>
-        <Topbar symbol="AAPL"/>
-        <Topbar symbol="MSFT"/>
+        <div className="viewchart flex row">
+          <AccountHistoryChart />
+          <div className="trending-up">
+            <div className="top-active stocks-container">
+              <p className="trending">Open Positions</p>
+              {loading ? (
+                positions.length > 0 ? (
+                  positions.map((position, index) => (
+                    <TopContainerListItem
+                      key={index}
+                      symbol={position.symbol}
+                      data={stocks[position.symbol]}
+                      Security={companies[position.symbol]}
+                    />
+                  ))
+                ) : (
+                  <p>No open positions available</p>
+                )
+              ) : (
+                <p>Loading positions...</p>
+              )}
+            </div>
+          </div>
         </div>
-        </div>
-      <div className="viewchart flex row">
-       <AccountHistoryChart/>
-       <div className="trending-up">
-       <div className="top-active stocks-container">
-          <p className="trending">Trending Up</p>
-          <TopContainerListItem symbol={symbols[0]} data={stocks[symbols[0]]}/>
-          <TopContainerListItem symbol={symbols[1]} data={stocks[symbols[1]]}/>
-          <TopContainerListItem symbol={symbols[2]} data={stocks[symbols[2]]}/>
-          <TopContainerListItem symbol={symbols[3]} data={stocks[symbols[3]]}/>
-          <TopContainerListItem symbol={symbols[4]} data={stocks[symbols[4]]}/>
-        </div>
-       </div>
-      </div>
-      
       </div>
     </div>
-  )
-//           <Topbar/>
+  );
 }
-export default Wallet
+export default Wallet;
