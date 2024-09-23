@@ -114,6 +114,14 @@
         padding: 10px;
     }
 
+    .title {
+        font-size: 18px;
+    }
+
+    .list-item {
+        padding: 15px;
+        font-size: 14px;
+    }
 }
 
 /* For screens smaller than 400px (Small mobile devices) */
