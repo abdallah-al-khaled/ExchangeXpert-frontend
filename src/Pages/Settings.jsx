@@ -101,7 +101,6 @@ function SettingsPage() {
   
   return (
     <div className="main-content">
-      <TopNav />
       <div className="settings-page fade-in">
         <h2 className="settings-title">Settings</h2>
 

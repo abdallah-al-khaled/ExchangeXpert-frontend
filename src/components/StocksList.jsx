@@ -169,12 +169,12 @@ function StocksList({
           <p className="sentiment-text">Sentiment</p>
           <p
             className={`buy-or-sell ${
-              sentimentScore > 70 ? "blue" : sentimentScore < 30 ? "red" : "green"
+              sentimentScore > 60 ? "blue" : sentimentScore < 40 ? "red" : "green"
             }`}
           >
-            {sentimentScore > 70
+            {sentimentScore > 60
               ? "Positive"
-              : sentimentScore < 30
+              : sentimentScore < 40
               ? "Negative"
               : "Neutral"}
           </p>

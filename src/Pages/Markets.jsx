@@ -4,7 +4,6 @@ import TopNav from "../components/TopNav";
 function Markets() {
   return (
     <div className="main-content">
-      <TopNav />
       <TopContainer />
     </div>
   );

@@ -69,7 +69,6 @@ function Stock() {
   console.log(sentiment);
   return (
     <div className="main-content">
-      <TopNav />
       <div className="page">
         <div className="flex upper">
           <div className="tradingviewchart">
