@@ -70,3 +70,39 @@
     width: 170px;
     text-overflow: ellipsis; 
 }
+
+
+@media (max-width: 576px) {
+    .single-stock {
+        flex-direction: column;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .logo-list img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .price, .volume, .chart, .sentiment-analysis {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .sentiment-analysis {
+        font-size: 11px;
+    }
+
+    .chart {
+        display: none;
+    }
+
+    .date {
+        font-size: 11px;
+    }
+}

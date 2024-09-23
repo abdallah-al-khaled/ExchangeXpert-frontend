@@ -163,22 +163,6 @@ function TopContainer({ title, filter = "active" }) {
           )}
         </div>
 
-        {/* <div className="top-losers stocks-container">
-          <p className="title">Top 5 Most Active Stocks by Volume</p>
-          {loading ? (
-            <p>Loading data...</p>
-          ) : (
-            topStocks.map((stock, index) => (
-              <TopContainerListItem
-                key={index}
-                symbol={stock.symbol}
-                data={stocks[stock.symbol]}
-                Security={companies[stock.symbol]}
-              />
-            ))
-          )}
-        </div> */}
-
         <div className="top-losers stocks-container">
           <p className="title">Top 5 Active Market Players</p>
           {loading ? (
