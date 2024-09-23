@@ -1,222 +1,297 @@
 .logo img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
-/* ~: */
+/* Sidebar styles */
 .sidebar {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 80px;
-    background: #001429;
-    padding: 0.9rem 0.8rem;
-    transition: width 0.5s ease;
+  position: fixed; /* Make the sidebar fixed */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80px;
+  background: #001429;
+  padding: 0.9rem 0.8rem;
+  transition: width 0.5s ease;
+  z-index: 1000; /* Ensure it stays above other content */
+  overflow-y: auto; /* Allow scrolling in case content overflows */
 }
 
-.sidebar.open ~ .main-content{
-    left: 300px;
-    width: calc(100% - 300px);
+.sidebar.open ~ .main-content {
+  left: 300px;
+  width: calc(100% - 300px);
 }
 
 .sidebar.open {
-    width: 300px;
+  width: 300px;
 }
 
 .sidebar #btn {
-    position: absolute;
-    color:#fff;
-    top: .8rem;
-    left: 50%;
-    font-size: 1.2rem;
-    line-height: 50px;
-    transform: translateX(-50%);
-    cursor: pointer;
-    transition: left 0.5s ease;
+  position: absolute;
+  color: #fff;
+  top: 0.8rem;
+  left: 50%;
+  font-size: 1.2rem;
+  line-height: 50px;
+  transform: translateX(-50%);
+  cursor: pointer;
+  transition: left 0.5s ease;
 }
 
-.sidebar.open #btn{
-    margin-top: 5px;
-    left: 90%;
+.sidebar.open #btn {
+  margin-top: 5px;
+  left: 90%;
 }
 
 .sidebar .top .logo {
-    color: #fff;
-    display: flex;
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    pointer-events: none;
-    opacity: 0;
-    transition: all 0.5s ease;
- }
+  color: #fff;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
 .sidebar.open .top .logo {
-    opacity: 1; 
- }
-
- .top .logo img {
-    margin-right: 10px;
-    margin-left: 10px;
- }
-
-
- .sidebar ul li{
-    position: relative;
-    list-style-type: none;
-    height: 50px;
-    width: 90%;
-    margin: 0.8rem 0.4rem;
-    line-height: 50px;
-    transition: all 0.5s ease;
-    }
-    
-.sidebar ul li .nav-link{
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius:0.8rem;
+  opacity: 1;
 }
 
-.sidebar ul li .nav-link span{
-    color: #ffffff;
+.top .logo img {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
-
-
-.sidebar ul li .nav-link .icon {
-    min-width: 50px;
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
-    transition: all 0s ease;
-}
-
-.sidebar .nav-item {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-}
-
-.sidebar.open .nav-item {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0.2s; 
+.sidebar ul li {
+  position: relative;
+  list-style-type: none;
+  height: 50px;
+  width: 90%;
+  margin: 0.8rem 0.4rem;
+  line-height: 50px;
+  transition: all 0.5s ease;
 }
 
 .sidebar ul li .nav-link {
-    display: flex;
-    align-items: center;
-    
-    text-decoration: none;
-    color: #ffffff;
-    border-radius: 0.8rem;
-    height: 50px;
-    margin-left: -5px;
-    transition: all 0.3s ease;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 0.8rem;
+}
+
+.sidebar ul li .nav-link span {
+  color: #ffffff;
+}
+
+.sidebar ul li .nav-link .icon {
+  min-width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  transition: all 0s ease;
+}
+
+.sidebar .nav-item {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sidebar.open .nav-item {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.2s;
+}
+
+.sidebar ul li .nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 0.8rem;
+  height: 50px;
+  margin-left: -5px;
+  transition: all 0.3s ease;
 }
 
 .sidebar ul li .icon {
-    border-radius: 12px;
-    padding-top: 5px;
+  border-radius: 12px;
+  padding-top: 5px;
 }
 
-.bg-blue{
-    background-color:#1990FE;
+.bg-blue {
+  background-color: #1990fe;
 }
 
 .sidebar.open ul li .nav-link:hover {
-    background-color:#1990FE;
+  background-color: #1990fe;
 }
+
 .sidebar ul li .icon:hover {
-    background-color:#1990FE;
+  background-color: #1990fe;
 }
 
-
+/* Main content adjusts when the sidebar is open or closed */
 .main-content {
-    position: relative;
-    min-height: 100vh;
-    transition: all 0.5s ease;
-    left: 80px;
-    width: calc(100% - 80px);
-    background-color: #F5F7F9;
+  position: relative;
+  min-height: 100vh;
+  transition: all 0.5s ease;
+  left: 80px;
+  width: calc(100% - 80px);
+  background-color: #f5f7f9;
 }
 
-
-
+/* Flex classes */
 .flex {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
-.column{
-    flex-direction: column;
+.column {
+  flex-direction: column;
 }
 
-.topbar-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    margin: 10px 20px ;
+/* Media queries for responsiveness */
+
+/* For tablets */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
   }
 
-  .tradingview-widget-container__widget{
-    display: flex;
-    gap: 20px;
-    min-width: 20px;
+  .sidebar.open {
+    width: 250px;
   }
 
-  .label__link-dzbd7lyV{
-    display: none;
+  .sidebar.open .nav-item {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s;
   }
 
-  .Best-stocks{
-    align-self:start;
+  .main-content {
+    left: 60px;
+    width: calc(100% - 60px);
   }
 
-  .stock-list-top-bar{
-    width: 1480px;
-    display: flex;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 20px;
-    border-radius: 20px;
-    align-self:start;
-    background: #ffffff;
+  .sidebar.open ~ .main-content {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 576px) {
+  .sidebar {
+    width: 50px;
   }
 
-  .stock-list-top-bar::-webkit-scrollbar {
-    display: none;
+  .sidebar.open {
+    width: 200px;
+  }
+
+  .main-content {
+    left: 50px;
+    width: calc(100% - 50px);
+  }
+
+  .sidebar.open ~ .main-content {
+    left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .sidebar #btn {
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+  }
+
+  .sidebar ul li {
+    margin: 0.4rem 0.2rem;
+  }
+
+  .sidebar ul li .nav-link {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .sidebar ul li .icon {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .sidebar .top .logo {
+    height: 40px;
+  }
+
+  .top .logo img {
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .sidebar.open .top .logo {
+    opacity: 1;
+  }
 }
 
-.viewchart{
-    padding: 10px;
-    margin: 10px 20px ;
-    border-radius: 10px;
-    gap: 30px;
-}
-
-.highcharts-container{
-    border-radius: 20px;
-}
-.trending{
-    align-self: flex-start;
-    padding: 10px;
-}
-
-.login-logout{
-}
-
-.logout{
-}
-
-.sidebar.open ul.logout li .nav-link {
-    background-color:#1990FE;
-}
+@media (max-width: 576px) {
+    .sidebar {
+      width: 80px;
+    }
+  
+    .sidebar.open {
+      width: 200px;
+    }
+  
+    .main-content {
+      left: 50px;
+      width: calc(100% - 50px);
+    }
+  
+    .sidebar.open ~ .main-content {
+      left: 200px;
+    }
+  
+    .sidebar #btn {
+      top: 0.5rem;
+      left: 50%;
+      font-size: 1rem;
+    }
+  
+    .sidebar ul li {
+      margin: 0.4rem 0.2rem;
+    }
+  
+    .sidebar ul li .nav-link {
+      height: 40px;
+      line-height: 40px;
+    }
+  
+    .sidebar ul li .icon {
+      height: 40px;
+      line-height: 40px;
+    }
+  
+    .sidebar .top .logo {
+      height: 40px;
+    }
+  
+    .top .logo img {
+      margin-right: 5px;
+      margin-left: 5px;
+      width: 40px;
+      height: 40px;
+    }
+  
+    .sidebar.open .top .logo {
+      opacity: 1;
+    }
+  }
