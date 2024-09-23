@@ -36,6 +36,7 @@ function TopNav() {
   }
 
   return (
+    <div className="main-bar">
     <div className="topnav flex">
       <div className="search">
         <input type="text" placeholder="Search for stocks and more" />
@@ -53,6 +54,7 @@ function TopNav() {
           <p>${parseFloat(accountData.portfolio_value).toLocaleString()}</p> {/* Display portfolio value */}
         </div>
       </div>
+    </div>
     </div>
   );
 }

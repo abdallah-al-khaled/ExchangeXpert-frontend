@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Markets from './Pages/Markets';
 import Wallet from './Pages/Wallet';
@@ -10,11 +10,28 @@ import SettingsPage from './Pages/Settings';
 import Signup from './Pages/Signup';
 import AdminPage from './Pages/Admin';
 import PrivateRoute from './utils/PrivateRoute'; // Import PrivateRoute
+import TopNav from './components/TopNav';
 
 function App() {
   return (
     <Router>
+      <MainApp />
+    </Router>
+  );
+}
+
+function MainApp() {
+  const location = useLocation(); // Get the current route location
+
+  // Define the routes where TopNav should not be shown
+  const hideTopNavPaths = ['/login', '/signup'];
+
+  return (
+    <>
       <Sidebar />
+      {/* Conditionally render TopNav based on current route */}
+      {!hideTopNavPaths.includes(location.pathname) && <TopNav />}
+
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
@@ -78,7 +95,7 @@ function App() {
           } 
         />
       </Routes>
-    </Router>
+    </>
   );
 }
 

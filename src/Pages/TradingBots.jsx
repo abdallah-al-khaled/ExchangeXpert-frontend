@@ -53,7 +53,6 @@ console.log(bots);
 
   return (
     <div className="main-content">
-      <TopNav />
       <div className="page">
         {bots.length > 0 ? (
           bots.map((bot) => <TradingBot key={bot.id} bot={bot} />)

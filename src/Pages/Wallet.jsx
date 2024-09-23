@@ -80,7 +80,6 @@ function Wallet() {
 
   return (
     <div className="main-content">
-      <TopNav />
       <div className="page">
         <div className="topbar-container">
           <div className="Best-stocks">
