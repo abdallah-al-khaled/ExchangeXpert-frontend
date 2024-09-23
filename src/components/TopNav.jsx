@@ -4,21 +4,20 @@ import profilePic from "../assets/images/Ellipse 81.png";
 import "../assets/css/topnav.css";
 
 function TopNav() {
-  const [accountData, setAccountData] = useState(null); // To store account data
-  const [loading, setLoading] = useState(true); // For loading state
-  const [error, setError] = useState(""); // For error handling
+  const [accountData, setAccountData] = useState(null); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(""); 
 
   useEffect(() => {
-    // Fetch account data from the API
     const fetchAccountData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/get-account", {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, // Assuming auth token is in sessionStorage
+            Authorization: `Bearer ${sessionStorage.getItem("authToken")}`, 
           },
         });
-        setAccountData(response.data); // Set the fetched account data
-        setLoading(false); // Set loading to false when data is fetched
+        setAccountData(response.data); 
+        setLoading(false); 
       } catch (err) {
         setError("Failed to load account data.");
         setLoading(false);

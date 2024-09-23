@@ -21,7 +21,7 @@ const Login = () => {
 
       localStorage.setItem("authToken", response.data.authorisation.token);
       sessionStorage.setItem("authToken", response.data.authorisation.token);
-      console.log(response.data.authorisation.token);
+      console.log(response.data);
       
       navigate("/Markets");
 
