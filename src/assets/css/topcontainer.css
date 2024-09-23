@@ -122,6 +122,27 @@
         padding: 15px;
         font-size: 14px;
     }
+
+    .stockList {
+        width: 100%;
+    }
+
+    .symbol {
+        font-size: 12px;
+    }
+    
+    .companyName {
+        width: 150px;
+    }
+
+    .gap {
+        gap: 10px;
+    }
+
+    .item img {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* For screens smaller than 400px (Small mobile devices) */
