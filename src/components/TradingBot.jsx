@@ -43,8 +43,8 @@ const TradingBot = ({ bot }) => {
             feed: "iex",
           },
           headers: {
-            "APCA-API-KEY-ID": 'PK0FMUIIT7R0SBT8EP9R',
-            "APCA-API-SECRET-KEY": 'MLrMimpcBHiAIjpzZdnJXHh2yFYcY1N5E3oQSjRv',
+            "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+            "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
           },
         }
       );
@@ -148,7 +148,7 @@ const TradingBot = ({ bot }) => {
       <div className="bot-card">
         <div className="bot-chart">
           {stockPrices.length > 0 ? (
-            <Line data={chartData} />
+            <Line data={chartData} options={{ maintainAspectRatio: false }} />
           ) : (
             <p>Loading stock data...</p>
           )}

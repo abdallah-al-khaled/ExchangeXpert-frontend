@@ -13,6 +13,7 @@ import TradingBots from './Pages/TradingBots';
 import { Settings } from '@mui/icons-material';
 import SettingsPage from './Pages/Settings';
 import Signup from './Pages/Signup';
+import AdminPage from './Pages/Admin';
  
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/AI-bots" element={<TradingBots/>} />
           <Route path="/Settings" element={<SettingsPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
     </Router>
   );
