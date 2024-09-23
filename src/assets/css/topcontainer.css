@@ -108,4 +108,29 @@
         flex-wrap: nowrap;
     }
 
-    
+    .stocks-container {
+        width: 300px;
+        min-height: auto;
+        padding: 10px;
+    }
+
+}
+
+/* For screens smaller than 400px (Small mobile devices) */
+@media (max-width: 400px) {
+    .title {
+        font-size: 16px;
+    }
+
+    .list-item {
+        padding: 10px;
+    }
+
+    .symbol {
+        font-size: 10px;
+    }
+
+    .companyName {
+        width: 120px;
+    }
+}
