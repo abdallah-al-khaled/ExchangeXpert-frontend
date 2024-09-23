@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'; // Import required components
 import { Switch } from "@mui/material";
 import axios from "axios";
 import "../assets/css/tradingbot.css";
+
+// Register the required components with Chart.js
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const TradingBot = ({ bot }) => {
   const [botData, setBotData] = useState({
@@ -15,20 +19,16 @@ const TradingBot = ({ bot }) => {
   const [stockPrices, setStockPrices] = useState([]);
   const [labels, setLabels] = useState([]);
 
-  // Function to calculate how long ago the bot was updated
   const timeAgoInHours = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
     const diffInMs = now - date;
-    return Math.floor(diffInMs / (1000 * 60 * 60)); // Convert ms to hours
+    return Math.floor(diffInMs / (1000 * 60 * 60));
   };
 
-  // Function to fetch stock prices
   const fetchStockData = async (symbol) => {
     const today = new Date().toISOString().split("T")[0];
-    const threeDaysAgo = new Date(
-      new Date().setDate(new Date().getDate() - 3)
-    )
+    const threeDaysAgo = new Date(new Date().setDate(new Date().getDate() - 3))
       .toISOString()
       .split("T")[0];
 
@@ -49,8 +49,6 @@ const TradingBot = ({ bot }) => {
         }
       );
 
-      console.log(`API Response for ${symbol}:`, response.data);
-
       if (response.data && response.data.bars && response.data.bars.length > 0) {
         const stockPrices = response.data.bars.map((bar) => bar.c); // Closing prices
         const labels = response.data.bars.map((bar) =>
@@ -59,8 +57,6 @@ const TradingBot = ({ bot }) => {
 
         setStockPrices(stockPrices);
         setLabels(labels);
-        console.log("Stock Prices:", stockPrices);
-        console.log("Labels (Dates):", labels);
       } else {
         console.warn(`No data returned for symbol ${symbol}`);
       }
@@ -71,14 +67,11 @@ const TradingBot = ({ bot }) => {
 
   useEffect(() => {
     if (botData.latestTrades.length > 0) {
-      // Get the first stock symbol
       const firstStockSymbol = botData.latestTrades[0].stock_symbol;
-      console.log("Fetching data for stock symbol:", firstStockSymbol);
       fetchStockData(firstStockSymbol);
     }
   }, [botData.latestTrades]);
 
-  // Chart data configuration
   const chartData = {
     labels: labels,
     datasets: [
@@ -114,6 +107,7 @@ const TradingBot = ({ bot }) => {
       console.error("Error toggling bot", error);
     }
   };
+
   useEffect(() => {
     const fetchBotData = async () => {
       const token = sessionStorage.getItem("authToken");
@@ -142,6 +136,8 @@ const TradingBot = ({ bot }) => {
     fetchBotData();
   }, [bot.id]);
 
+  console.log(bot);
+  
   return (
     <div className="bot-container">
       <h3>{bot.name}</h3>
@@ -157,27 +153,28 @@ const TradingBot = ({ bot }) => {
         <div className="bot-info">
           <p className="profit-gain flex column">Bot latest trade:</p>
           <div className="flex bot-symbols">
-          <img
+            <img
               src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[0].stock_symbol}?format=jpg`}
-              alt={''}
+              alt={""}
               width={40}
               className="overlap-image"
             />
-            {bot.latestTrades[1]?.stock_symbol && <img
-              src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[1]?.stock_symbol}?format=jpg`}
-              alt={''}
-              width={40}
-              className="overlap-image"
-            />
-            }
-            {bot.latestTrades[2]?.stock_symbol && <img
-              src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[2]?.stock_symbol}?format=jpg`}
-              alt={''}
-              width={40}
-              className="overlap-image"
-            />
-            }
-           
+            {bot.latestTrades[1]?.stock_symbol && (
+              <img
+                src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[1]?.stock_symbol}?format=jpg`}
+                alt={""}
+                width={40}
+                className="overlap-image"
+              />
+            )}
+            {bot.latestTrades[2]?.stock_symbol && (
+              <img
+                src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[2]?.stock_symbol}?format=jpg`}
+                alt={""}
+                width={40}
+                className="overlap-image"
+              />
+            )}
           </div>
         </div>
         <div className="bot-info flex column">
@@ -190,7 +187,6 @@ const TradingBot = ({ bot }) => {
           <p>{botData.allocated_amount}$</p>
         </div>
 
-        {/* Toggle Switch */}
         <div className="bot-switch">
           <p className="switch-label">
             {botData.status === "active" ? "ON" : "OFF"}
