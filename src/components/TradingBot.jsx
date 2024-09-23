@@ -159,21 +159,25 @@ const TradingBot = ({ bot }) => {
           <div className="flex bot-symbols">
           <img
               src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[0].stock_symbol}?format=jpg`}
-              alt={bot.latestTrades[0].stock_symbol}
+              alt={''}
               width={40}
               className="overlap-image"
             />
-            <img
+            {bot.latestTrades[1]?.stock_symbol && <img
               src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[1]?.stock_symbol}?format=jpg`}
-              alt={bot.latestTrades[0].stock_symbol}
+              alt={''}
               width={40}
               className="overlap-image"
-            /><img
-            src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[2]?.stock_symbol}?format=jpg`}
-            alt={bot.latestTrades[0].stock_symbol}
-            width={40}
-            className="overlap-image"
-          />
+            />
+            }
+            {bot.latestTrades[2]?.stock_symbol && <img
+              src={`https://assets.parqet.com/logos/symbol/${bot.latestTrades[2]?.stock_symbol}?format=jpg`}
+              alt={''}
+              width={40}
+              className="overlap-image"
+            />
+            }
+           
           </div>
         </div>
         <div className="bot-info flex column">
