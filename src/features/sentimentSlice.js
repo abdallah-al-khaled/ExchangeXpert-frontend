@@ -10,7 +10,8 @@ export const fetchBestStocks = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching best stocks:", error);
+      return []
     }
   }
 );
@@ -24,7 +25,8 @@ export const fetchWorstStocks = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching worst stocks:", error);
+      return []
     }
   }
 );
@@ -45,7 +47,7 @@ export const fetchTopStocksByVolume = createAsyncThunk(
       );
       return response.data.most_actives;
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching top stocks by volume:", error);
     }
   }
 );
@@ -53,19 +55,23 @@ export const fetchTopStocksByVolume = createAsyncThunk(
 export const fetchTopStocksByTrades = createAsyncThunk(
   "sentiment/fetchTopStocksByTrades",
   async () => {
-    const response = await axios.get(
-      "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
-      {
-        headers: {
-          "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
-          "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
-          accept: "application/json",
-        },
-      }
-    );
-    console.log("from slice", response.data.most_actives);
+    try {
+      const response = await axios.get(
+        "https://data.alpaca.markets/v1beta1/screener/stocks/most-actives?by=trades&top=100",
+        {
+          headers: {
+            "APCA-API-KEY-ID": process.env.REACT_APP_APCA_API_KEY_ID,
+            "APCA-API-SECRET-KEY": process.env.REACT_APP_APCA_API_SECRET_KEY,
+            accept: "application/json",
+          },
+        }
+      );
+      console.log("from slice", response.data.most_actives);
 
-    return response.data.most_actives;
+      return response.data.most_actives;
+    } catch (error) {
+      console.error("Error fetching top stocks by trades:", error);
+    }
   }
 );
 

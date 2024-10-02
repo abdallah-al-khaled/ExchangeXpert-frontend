@@ -7,7 +7,7 @@ body {
 
 .settings-page {
   max-width: 600px;
-  margin: 50px auto;
+  /* margin: 50px auto; */
   padding: 20px;
   background-color: #fefefe;
   border-radius: 15px;

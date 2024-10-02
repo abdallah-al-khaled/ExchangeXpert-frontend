@@ -29,7 +29,6 @@ function MainApp() {
   return (
     <>
       <Sidebar />
-      {/* Conditionally render TopNav based on current route */}
       {!hideTopNavPaths.includes(location.pathname) && <TopNav />}
 
       <Routes>

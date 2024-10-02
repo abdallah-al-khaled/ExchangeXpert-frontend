@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import "../assets/css/sidebar.css";
 import logo from "../assets/images/logo.png";
 import "boxicons";
+import TopNav from "./TopNav";
 
 function Sidebar() {
   const [isAdmin, setIsAdmin] = useState(false); // To track if user is admin
@@ -206,6 +207,9 @@ function Sidebar() {
             </li>
           </ul>
         )}
+      </div>
+      <div className={`top-nav ${isOpen ? "sidebar-open" : "sidebar-closed"}`}>
+        <TopNav />
       </div>
     </>
   );

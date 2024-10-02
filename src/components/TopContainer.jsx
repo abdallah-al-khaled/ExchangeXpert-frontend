@@ -22,6 +22,7 @@ function TopContainer({ title, filter = "active" }) {
     loading,
     topStocksByVolume,
     topStocksByTrades,
+    error,
   } = useSelector((state) => state.sentiment);
 
   const [companies, setCompanies] = useState({});
@@ -32,41 +33,53 @@ function TopContainer({ title, filter = "active" }) {
   // Fetch company data and stocks
   useEffect(() => {
     const fetchData = async () => {
-      if (!stocksLoaded) {
-        dispatch(fetchBestStocks());
-        dispatch(fetchWorstStocks());
-        dispatch(fetchTopStocksByVolume());
-        dispatch(fetchTopStocksByTrades());
-        dispatch(setStocksLoaded(true));
+      try {
+        if (!stocksLoaded) {
+          dispatch(fetchBestStocks());
+          dispatch(fetchWorstStocks());
+          dispatch(fetchTopStocksByVolume());
+          dispatch(fetchTopStocksByTrades());
+          dispatch(setStocksLoaded(true));
+        }
+        const companiesData = await fetch("/sp500_companies.json");
+        const companiesJson = await companiesData.json();
+        setCompanies(companiesJson);
+      } catch (error) {
+        console.error("Error fetching company data:", error);
       }
-      const companiesData = await fetch("/sp500_companies.json");
-      const companiesJson = await companiesData.json();
-      setCompanies(companiesJson);
     };
     fetchData();
   }, [dispatch, stocksLoaded]);
 
   // Filter and set top S&P 500 stocks by volume
   useEffect(() => {
-    if (companies && topStocksByVolume.length > 0) {
-      const sp500Symbols = Object.keys(companies);
-      const sp500TopStocks = topStocksByVolume.filter((stock) =>
-        sp500Symbols.includes(stock.symbol)
-      );
-      const top5Stocks = sp500TopStocks.slice(0, 10);
-      setTopStocks(top5Stocks);
+    try {
+      if (companies && topStocksByVolume.length > 0) {
+        const sp500Symbols = Object.keys(companies);
+        const sp500TopStocks = topStocksByVolume.filter((stock) =>
+          sp500Symbols.includes(stock.symbol)
+        );
+        const top5Stocks = sp500TopStocks.slice(0, 10);
+        setTopStocks(top5Stocks);
+      }
+    } catch (error) {
+      console.error("Error filtering top stocks by volume:", error);
     }
   }, [companies, topStocksByVolume]);
 
   // Filter and set top S&P 500 stocks by trade count
   useEffect(() => {
-    if (companies && topStocksByTrades.length > 0) {
-      const sp500Symbols = Object.keys(companies);
-      const sp500TopStocks = topStocksByTrades.filter((stock) =>
-        sp500Symbols.includes(stock.symbol)
-      );
-      const top5Stocks = sp500TopStocks.slice(0, 5);
-      setTopStocksTradeCount(top5Stocks);
+    try {
+      if (companies && topStocksByTrades.length > 0) {
+        const sp500Symbols = Object.keys(companies);
+        const sp500TopStocks = topStocksByTrades.filter((stock) =>
+          sp500Symbols.includes(stock.symbol)
+        );
+        const top5Stocks = sp500TopStocks.slice(0, 5);
+        setTopStocksTradeCount(top5Stocks);
+      }
+    } catch (error) {
+      console.error("Error filtering top stocks by trades:", error);
     }
   }, [companies, topStocksByTrades]);
 
@@ -74,10 +87,7 @@ function TopContainer({ title, filter = "active" }) {
   useEffect(() => {
     const fetchStockData = async () => {
       if (
-        bestStocks.length > 0 &&
-        worstStocks.length > 0 &&
-        topStocks.length > 0 &&
-        topStocksByTrades.length > 0
+        topStocksTradeCount.length > 0
       ) {
         const stockSymbols = [
           ...new Set([
@@ -92,7 +102,6 @@ function TopContainer({ title, filter = "active" }) {
         d.setDate(d.getDate() - 5);
 
         try {
-
           const response = await axios.get(
             "https://data.alpaca.markets/v2/stocks/bars",
             {
@@ -112,13 +121,14 @@ function TopContainer({ title, filter = "active" }) {
               },
             }
           );
-                  
-        console.log("from slice", stockSymbols);
-        console.log(" response", response);
-        setStocks(response.data.bars);
-        } catch (error) {
-          console.log(error);
+
+          console.log("from slice", stockSymbols);
+          console.log("response", response);
+          setStocks(response.data.bars);
+          console.log("oncifjrnhjrbvhf");
           
+        } catch (error) {
+          console.error("Error fetching stock data:", error);
         }
 
         console.log(bestStocks, loading, topStocks, topStocksTradeCount, worstStocks);
@@ -127,15 +137,16 @@ function TopContainer({ title, filter = "active" }) {
     fetchStockData();
   }, [bestStocks, loading, topStocks, topStocksTradeCount, worstStocks]);
 
-  // Display loading or stock data
+  // Display loading, error, or stock data
   return (
     <div className="page">
+      {error && <p>Error loading data: {error}</p>}
       <div className="top-containers">
         <div className="top-active stocks-container">
           <p className="title">Top 5 Market Leaders</p>
           {loading ? (
             <p>Loading data...</p>
-          ) : (
+          ) : bestStocks && bestStocks.length > 0 ? (
             bestStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
@@ -144,6 +155,8 @@ function TopContainer({ title, filter = "active" }) {
                 Security={companies[stock.stock_symbol]}
               />
             ))
+          ) : (
+            <p>No data available.</p>
           )}
         </div>
 
@@ -151,7 +164,7 @@ function TopContainer({ title, filter = "active" }) {
           <p className="title">Top 5 Market Laggards</p>
           {loading ? (
             <p>Loading data...</p>
-          ) : (
+          ) : worstStocks && worstStocks.length > 0 ? (
             worstStocks.map((stock, index) => (
               <TopContainerListItem
                 key={index}
@@ -160,6 +173,8 @@ function TopContainer({ title, filter = "active" }) {
                 Security={companies[stock.stock_symbol]}
               />
             ))
+          ) : (
+            <p>No data available.</p>
           )}
         </div>
 
@@ -167,7 +182,7 @@ function TopContainer({ title, filter = "active" }) {
           <p className="title">Top 5 Active Market Players</p>
           {loading ? (
             <p>Loading data...</p>
-          ) : (
+          ) : topStocksTradeCount && topStocksTradeCount.length > 0 ? (
             topStocksTradeCount.map((stock, index) => (
               <TopContainerListItem
                 key={index}
@@ -176,6 +191,8 @@ function TopContainer({ title, filter = "active" }) {
                 Security={companies[stock.symbol]}
               />
             ))
+          ) : (
+            <p>No data available.</p>
           )}
         </div>
 
@@ -192,7 +209,7 @@ function TopContainer({ title, filter = "active" }) {
       <div className="flex column gap">
         {loading ? (
           <p>Loading data...</p>
-        ) : (
+        ) : topStocks && topStocks.length > 0 ? (
           topStocks.map((stock, index) => (
             <StocksList
               key={index}
@@ -201,6 +218,8 @@ function TopContainer({ title, filter = "active" }) {
               Security={companies[stock.symbol]}
             />
           ))
+        ) : (
+          <p>No data available.</p>
         )}
       </div>
     </div>
