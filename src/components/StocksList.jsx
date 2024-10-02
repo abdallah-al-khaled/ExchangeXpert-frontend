@@ -7,28 +7,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function StocksList({
   symbol = "MSFT",
-  price = "123.45",
-  volume = "12345",
   sentiment = 60,
   Security = "",
-}) 
-{
+  price_change = 0,
+}) {
   const [sentimentScore, setSentimentScore] = useState(0);
   const [data, setData] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [volume, setVolume] = useState(0);
+
   useEffect(() => {
     const getData = async () => {
       try {
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 3); 
+        yesterday.setDate(yesterday.getDate() - 3);
         const startDate = yesterday.toISOString().split("T")[0];
 
         const response = await axios.get(
           `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
           {
             params: {
-              timeframe: "5Min", 
+              timeframe: "5Min",
               start: `${startDate}`,
-              limit: 1000, 
+              limit: 1000,
               feed: "iex",
             },
             headers: {
@@ -39,9 +40,13 @@ function StocksList({
           }
         );
         const bars = response.data.bars;
+        console.log(bars);
+        setVolume(bars[bars.length - 1].v);
         // Extract closing prices from the data and update state
         const closingPrices = bars.map((bar) => bar.c);
         setData(closingPrices);
+        setPrice(closingPrices[closingPrices.length - 1]);
+
         return response.data.bars;
       } catch (error) {
         console.error("Error fetching stock data from Alpaca:", error);
@@ -51,19 +56,23 @@ function StocksList({
     getData();
 
     const getSentimentScore = async () => {
-      const {data} = await axios.get(`http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`)
-      setSentimentScore(Math.floor((parseFloat(data.sentiment_score) + 1) * 50))
-      console.log((data))
-      return data.sentiment_score
+      const { data } = await axios.get(
+        `http://127.0.0.1:8000/api/sentiment-analysis/${symbol}`
+      );
+      setSentimentScore(
+        Math.floor((parseFloat(data.sentiment_score) + 1) * 50)
+      );
+      console.log(data);
+      return data.sentiment_score;
     };
-    getSentimentScore()
+    getSentimentScore();
   }, []);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/Stock/${symbol}`);
-  }
+  };
 
   const options = {
     chart: {
@@ -149,12 +158,12 @@ function StocksList({
 
         <div className="price">
           <p>Price</p>
-          <p>{price}</p>
+          <p>{price && price}</p>
         </div>
 
         <div className="volume">
           <p>Volume</p>
-          <p>{volume}</p>
+          <p>{volume && volume}</p>
         </div>
         <div className="chart flex">
           {/* <ReactApexChart options={options} series={options.series} type="area" height={60}/> */}
@@ -162,14 +171,17 @@ function StocksList({
             <Sparklines data={data}>
               <SparklinesLine color="#52B4FF" style={{ strokeWidth: 3 }} />
             </Sparklines>
-          ): null}
-          
+          ) : null}
         </div>
         <div className="flex column sentiment-analysis">
           <p className="sentiment-text">Sentiment</p>
           <p
             className={`buy-or-sell ${
-              sentimentScore > 60 ? "blue" : sentimentScore < 40 ? "red" : "green"
+              sentimentScore > 60
+                ? "blue"
+                : sentimentScore < 40
+                ? "red"
+                : "green"
             }`}
           >
             {sentimentScore > 60

@@ -3,9 +3,9 @@
   height: 50px;
 }
 
-/* Sidebar styles */
+/* ~: */
 .sidebar {
-  position: fixed; /* Make the sidebar fixed */
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,11 +16,9 @@
   background: #001429;
   padding: 0.9rem 0.8rem;
   transition: width 0.5s ease;
-  z-index: 1000; /* Ensure it stays above other content */
-  overflow-y: auto; /* Allow scrolling in case content overflows */
 }
 
-.sidebar.open ~ .main-content {
+.sidebar.open ~ .main-content{
   left: 300px;
   width: calc(100% - 300px);
 }
@@ -31,8 +29,8 @@
 
 .sidebar #btn {
   position: absolute;
-  color: #fff;
-  top: 0.8rem;
+  color:#fff;
+  top: .8rem;
   left: 50%;
   font-size: 1.2rem;
   line-height: 50px;
@@ -41,7 +39,7 @@
   transition: left 0.5s ease;
 }
 
-.sidebar.open #btn {
+.sidebar.open #btn{
   margin-top: 5px;
   left: 90%;
 }
@@ -56,9 +54,8 @@
   opacity: 0;
   transition: all 0.5s ease;
 }
-
 .sidebar.open .top .logo {
-  opacity: 1;
+  opacity: 1; 
 }
 
 .top .logo img {
@@ -66,7 +63,8 @@
   margin-left: 10px;
 }
 
-.sidebar ul li {
+
+.sidebar ul li{
   position: relative;
   list-style-type: none;
   height: 50px;
@@ -74,19 +72,21 @@
   margin: 0.8rem 0.4rem;
   line-height: 50px;
   transition: all 0.5s ease;
-}
-
-.sidebar ul li .nav-link {
+  }
+  
+.sidebar ul li .nav-link{
   color: #ffffff;
   display: flex;
   align-items: center;
   text-decoration: none;
-  border-radius: 0.8rem;
+  border-radius:0.8rem;
 }
 
-.sidebar ul li .nav-link span {
+.sidebar ul li .nav-link span{
   color: #ffffff;
 }
+
+
 
 .sidebar ul li .nav-link .icon {
   min-width: 50px;
@@ -105,12 +105,13 @@
 .sidebar.open .nav-item {
   opacity: 1;
   visibility: visible;
-  transition-delay: 0.2s;
+  transition-delay: 0.2s; 
 }
 
 .sidebar ul li .nav-link {
   display: flex;
   align-items: center;
+  
   text-decoration: none;
   color: #ffffff;
   border-radius: 0.8rem;
@@ -124,39 +125,101 @@
   padding-top: 5px;
 }
 
-.bg-blue {
-  background-color: #1990fe;
+.bg-blue{
+  background-color:#1990FE;
 }
 
 .sidebar.open ul li .nav-link:hover {
-  background-color: #1990fe;
+  background-color:#1990FE;
 }
-
 .sidebar ul li .icon:hover {
-  background-color: #1990fe;
+  background-color:#1990FE;
 }
 
-/* Main content adjusts when the sidebar is open or closed */
+
 .main-content {
   position: relative;
   min-height: 100vh;
   transition: all 0.5s ease;
   left: 80px;
   width: calc(100% - 80px);
-  background-color: #f5f7f9;
+  background-color: #F5F7F9;
 }
 
-/* Flex classes */
+
+
 .flex {
   display: flex;
   flex-direction: row;
 }
 
-.column {
+.column{
   flex-direction: column;
 }
 
-/* Media queries for responsiveness */
+.topbar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 20px ;
+}
+
+.tradingview-widget-container__widget{
+  display: flex;
+  gap: 20px;
+  min-width: 20px;
+}
+
+.label__link-dzbd7lyV{
+  display: none;
+}
+
+.Best-stocks{
+  align-self:start;
+}
+
+.stock-list-top-bar{
+  width: 1480px;
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 20px;
+  align-self:start;
+  background: #ffffff;
+}
+
+.stock-list-top-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.viewchart{
+  padding: 10px;
+  margin: 10px 20px ;
+  border-radius: 10px;
+  gap: 30px;
+}
+
+.highcharts-container{
+  border-radius: 20px;
+}
+.trending{
+  align-self: flex-start;
+  padding: 10px;
+}
+
+.login-logout{
+}
+
+.logout{
+}
+
+.sidebar.open ul.logout li .nav-link {
+  background-color:#1990FE;
+}
 
 /* For tablets */
 @media (max-width: 768px) {

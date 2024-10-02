@@ -8,19 +8,25 @@
     padding-right: 30px;
     border-bottom: 1px solid rgb(216, 216, 216);
 }
+.top-nav.sidebar-open .main-bar{
+    left: 300px;
+    width: calc(100% - 300px);
+    transition: left 0.5s ease, width 0.5s;
+  }
+  
+  /* Styles when the sidebar is closed */
+  .top-nav.sidebar-closed .main-bar{
+    left: 80px;
+    width: calc(100% - 80px);
+    transition: left 0.5s ease, width 0.5s ease;
+  }
 
 .main-bar{
     position: relative;
     transition: all 0.5s ease;
     background-color: #F5F7F9;
-    left: 300px;
-    width: calc(100% - 300px);
 }
 
-.sidebar.open .main-ba{
-    left: 300px;
-    width: calc(100% - 300px);
-}
 
 .topnav img {
     width: 40px;
