@@ -21,16 +21,10 @@ function App() {
 }
 
 function MainApp() {
-  const location = useLocation(); // Get the current route location
-
-  // Define the routes where TopNav should not be shown
-  const hideTopNavPaths = ['/login', '/signup'];
-
   return (
     <>
       <Sidebar />
-      {!hideTopNavPaths.includes(location.pathname) && <TopNav />}
-
+      
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
