@@ -136,7 +136,7 @@ function TopContainer({ title, filter = "active" }) {
     };
     fetchStockData();
   }, [bestStocks, loading, topStocks, topStocksTradeCount, worstStocks]);
-
+  
   // Display loading, error, or stock data
   return (
     <div className="page">
@@ -209,12 +209,13 @@ function TopContainer({ title, filter = "active" }) {
       <div className="flex column gap">
         {loading ? (
           <p>Loading data...</p>
-        ) : topStocks && topStocks.length > 0 ? (
-          topStocks.map((stock, index) => (
+        ) : topStocks && topStocks.length > 0 && stocks ? (
+          topStocks.map((stock, index) => (         
             <StocksList
               key={index}
               symbol={stock.symbol}
               sentiment={50}
+              price_change={stocks[stock.symbol]}
               Security={companies[stock.symbol]}
             />
           ))
