@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar';
 import Markets from './Pages/Markets';
 import Wallet from './Pages/Wallet';
 import Stock from './Pages/Stock';

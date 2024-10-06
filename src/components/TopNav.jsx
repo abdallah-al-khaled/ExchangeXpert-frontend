@@ -28,11 +28,11 @@ function TopNav() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div></div>;
   }
 
   return (

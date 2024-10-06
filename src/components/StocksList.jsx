@@ -69,6 +69,7 @@ function StocksList({
   }, []);
 
   const navigate = useNavigate();
+console.log(price_change,"price_change");
 
   const handleClick = () => {
     navigate(`/Stock/${symbol}`);
@@ -158,7 +159,7 @@ function StocksList({
 
         <div className="price">
           <p>Price</p>
-          <p>{price && price}</p>
+          <p>${price_change && price_change[price_change.length - 1].c}</p>
         </div>
 
         <div className="volume">
