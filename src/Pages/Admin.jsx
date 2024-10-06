@@ -64,7 +64,7 @@ const AdminBotUserTrades = () => {
       }));
     } catch (err) {
       console.error(`Failed to load user trades for bot ${botId}`, err);
-      setError(`Failed to load user trades for bot ${botId}`);
+      setError(`Somthing went wrong while fetching.`);
     }
   };
 
