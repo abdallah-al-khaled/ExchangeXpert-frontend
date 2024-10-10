@@ -41,7 +41,7 @@ function Sidebar() {
     };
 
     fetchUserRole();
-  }, []);
+  }, [isAdmin]);
 
   return (
     <>
