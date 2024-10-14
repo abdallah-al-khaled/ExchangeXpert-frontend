@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'; // Import required components
-import { Switch } from "@mui/material";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js"; // Import required components
+import { Switch, Button, TextField } from "@mui/material";
 import axios from "axios";
 import "../assets/css/tradingbot.css";
 
 // Register the required components with Chart.js
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const TradingBot = ({ bot }) => {
   const [botData, setBotData] = useState({
@@ -18,6 +35,14 @@ const TradingBot = ({ bot }) => {
 
   const [stockPrices, setStockPrices] = useState([]);
   const [labels, setLabels] = useState([]);
+  const [isEditingBalance, setIsEditingBalance] = useState(false);
+  const [newBalance, setNewBalance] = useState(0); 
+
+  useEffect(() => {
+    if (botData.allocated_amount !== undefined) {
+      setNewBalance(botData.allocated_amount);
+    }
+  }, [botData.allocated_amount]);
 
   const timeAgoInHours = (dateString) => {
     const date = new Date(dateString);
@@ -49,7 +74,11 @@ const TradingBot = ({ bot }) => {
         }
       );
 
-      if (response.data && response.data.bars && response.data.bars.length > 0) {
+      if (
+        response.data &&
+        response.data.bars &&
+        response.data.bars.length > 0
+      ) {
         const stockPrices = response.data.bars.map((bar) => bar.c); // Closing prices
         const labels = response.data.bars.map((bar) =>
           new Date(bar.t).toLocaleDateString()
@@ -108,6 +137,33 @@ const TradingBot = ({ bot }) => {
     }
   };
 
+  const handleEditBalance = () => {
+    setIsEditingBalance(true);
+  };
+
+  const handleSaveBalance = async () => {
+    const token = sessionStorage.getItem("authToken");
+    try {
+      await axios.put(
+        `http://127.0.0.1:8000/api/user-bots/${bot.id}/update-balance`,
+        { allocated_amount: newBalance },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+      setBotData((prevData) => ({
+        ...prevData,
+        allocated_amount: newBalance,
+      }));
+      setIsEditingBalance(false); // Switch back to view mode
+    } catch (error) {
+      console.error("Error saving new balance", error);
+    }
+  };
+
   useEffect(() => {
     const fetchBotData = async () => {
       const token = sessionStorage.getItem("authToken");
@@ -137,7 +193,7 @@ const TradingBot = ({ bot }) => {
   }, [bot.id]);
 
   console.log(bot);
-  
+
   return (
     <div className="bot-container">
       <h3>{bot.name}</h3>
@@ -184,7 +240,35 @@ const TradingBot = ({ bot }) => {
 
         <div className="bot-info flex column">
           <p>Balance Per Trade: </p>
-          <p>{botData.allocated_amount}$</p>
+          {isEditingBalance ? (
+            <>
+              <TextField
+                type="number"
+                value={newBalance}
+                onChange={(e) => setNewBalance(e.target.value)}
+                variant="outlined"
+                size="small"
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSaveBalance}
+              >
+                Save
+              </Button>
+            </>
+          ) : (
+            <>
+              <p>{botData.allocated_amount}$</p>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleEditBalance}
+              >
+                Edit
+              </Button>
+            </>
+          )}
         </div>
 
         <div className="bot-switch">

@@ -15,6 +15,7 @@ function StocksList({
   const [data, setData] = useState([]);
   const [price, setPrice] = useState(0);
   const [volume, setVolume] = useState(0);
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -62,6 +63,7 @@ function StocksList({
       setSentimentScore(
         Math.floor((parseFloat(data.sentiment_score) + 1) * 50)
       );
+      setDate(data.analysis_date)
       console.log(data);
       return data.sentiment_score;
     };
@@ -192,7 +194,7 @@ console.log(price_change,"price_change");
               : "Neutral"}
           </p>
           <HighchartsReact highcharts={Highcharts} options={options} />
-          <p className="date">Based on data from 11-8-2024</p>
+          <p className="date">Based on data from {date.split(" ")[0]}</p>
         </div>
       </div>
     </>

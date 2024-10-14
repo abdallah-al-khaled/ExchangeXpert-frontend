@@ -21,6 +21,7 @@ function Stock() {
   const { symbol } = useParams();
   const [sentiment, setSentiment] = useState({});
   const [img, setImg] = useState({});
+  const [date, setDate] = useState('');
 
   const getSentimentScore = (symbol) => {
     const bestStock = bestStocks.find((stock) => stock.stock_symbol === symbol);
@@ -44,6 +45,7 @@ function Stock() {
         );
         console.log(parseFloat(data.sentiment_score));
         setSentiment(Math.floor((parseFloat(data.sentiment_score) + 1) * 50));
+        setDate(data.analysis_date)
         return data;
       } catch (error) {
         console.log(error);
@@ -82,18 +84,20 @@ function Stock() {
             <GaugeChart value={sentiment} />
             <p
               className={
-                sentiment > 70 ? "green" : sentiment < 30 ? "red" : "yellow"
+                sentiment > 60 ? "green" : sentiment < 40 ? "red" : "yellow"
               }
               id={"sentiment"}
             >
-              {sentiment > 70
+              {sentiment > 60
                 ? "Positive"
-                : sentiment < 30
+                : sentiment < 40
                 ? "Negative"
                 : "Neutral"}
             </p>
             <div className=""></div>
-            <p className="last-updated">last updated 22-8-2024</p>
+            <p className="last-updated">
+              last updated {date.split(" ")[0]}
+              </p>
           </div>
         </div>
         <div className="flex lower">

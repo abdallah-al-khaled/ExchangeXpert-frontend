@@ -98,8 +98,8 @@ h3 {
 }
 
 .animated-input:focus {
-  border-color: #4CAF50;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  border-color: #6a1cb8;;
+  box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3)
 }
 
 .update-btn {

@@ -115,28 +115,6 @@ function Wallet() {
               ) : (
                 <p>Loading positions...</p>
               )}
-              <TopContainerListItem
-                symbol={"NVDA"}
-                data={[{ c: 117.06 }, { c: 116.0 }]}
-                price="100"
-                Security={"NVIDIA Corp"}
-              />
-              <TopContainerListItem
-                symbol={"GOOGL"}
-                data={[{ c: 163.50 }, { c: 163.59 }]}
-                price="100"
-                Security={"Alphabet Inc"}
-              /><TopContainerListItem
-              symbol={"META"}
-              data={[{ c: 560.00 }, { c: 561.35 }]}
-              price="100"
-              Security={"NVIDIA Corp"}
-            /><TopContainerListItem
-            symbol={"UBER"}
-            data={[{ c: 74.82 }, { c: 73.94 }]}
-            price="100"
-            Security={"NVIDIA Corp"}
-          />
             </div>
           </div>
         </div>

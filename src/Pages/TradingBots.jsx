@@ -11,7 +11,6 @@ function TradingBots() {
   useEffect(() => {
     const fetchBots = async () => {
       try {
-        // Fetch all bots
         const botResponse = await axios.get("http://127.0.0.1:8000/api/bots", {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`
@@ -21,7 +20,6 @@ function TradingBots() {
 
         console.log(botsData);
 
-        // Fetch latest trades for each bot and attach to the bot object
         const botsWithTrades = await Promise.all(
           botsData.map(async (bot) => {
             const tradesResponse = await axios.get(`http://127.0.0.1:8000/api/bots/${bot.id}/latest-trades`, {
@@ -41,7 +39,7 @@ function TradingBots() {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching bots and trades:", error);
-        setLoading(false); // Stop loading even if there is an error
+        setLoading(false); 
       }
     };
 

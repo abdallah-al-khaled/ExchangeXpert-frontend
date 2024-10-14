@@ -342,3 +342,16 @@ input:checked+.slider:before {
 .overlap-image:nth-child(3) {
   z-index: 1;
 }
+
+.bot-info .MuiButtonBase-root{
+  margin-top: 5px;
+  width: 120px;
+}
+
+.bot-info input{
+  width: 120px;
+}
+
+.MuiFormControl-root{
+  width: 120px;
+}
